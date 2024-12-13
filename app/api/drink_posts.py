@@ -1,9 +1,9 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from app.models import User, db, BeveragePost, Review, Category, Brand
 # from app.forms import LoginForm
 # from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
-
+from app.forms import PostDrink
 
 drink_posts = Blueprint('posts', __name__)
 
@@ -28,13 +28,13 @@ def recent_drinks():
                 drink['avgRating'] = drink['rating']
         return allDrinks
     else:
-        return jsonify({'error': 'There are currently no drinks posted'})
+        return jsonify({'message': 'There are currently no drinks posted'})
 
 
 @drink_posts.route('/<int:postId>')
 def drink_from_home(postId):
     """
-    When a drink is selected the it provides all
+    When a drink is selected then it provides all
     the details and reviews for that drink
     """
     drink = BeveragePost.query.filter_by(id=postId).first()
@@ -55,6 +55,144 @@ def drink_from_home(postId):
     # print(postId)
 
 
+@drink_posts.route('/<int:postId>', methods=['DELETE', 'PATCH'])
+@login_required
+def del_patch_drink(postId):
+    """
+    Used to delete and or update a drink post only if it
+    is owned by the user
+    """
+    drink = BeveragePost.query.get(postId)
+
+    # print(drink)
+    if not drink:
+        return jsonify({'error': 'How did you get here? A post for this drink does not exist'}), 404
+
+    good_drink = drink.to_dict()
+    # print(good_drink)
+
+    if current_user.to_dict()['id'] != good_drink['user_id']:
+        return jsonify({'error': 'You do not own this post, you cannot delete it'}), 403
+
+    if request.method == 'DELETE':
+        if current_user:
+            db.session.delete(drink)
+            db.session.commit()
+            return jsonify({'message': 'Your post has been deleted'})
+        else:
+            return jsonify({'error': 'How did you get here? You need to be logged in to delete YOUR post'}), 401
+
+    if request.method == 'PATCH':
+        categories = Category.query.all()
+        available_cats = [cat.to_dict() for cat in categories]
+        brands = Brand.query.all()
+        available_brands = [brand.to_dict() for brand in brands]
+
+        category_choices = [(cat['id'], cat['name']) for cat in available_cats]
+        brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
+
+        form = PostDrink()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        form.category.choices=category_choices
+        form.brand.choices=brand_choices
+        print('from the patch bbyyyyyy')
+        if form.validate_on_submit():
+            # return drink.to_dict()
+            drink.brand_id = form.data['brand']
+            drink.category_id = form.data['category']
+            drink.name = form.data['name']
+            drink.img = form.data['img']
+            drink.oz = form.data['oz']
+            drink.alc = form.data['alc']
+            drink.rating = form.data['rating']
+            drink.cal = form.data['cal']
+            drink.carbs = form.data['carbs']
+            drink.sodium = form.data['sodium']
+            drink.desc = form.data['desc']
+            print('from the patch', drink.to_dict())
+            db.session.commit()
+            return jsonify({'message': 'Your post was update'})
+        else:
+            return form.errors, 400
+
+
+
+
+
+
+
+# @drink_posts.route('/<int:postId>/update', methods=['GET','PATCH'])
+# @login_required
+# def patch_drink(postId):
+
+#     drink = BeveragePost.query.get(postId)
+
+#     print(request.method)
+
+#     if not drink:
+#         return jsonify({'error': 'How did you get here? A post for this drink does not exist'}), 404
+
+#     good_drink = drink.to_dict()
+#     # print(good_drink)
+
+#     if current_user.to_dict()['id'] != good_drink['user_id']:
+#         return jsonify({'error': 'You do not own this post, you cannot delete it'}), 403
+
+#     categories = Category.query.all()
+#     available_cats = [cat.to_dict() for cat in categories]
+#     brands = Brand.query.all()
+#     available_brands = [brand.to_dict() for brand in brands]
+
+
+
+
+#     category_choices = [(cat['id'], cat['name']) for cat in available_cats]
+#     brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
+#     # return drink.to_dict()
+#     form = PostDrink()
+#     form.category.choices=category_choices
+#     form.brand.choices=brand_choices
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     # print(form.data, 'secondddddd')
+#     if request.method == 'GET':
+#         # form.populate_obj(drink.to_dict())
+#         print('helloooo from the get')
+#         form.category.data = drink.category_id
+#         form.brand.data = drink.brand_id
+#         form.name.data = drink.name
+#         form.img.data = drink.img
+#         form.oz.data = drink.oz
+#         form.alc.data = drink.alc
+#         form.rating.data = drink.rating
+#         form.cal.data = drink.cal
+#         form.carbs.data = drink.carbs
+#         form.sodium.data = drink.sodium
+#         form.desc.data = drink.desc
+#         return render_template('update_drink.html', form=form, drink=drink)
+
+#     if request.method == 'PATCH':
+#         print('from the patch bbyyyyyy')
+#         if form.validate_on_submit():
+#             # return drink.to_dict()
+#             drink.brand_id = form.data['brand']
+#             drink.category_id = form.data['category']
+#             drink.name = form.data['name']
+#             drink.img = form.data['img']
+#             drink.oz = form.data['oz']
+#             drink.alc = form.data['alc']
+#             drink.rating = form.data['rating']
+#             drink.cal = form.data['cal']
+#             drink.carbs = form.data['carbs']
+#             drink.sodium = form.data['sodium']
+#             drink.desc = form.data['desc']
+#             print('from the patch', drink.to_dict())
+#             db.session.commit()
+#             return jsonify({'message': 'Your post was update'})
+#         else:
+#             return form.errors, 400
+
+
+
 @drink_posts.route('/category/<int:categoryId>')
 def category_selection(categoryId):
     """
@@ -73,7 +211,8 @@ def category_selection(categoryId):
         return jsonify({'error': 'There are no categories just yet'}), 404
 
 
-@drink_posts.route('/brand/<int:brandId>')
+
+@drink_posts.route('/brands/<int:brandId>')
 def brand_selection(brandId):
     """
     for when a user selects a brand of beverages
@@ -87,3 +226,55 @@ def brand_selection(brandId):
             return jsonify({'error': 'No Drinks are available for this brand yet'})
     else:
         return jsonify({'error': 'there is no such brand just yet'}), 404
+
+
+@drink_posts.route('/post-drink', methods=['GET','POST'])
+@login_required
+def create_post():
+    """
+    This is for creating a drink post, I made it a
+    get so that I can run my tests from the backend
+    before moving on to the front, making the get useless
+    """
+    categories = Category.query.all()
+    available_cats = [cat.to_dict() for cat in categories]
+    brands = Brand.query.all()
+    available_brands = [brand.to_dict() for brand in brands]
+
+    category_choices = [(cat['id'], cat['name']) for cat in available_cats]
+    brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
+
+    form=PostDrink()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    form.category.choices=category_choices
+    form.brand.choices=brand_choices
+
+    picked_brand = Brand.query.filter_by(id=form.brand.data).first()
+    if current_user:
+        if picked_brand:
+            if picked_brand.to_dict()['category_id'] == form.category.data:
+                if form.validate_on_submit():
+                    new_drink = BeveragePost(
+                        user_id = current_user.to_dict()['id'],
+                        brand_id = form.data['brand'],
+                        category_id = form.data['category'],
+                        name = form.data['name'],
+                        img = form.data['img'],
+                        oz = form.data['oz'],
+                        alc = form.data['alc'],
+                        rating = form.data['rating'],
+                        cal = form.data['cal'],
+                        carbs = form.data['carbs'],
+                        sodium = form.data['sodium'],
+                        desc = form.data['desc']
+                    )
+                    db.session.add(new_drink)
+                    print(new_drink)
+                    db.session.commit()
+                    return jsonify({'message': 'Your post was created'}), 201
+            else:
+                return jsonify({'error': 'The brand does not match the category of drink'}), 400
+    else:
+        return jsonify({'error': 'Please log in or create an account in order to post your drink'}), 401
+    return render_template('post_drink.html', form=form)

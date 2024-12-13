@@ -1,0 +1,26 @@
+<form method="post" action="">
+    {{ form.csrf_token }}
+    {{ form.brand.label }}
+    {{ form.brand() }}
+    {{ form.category.label }}
+    {{ form.category() }}
+    {{ form.name.label }}
+    {{ form.name() }}
+    {{ form.img.label }}
+    {{ form.img() }}
+    {{ form.oz.label }}
+    {{ form.oz() }}
+    {{ form.alc.label }}
+    {{ form.alc() }}
+    {{ form.rating.label }}
+    {{ form.rating() }}
+    {{ form.cal.label }}
+    {{ form.cal() }}
+    {{ form.carbs.label }}
+    {{ form.carbs() }}
+    {{ form.sodium.label }}
+    {{ form.sodium() }}
+    {{ form.desc.label }}
+    {{ form.desc() }}
+    {{ form.submit() }}
+</form>
