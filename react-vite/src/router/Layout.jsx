@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
+import CategoryBar from "../components/CategoryBar/CategoryBar";
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -16,7 +17,18 @@ export default function Layout() {
     <>
       <ModalProvider>
         <Navigation />
-        {isLoaded && <Outlet />}
+
+        <div className="layout">
+          <div className="category_bar">
+            <CategoryBar />
+          </div>
+
+          {isLoaded && <Outlet />}
+        </div>
+        {/* {isLoaded && <Outlet />}
+        <div className="category_bar">
+          <CategoryBar/>
+        </div> */}
         <Modal />
       </ModalProvider>
     </>

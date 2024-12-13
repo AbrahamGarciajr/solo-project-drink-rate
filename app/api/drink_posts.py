@@ -31,8 +31,58 @@ def recent_drinks():
         return jsonify({'message': 'There are currently no drinks posted'})
 
 
+
+@drink_posts.route('/categories')
+def all_categories():
+    """
+    gets all of the categories
+    """
+    categories = Category.query.all()
+
+    return [cat.to_dict() for cat in categories]
+
+
+
+
+@drink_posts.route('/categories/<int:categoryId>')
+def category_selection(categoryId):
+    """
+    For when a user selects a category of beverages it will return a
+    list of all the brands associated with that category
+    """
+    # categories = Category.query.all()
+    category = Category.query.filter_by(id=categoryId).first()
+    if category:
+        brands = Brand.query.filter_by(category_id=categoryId).all()
+        if brands:
+            return [brand.to_dict() for brand in brands]
+        else:
+            # print('this is ittttttttt')
+            return jsonify({'error': 'There are no brands for this category just yet'}), 404
+    else:
+        return jsonify({'error': 'There are no categories just yet'}), 404
+
+
+
+@drink_posts.route('/brands/<int:brandId>')
+def brand_selection(brandId):
+    """
+    for when a user selects a brand of beverages, it will return a list
+    of all the beverage posts under that brand 
+    """
+    brand = Brand.query.filter_by(id=brandId).first()
+    if brand:
+        drinks = BeveragePost.query.filter_by(brand_id=brandId).all()
+        if drinks:
+            return [drink.to_dict() for drink in drinks]
+        else:
+            return jsonify({'error': 'No Drinks are available for this brand yet'})
+    else:
+        return jsonify({'error': 'there is no such brand just yet'}), 404
+
+
 @drink_posts.route('/<int:postId>')
-def drink_from_home(postId):
+def selected_drink(postId):
     """
     When a drink is selected then it provides all
     the details and reviews for that drink
@@ -72,7 +122,7 @@ def del_patch_drink(postId):
     # print(good_drink)
 
     if current_user.to_dict()['id'] != good_drink['user_id']:
-        return jsonify({'error': 'You do not own this post, you cannot delete it'}), 403
+        return jsonify({'error': 'You do not own this post, you cannot mess with it'}), 403
 
     if request.method == 'DELETE':
         if current_user:
@@ -95,7 +145,7 @@ def del_patch_drink(postId):
         form['csrf_token'].data = request.cookies['csrf_token']
         form.category.choices=category_choices
         form.brand.choices=brand_choices
-        print('from the patch bbyyyyyy')
+        # print('from the patch bbyyyyyy')
         if form.validate_on_submit():
             # return drink.to_dict()
             drink.brand_id = form.data['brand']
@@ -109,123 +159,11 @@ def del_patch_drink(postId):
             drink.carbs = form.data['carbs']
             drink.sodium = form.data['sodium']
             drink.desc = form.data['desc']
-            print('from the patch', drink.to_dict())
+            # print('from the patch', drink.to_dict())
             db.session.commit()
             return jsonify({'message': 'Your post was update'})
         else:
             return form.errors, 400
-
-
-
-
-
-
-
-# @drink_posts.route('/<int:postId>/update', methods=['GET','PATCH'])
-# @login_required
-# def patch_drink(postId):
-
-#     drink = BeveragePost.query.get(postId)
-
-#     print(request.method)
-
-#     if not drink:
-#         return jsonify({'error': 'How did you get here? A post for this drink does not exist'}), 404
-
-#     good_drink = drink.to_dict()
-#     # print(good_drink)
-
-#     if current_user.to_dict()['id'] != good_drink['user_id']:
-#         return jsonify({'error': 'You do not own this post, you cannot delete it'}), 403
-
-#     categories = Category.query.all()
-#     available_cats = [cat.to_dict() for cat in categories]
-#     brands = Brand.query.all()
-#     available_brands = [brand.to_dict() for brand in brands]
-
-
-
-
-#     category_choices = [(cat['id'], cat['name']) for cat in available_cats]
-#     brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
-#     # return drink.to_dict()
-#     form = PostDrink()
-#     form.category.choices=category_choices
-#     form.brand.choices=brand_choices
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     # print(form.data, 'secondddddd')
-#     if request.method == 'GET':
-#         # form.populate_obj(drink.to_dict())
-#         print('helloooo from the get')
-#         form.category.data = drink.category_id
-#         form.brand.data = drink.brand_id
-#         form.name.data = drink.name
-#         form.img.data = drink.img
-#         form.oz.data = drink.oz
-#         form.alc.data = drink.alc
-#         form.rating.data = drink.rating
-#         form.cal.data = drink.cal
-#         form.carbs.data = drink.carbs
-#         form.sodium.data = drink.sodium
-#         form.desc.data = drink.desc
-#         return render_template('update_drink.html', form=form, drink=drink)
-
-#     if request.method == 'PATCH':
-#         print('from the patch bbyyyyyy')
-#         if form.validate_on_submit():
-#             # return drink.to_dict()
-#             drink.brand_id = form.data['brand']
-#             drink.category_id = form.data['category']
-#             drink.name = form.data['name']
-#             drink.img = form.data['img']
-#             drink.oz = form.data['oz']
-#             drink.alc = form.data['alc']
-#             drink.rating = form.data['rating']
-#             drink.cal = form.data['cal']
-#             drink.carbs = form.data['carbs']
-#             drink.sodium = form.data['sodium']
-#             drink.desc = form.data['desc']
-#             print('from the patch', drink.to_dict())
-#             db.session.commit()
-#             return jsonify({'message': 'Your post was update'})
-#         else:
-#             return form.errors, 400
-
-
-
-@drink_posts.route('/category/<int:categoryId>')
-def category_selection(categoryId):
-    """
-    For when a user selects a category of beverages
-    """
-    # categories = Category.query.all()
-    category = Category.query.filter_by(id=categoryId).first()
-    if category:
-        brands = Brand.query.filter_by(category_id=categoryId).all()
-        if brands:
-            return [brand.to_dict() for brand in brands]
-        else:
-            # print('this is ittttttttt')
-            return jsonify({'error': 'There are no brands for this category just yet'}), 404
-    else:
-        return jsonify({'error': 'There are no categories just yet'}), 404
-
-
-
-@drink_posts.route('/brands/<int:brandId>')
-def brand_selection(brandId):
-    """
-    for when a user selects a brand of beverages
-    """
-    brand = Brand.query.filter_by(id=brandId).first()
-    if brand:
-        drinks = BeveragePost.query.filter_by(brand_id=brandId).all()
-        if drinks:
-            return [drink.to_dict() for drink in drinks]
-        else:
-            return jsonify({'error': 'No Drinks are available for this brand yet'})
-    else:
-        return jsonify({'error': 'there is no such brand just yet'}), 404
 
 
 @drink_posts.route('/post-drink', methods=['GET','POST'])

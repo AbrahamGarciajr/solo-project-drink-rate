@@ -5,6 +5,8 @@ import { RouterProvider } from "react-router-dom";
 import configureStore from "./redux/store";
 import { router } from "./router";
 import * as sessionActions from "./redux/session";
+import * as categoryActions from "./redux/categories"
+import * as drinkActions from "./redux/drinks"
 import "./index.css";
 
 const store = configureStore();
@@ -12,6 +14,8 @@ const store = configureStore();
 if (import.meta.env.MODE !== "production") {
   window.store = store;
   window.sessionActions = sessionActions;
+  window.categoryActions = categoryActions;
+  window.drinkActions = drinkActions;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(

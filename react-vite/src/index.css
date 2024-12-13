@@ -1,1 +1,31 @@
 /* TODO: Add sitewide styles */
+
+.category_bar{
+    border: 1px, solid, black;
+    width: 80%;
+}
+
+.category_bar_option_holder{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.category_bar_options{
+    border-color: brown;
+}
+
+.home_page_drinks_holder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.home_page_drinks{
+    border: 1px, solid, black;
+    width: 20rem;
+    height: 150px;
+    margin: 10px
+}
