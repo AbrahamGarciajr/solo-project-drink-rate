@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkAllDrinks } from "../../redux/drinks"
+import { useNavigate } from "react-router-dom"
 
 
 
 function Home(){
     let drinks = useSelector(state => state.drinks.drinks)
     let dispatch = useDispatch()
+    let navigate = useNavigate()
     let [isLoaded, setIsLoaded] = useState(false)
     // console.log(categories)
     let arrDrinks = Object.values(drinks)
@@ -18,7 +20,7 @@ function Home(){
 
 
     let drinkClick = (drink) => {
-        console.log(drink)
+        navigate(`/drink/${drink.id}`)
     }
 
 

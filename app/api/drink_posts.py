@@ -68,7 +68,7 @@ def category_selection(categoryId):
 def brand_selection(brandId):
     """
     for when a user selects a brand of beverages, it will return a list
-    of all the beverage posts under that brand 
+    of all the beverage posts under that brand
     """
     brand = Brand.query.filter_by(id=brandId).first()
     if brand:
@@ -97,7 +97,7 @@ def selected_drink(postId):
             good_drink['avgRating'] = (
                 total_ratings + good_drink['rating'])/(len(revs) + 1)
         else:
-            good_drink['avgRating'] = drink['rating']
+            good_drink['avgRating'] = good_drink['rating']
         return good_drink
     else:
         # print(drink)
@@ -208,7 +208,7 @@ def create_post():
                         desc = form.data['desc']
                     )
                     db.session.add(new_drink)
-                    print(new_drink)
+                    # print(new_drink)
                     db.session.commit()
                     return jsonify({'message': 'Your post was created'}), 201
             else:

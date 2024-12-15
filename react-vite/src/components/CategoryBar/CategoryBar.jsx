@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 
 
-function CategoryBar(){
+function CategoryBar() {
     let categories = useSelector(state => state.categories.categories)
     let [isLoaded, setIsLoaded] = useState(false)
     let dispatch = useDispatch()
@@ -22,8 +22,12 @@ function CategoryBar(){
         navigate(`/category/${cat.id}`)
     }
 
+    let createPost = () => {
+        navigate('/drink/create')
+    }
 
-    return(
+
+    return (
         <>
             {categories && isLoaded && (
                 <div className="category_bar_option_holder">
@@ -34,6 +38,9 @@ function CategoryBar(){
                             </div>
                         )
                     })}
+                    <div className="category_bar_options" onClick={createPost}>
+                        Create a Post
+                    </div>
                 </div>
             )}
         </>

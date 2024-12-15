@@ -1,6 +1,7 @@
 // actions
 const GET_CATS = 'categories/getCats'
 const GET_BRANDS = 'brands/getCatBrands'
+// const RESET_STATE = 'state/reset'
 
 const getCats = (data) => ({
     type: GET_CATS,
@@ -11,6 +12,10 @@ const getCatBrands = (data) => ({
     type: GET_BRANDS,
     payload: data
 })
+
+// const resetState = () => ({
+//     type: RESET_STATE
+// })
 
 
 // thunks
@@ -29,12 +34,15 @@ export const thunkCategoryBrands = (catId) => async dispatch => {
     // console.log(catId, 'this is the cat id')
     const res = await fetch(`/api/drinks/categories/${catId}`)
 
-    if(res.ok){
+    if (res.ok) {
         let data = await res.json()
         // console.log('from the thunk res', data)
+        // dispatch(resetState())
         dispatch(getCatBrands(data))
-    }
+    } 
 }
+
+
 
 
 
@@ -58,13 +66,16 @@ function categoryReducer(state = initialState, action) {
         }
         case GET_BRANDS: {
             let newState = { ...state }
-            // console.log(action.payload, 'from the reducer')
+            // console.log(newState, ' from reducer')
+            newState.brands = {}
             action.payload.forEach(brand => {
                 newState.brands[brand.id] = brand
             })
-            console.log(newState)
+            // console.log(newState)
             return newState
         }
+        // case RESET_STATE:
+        //     return initialState
         default:
             return state
     }
