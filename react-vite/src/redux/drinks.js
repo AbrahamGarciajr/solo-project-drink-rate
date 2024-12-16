@@ -3,6 +3,7 @@ const GET_DRINKS = 'drinks/getAllDrinks'
 const BRAND_DRINKS = 'drink/brandDrinks'
 const ONE_DRINK = 'drink/oneDrink'
 const DELETE_DRINK = 'drink/deleteDrink'
+const CREATE_DRINK = 'drink/createDrink'
 
 
 const getAllDrinks = (data) => ({
@@ -23,6 +24,11 @@ const oneDrink = (data) => ({
 const deleteDrink = (drinkId) => ({
     type: DELETE_DRINK,
     payload: drinkId
+})
+
+const createDrink = (data) => ({
+    type: CREATE_DRINK,
+    payload: data
 })
 
 
@@ -80,6 +86,26 @@ export const thunkDeleteDrink = (drinkId) => async dispatch => {
 
 export const thunkCreateDrink = (drinkInfo) => async dispatch => {
     console.log(drinkInfo)
+    let res = await fetch(`/api/drinks/post-drink`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(drinkInfo)
+    })
+
+    // console.log(res,'theres')
+
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(createDrink(data));
+        // console.log(data, 'data')
+    } else if (res.status < 500) {
+        const errorMessages = await res.json();
+        return errorMessages
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
+
 }
 
 
@@ -119,6 +145,12 @@ function drinkReducer(state = initialState, action) {
             let newState = { ...state }
             delete newState.drinks[action.payload]
             // console.log(action.payload, 'the payload')
+            return newState
+        }
+        case CREATE_DRINK: {
+            let newState = { ...state }
+            // console.log(action.payload)
+            newState[action.payload.id] = action.payload
             return newState
         }
         default:

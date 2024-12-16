@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkCategoryBrands } from "../../redux/categories"
-
+import { thunkAllDrinks, thunkCreateDrink } from "../../redux/drinks"
+import { useNavigate } from "react-router-dom"
 
 
 function PostDrink() {
     let user = useSelector(state => state.session.user)
     let categories = useSelector(state => state.categories.categories)
     let brands = useSelector(state => state.categories.brands)
+    let drinks = useSelector(state => state.drinks.drinks)
     let [brand, setBrand] = useState(0)
     let [category, setCategory] = useState(0)
     let [name, setName] = useState('')
@@ -21,7 +23,9 @@ function PostDrink() {
     let [desc, setDesc] = useState('')
     let [errors, setErrors] = useState({});
     let dispatch = useDispatch()
+    let navigate = useNavigate()
 
+    let okImg = ['jpg', 'png', 'jpeg']
 
     // console.log(category)
     useEffect(() => {
@@ -30,8 +34,68 @@ function PostDrink() {
         }
     }, [dispatch, category])
 
-    let handleSub = () => {
-        console.log('well well well')
+    // useEffect(() => {
+    //     console.log(errors)
+    // })
+
+
+    let handleSub = async (e) => {
+        e.preventDefault()
+        setErrors({})
+
+        let checkImg = img.split('.')
+        if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
+            if (brand > 0 && category > 0) {
+                if (rating > 5 || rating < 0) {
+                    let ratingError = { 'error': 'The rating must be greater than 0 but less then 5' }
+                    setErrors(ratingError)
+                } else if (rating.split('.').length > 1) {
+                    let ratingError = { 'error': 'The rating must be a whole number' }
+                    setErrors(ratingError)
+                } else {
+                    if (errors.error || errors.server) {
+                        return
+                    } else {
+                        let newPost = {
+                            user_id: Number(user.id),
+                            brand: Number(brand),
+                            category: Number(category),
+                            name: name,
+                            img: img,
+                            oz: Number(oz),
+                            alc: Number(alc),
+                            rating: Number(rating),
+                            cal: Number(cal),
+                            carbs: Number(carbs),
+                            sodium: Number(sodium),
+                            desc: desc
+                        }
+                        let serverResponse = await dispatch(thunkCreateDrink(newPost))
+
+                        if (serverResponse) {
+                            setErrors(serverResponse);
+                        } else {
+                            // console.log(serverResponse, 'serverres'
+                            await dispatch(thunkAllDrinks())
+                                .then(() => {
+                                    let arrDrinks = Object.values(drinks)
+                                    // console.log(arrDrinks)
+                                    return arrDrinks
+                                })
+                                .then((arrDrinks) => navigate(`/drink/${arrDrinks[arrDrinks.length - 1].id}`))
+                        }
+                    }
+                }
+
+            } else {
+                let pickError = { 'error': 'You must select a brand and category' }
+                setErrors(pickError)
+            }
+        } else {
+            let imgError = { 'error': 'Picture must be a jpg, png, or jpeg' }
+            setErrors(imgError)
+        }
+
     }
 
     let arrCats = Object.values(categories)
@@ -48,6 +112,7 @@ function PostDrink() {
                         Name
                         <input
                             type='text'
+                            placeholder="Please use the whole name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
@@ -59,6 +124,7 @@ function PostDrink() {
                         Picture
                         <input
                             type='text'
+                            placeholder="A jpg, png, jpeg of drink"
                             value={img}
                             onChange={(e) => setImg(e.target.value)}
                             required
@@ -92,6 +158,7 @@ function PostDrink() {
                         Rating
                         <input
                             type='number'
+                            placeholder="Rating 1-5"
                             value={rating}
                             onChange={(e) => setRating(e.target.value)}
                             required
@@ -134,8 +201,9 @@ function PostDrink() {
                 <div>
                     <label>
                         Description
-                        <input
+                        <textarea
                             type='text'
+                            placeholder="Please describe your experience, minimum 15 characters"
                             value={desc}
                             onChange={(e) => setDesc(e.target.value)}
                             required
@@ -163,7 +231,7 @@ function PostDrink() {
                     <label>
                         Brands
                         <select value={brand} onChange={(e) => setBrand(e.target.value)}>
-                            <option value="DEFAULT" disabled >Select the brand</option>
+                            <option disabled >Select the brand</option>
                             {categories && (
                                 arrBrands.map(brand => {
                                     return (
@@ -176,6 +244,9 @@ function PostDrink() {
                         </select>
                     </label>
                 </div>
+                {errors.error && (
+                    <p>{errors.error}</p>
+                )}
 
                 <button type='submit'>Create Post</button>
             </form>

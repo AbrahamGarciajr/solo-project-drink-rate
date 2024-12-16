@@ -166,7 +166,7 @@ def del_patch_drink(postId):
             return form.errors, 400
 
 
-@drink_posts.route('/post-drink', methods=['GET','POST'])
+@drink_posts.route('/post-drink', methods=['POST'])
 @login_required
 def create_post():
     """
@@ -187,7 +187,8 @@ def create_post():
 
     form.category.choices=category_choices
     form.brand.choices=brand_choices
-
+    # print(form.data, 'from the back')
+    # print(request.data, 'reqdata')
     picked_brand = Brand.query.filter_by(id=form.brand.data).first()
     if current_user:
         if picked_brand:
@@ -215,4 +216,5 @@ def create_post():
                 return jsonify({'error': 'The brand does not match the category of drink'}), 400
     else:
         return jsonify({'error': 'Please log in or create an account in order to post your drink'}), 401
-    return render_template('post_drink.html', form=form)
+    # return jsonify({'message': 'Your post was created'}), 201
+    # return render_template('post_drink.html', form=form)
