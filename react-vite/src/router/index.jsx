@@ -7,6 +7,7 @@ import CategoryPick from '../components/CategoryBar/CategoryPick';
 import BrandPick from '../components/CategoryBar/BrandPick';
 import DrinkPick from '../components/Drinks/DrinkPick';
 import PostDrink from '../components/Drinks/PostDrink';
+import UpdateDrink from '../components/Drinks/UpdateDrink';
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,11 @@ export const router = createBrowserRouter([
           },
           {
             path: '/drink/create',
-            element: <PostDrink /> 
+            element: <PostDrink />
+          },
+          {
+            path: '/drink/:drinkId/update',
+            element: <UpdateDrink /> 
           }
         ]
       },

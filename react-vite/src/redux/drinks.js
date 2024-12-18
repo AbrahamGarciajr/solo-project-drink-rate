@@ -4,6 +4,7 @@ const BRAND_DRINKS = 'drink/brandDrinks'
 const ONE_DRINK = 'drink/oneDrink'
 const DELETE_DRINK = 'drink/deleteDrink'
 const CREATE_DRINK = 'drink/createDrink'
+// const UPDATE_DRINK = 'drink/updateDrink'
 
 
 const getAllDrinks = (data) => ({
@@ -30,6 +31,11 @@ const createDrink = (data) => ({
     type: CREATE_DRINK,
     payload: data
 })
+
+// const updateDrink = (data) => ({
+//     type: UPDATE_DRINK,
+//     payload: data
+// })
 
 
 // thunks
@@ -85,7 +91,7 @@ export const thunkDeleteDrink = (drinkId) => async dispatch => {
 }
 
 export const thunkCreateDrink = (drinkInfo) => async dispatch => {
-    console.log(drinkInfo)
+    // console.log(drinkInfo)
     let res = await fetch(`/api/drinks/post-drink`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -106,6 +112,27 @@ export const thunkCreateDrink = (drinkInfo) => async dispatch => {
         return { server: "Something went wrong. Please try again" }
     }
 
+}
+
+export const thunkUpdateDrink = (drinkInfo) => async dispatch => {
+    // console.log(drinkInfo.id)
+    let res = await fetch(`/api/drinks/${drinkInfo.id}`, {
+        method: 'PATCH',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(drinkInfo)
+    })
+
+    if (res.ok) {
+        const data = await res.json();
+        // dispatch(updateDrink(data));
+        // console.log(data, 'data')
+        return data
+    } else if (res.status < 500) {
+        const errorMessages = await res.json();
+        return errorMessages
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
 }
 
 

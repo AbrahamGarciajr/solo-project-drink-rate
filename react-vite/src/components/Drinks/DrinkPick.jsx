@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { thunkDeleteDrink, thunkOneDrink } from "../../redux/drinks"
+// import UpdateDrink from "./UpdateDrink"
 
 
 
@@ -21,6 +22,10 @@ function DrinkPick() {
     let deletePost = (drinkInfo) => {
         dispatch(thunkDeleteDrink(drinkInfo.id))
         .then(() => navigate('/'))
+    }
+
+    let updateDrink = () => {
+        navigate(`/drink/${drinkId}/update`)
     }
 
 
@@ -51,7 +56,7 @@ function DrinkPick() {
             {drink.user_id == user.id && isLoaded && (
                 <div>
                     <button onClick={()=>deletePost(drink)}> Delete </button>
-                    <button> Update </button>
+                    <button onClick={updateDrink}> Update </button>
                 </div>
 
             )}
