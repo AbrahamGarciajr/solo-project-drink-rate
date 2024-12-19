@@ -70,7 +70,8 @@ function DrinkPick() {
                 </div>
             )}
 
-            {drink.user_id == user.id && isLoaded && (
+
+            {user && drink.user_id == user.id && isLoaded && (
                 <div>
                     <button onClick={() => deletePost(drink)}> Delete </button>
                     <button onClick={updateDrink}> Update </button>
@@ -78,7 +79,7 @@ function DrinkPick() {
 
             )}
 
-            {drink.reviews && (
+            {drink.reviews && isLoaded && (
                 <div className="review-holder-one-drink">
                     {drink.reviews.length > 0 && (
                         drink.reviews.map(rev => {
@@ -86,7 +87,7 @@ function DrinkPick() {
                                 <div key={rev.id}>
                                     <div>{rev.review}</div>
                                     <div>{rev.rating}/5 stars</div>
-                                    {rev.user_id == user.id && (
+                                    {user && rev.user_id == user.id && (
                                         <div>
                                             <button onClick={() => deleteRev(rev)}> Delete </button>
                                             <button onClick={() => updateRev(rev)}> Update </button>
@@ -98,24 +99,30 @@ function DrinkPick() {
                     )}
                 </div>
             )}
-            {!drink.reviews && !user && (
+            {user && (
+                <div>
+                    {!drink.reviews && Number(user.id) !== Number(drink.user_id) && (
+                        <div className="review-holder-one-drink">
+                            <div>
+                                Would you like to leave a review for this drink?
+                            </div>
+                            <button onClick={postRev}>Post Review</button>
+                        </div>
+                    )}
+                    {!drink.reviews && Number(user.id) === Number(drink.user_id) && (
+                        <div className="review-holder-one-drink">
+                            Someone will agree with you soon bud!
+                        </div>
+                    )}
+                </div>
+
+            )}
+            {!drink.reviews && !user && isLoaded &&(
                 <div className="review-holder-one-drink">
                     Login to be the first to leave your experience with this drink!
                 </div>
             )}
-            {!drink.reviews && user && Number(user.id) !== Number(drink.user_id) && (
-                <div className="review-holder-one-drink">
-                    <div>
-                        Would you like to leave a review for this drink?
-                    </div>
-                    <button onClick={postRev}>Post Review</button>
-                </div>
-            )}
-            {!drink.reviews && user && Number(user.id) === Number(drink.user_id) && (
-                <div className="review-holder-one-drink">
-                        Someone will agree with you soon bud!
-                </div>
-            )}
+
 
             {!isLoaded && (
                 <div> Details are loading... </div>
