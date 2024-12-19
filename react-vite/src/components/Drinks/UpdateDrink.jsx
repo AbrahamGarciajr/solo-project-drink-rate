@@ -98,10 +98,13 @@ function UpdateDrink() {
                             await dispatch(thunkAllDrinks())
                                 .then(() => {
                                     let arrDrinks = Object.values(drinks)
-                                    alert(serverResponse.message)
+
                                     return arrDrinks
                                 })
-                                .then((arrDrinks) => navigate(`/drink/${arrDrinks[arrDrinks.length - 1].id}`))
+                                .then(() => {
+                                    alert(serverResponse.message)
+                                    navigate(`/drink/${drinkId}`)
+                                })
                         }
                     }
                 }
@@ -238,9 +241,9 @@ function UpdateDrink() {
                             {categories && (
                                 arrCats.map(cat => {
                                     return (
-                                            <option key={cat.id} value={cat.id}>
-                                                {cat.name}
-                                            </option>
+                                        <option key={cat.id} value={cat.id}>
+                                            {cat.name}
+                                        </option>
                                     )
                                 })
                             )}

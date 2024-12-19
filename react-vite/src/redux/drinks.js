@@ -165,6 +165,7 @@ function drinkReducer(state = initialState, action) {
         }
         case ONE_DRINK: {
             let newState = { ...state }
+            // console.log(action.payload)
             newState.selected = action.payload
             return newState
         }
