@@ -47,10 +47,7 @@ function PostDrink() {
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
                 if (rating > 5 || rating < 0) {
-                    let ratingError = { 'error': 'The rating must be greater than 0 but less then 5' }
-                    setErrors(ratingError)
-                } else if (rating.split('.').length > 1) {
-                    let ratingError = { 'error': 'The rating must be a whole number' }
+                    let ratingError = { 'error': 'The rating must be a whole number between 0-5' }
                     setErrors(ratingError)
                 } else {
                     if (errors.error || errors.server) {
