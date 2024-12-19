@@ -26,7 +26,6 @@ function UpdateDrink() {
     let [errors, setErrors] = useState({});
     let dispatch = useDispatch()
     let navigate = useNavigate()
-    // console.log(drink)
 
     let okImg = ['jpg', 'png', 'jpeg']
 
@@ -61,12 +60,11 @@ function UpdateDrink() {
     let handleSub = async (e) => {
         e.preventDefault()
         setErrors({})
-
         let checkImg = img.split('.')
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
-                if (rating > 5 || rating < 0 || rating.toString().length > 1) {
-                    let ratingError = { 'error': 'The rating must be a whole number between 0-5' }
+                if (rating > 5 || rating < 1 || rating.toString().length > 1) {
+                    let ratingError = { 'error': 'The rating must be a whole number between 1-5' }
                     setErrors(ratingError)
                 } else {
                     if (errors.error || errors.server) {
@@ -87,14 +85,11 @@ function UpdateDrink() {
                             sodium: Number(sodium),
                             desc: desc
                         }
-                        // console.log(newPost)
                         let serverResponse = await dispatch(thunkUpdateDrink(newPost))
 
                         if (!serverResponse.message) {
-                            // console.log(serverResponse)
                             setErrors(serverResponse);
                         } else {
-                            // console.log(serverResponse, 'serverres'
                             await dispatch(thunkAllDrinks())
                                 .then(() => {
                                     let arrDrinks = Object.values(drinks)
@@ -108,7 +103,6 @@ function UpdateDrink() {
                         }
                     }
                 }
-
             } else {
                 let pickError = { 'error': 'You must select a brand and category' }
                 setErrors(pickError)
@@ -119,11 +113,9 @@ function UpdateDrink() {
         }
     }
 
-    // console.log(name)
 
     let arrCats = Object.values(categories)
     let arrBrands = Object.values(brands)
-    // console.log('this is the cats', arrCats)
 
     return (
         <div>
@@ -271,7 +263,6 @@ function UpdateDrink() {
                 {errors.error && (
                     <p>{errors.error}</p>
                 )}
-
                 <button type='submit'>Update Post</button>
             </form>
         </div>

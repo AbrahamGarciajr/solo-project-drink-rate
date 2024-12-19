@@ -91,7 +91,7 @@ export const thunkDeleteDrink = (drinkId) => async dispatch => {
 }
 
 export const thunkCreateDrink = (drinkInfo) => async dispatch => {
-    // console.log(drinkInfo)
+    console.log(drinkInfo)
     let res = await fetch(`/api/drinks/post-drink`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -115,7 +115,7 @@ export const thunkCreateDrink = (drinkInfo) => async dispatch => {
 }
 
 export const thunkUpdateDrink = (drinkInfo) => async () => {
-    // console.log(drinkInfo.id)
+    // console.log(drinkInfo)
     let res = await fetch(`/api/drinks/${drinkInfo.id}`, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
@@ -124,7 +124,7 @@ export const thunkUpdateDrink = (drinkInfo) => async () => {
 
     if (res.ok) {
         const data = await res.json();
-        // dispatch(updateDrink(data));
+        // dispatch(updateDrink(drinkInfo));
         // console.log(data, 'data')
         return data
     } else if (res.status < 500) {

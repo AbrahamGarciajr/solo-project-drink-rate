@@ -79,7 +79,10 @@ function PostDrink() {
                                     // console.log(arrDrinks)
                                     return arrDrinks
                                 })
-                                .then((arrDrinks) => navigate(`/drink/${arrDrinks[arrDrinks.length - 1].id}`))
+                                .then((arrDrinks) => {
+                                    alert('Post has been created :)')
+                                    navigate(`/drink/${arrDrinks[arrDrinks.length - 1].id}`)
+                                })
                         }
                     }
                 }
