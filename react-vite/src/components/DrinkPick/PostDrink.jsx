@@ -214,7 +214,7 @@ function PostDrink() {
                     <label>
                         Category
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                            <option value="DEFAULT" disabled >Select the category</option>
+                            <option >Select the category</option>
                             {categories && (
                                 arrCats.map(cat => {
                                     return (
@@ -231,7 +231,7 @@ function PostDrink() {
                     <label>
                         Brands
                         <select value={brand} onChange={(e) => setBrand(e.target.value)}>
-                            <option disabled >Select the brand</option>
+                            <option >Select the brand</option>
                             {categories && (
                                 arrBrands.map(brand => {
                                     return (
