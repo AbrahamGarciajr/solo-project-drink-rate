@@ -33,13 +33,13 @@ function DrinkPick() {
         // dispatch(thunkDeleteDrink(drinkInfo.id))
         //     .then(() => navigate('/'))
         // console.log(rev)
+        return rev
     }
 
     let updateRev = (rev) => {
         // navigate(`/drink/${drinkId}/update`)
         // console.log(rev)
-        
-
+        return rev
     }
 
     let postRev = () => {

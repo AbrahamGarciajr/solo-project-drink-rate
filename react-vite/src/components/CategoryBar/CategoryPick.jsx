@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
-import { thunkAllCategories, thunkCategoryBrands } from "../../redux/categories"
+import { thunkCategoryBrands } from "../../redux/categories"
 
 
 function CategoryPick() {
     let { categoryId } = useParams()
-    let category = useSelector(state => state.categories.categories[categoryId])
+    // let category = useSelector(state => state.categories.categories[categoryId])
     let brands = useSelector(state => state.categories.brands)
     let dispatch = useDispatch()
     let [isLoaded, setIsLoaded] = useState(false)

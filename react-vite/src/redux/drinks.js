@@ -114,7 +114,7 @@ export const thunkCreateDrink = (drinkInfo) => async dispatch => {
 
 }
 
-export const thunkUpdateDrink = (drinkInfo) => async dispatch => {
+export const thunkUpdateDrink = (drinkInfo) => async () => {
     // console.log(drinkInfo.id)
     let res = await fetch(`/api/drinks/${drinkInfo.id}`, {
         method: 'PATCH',

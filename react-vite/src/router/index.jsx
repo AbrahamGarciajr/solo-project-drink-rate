@@ -5,9 +5,9 @@ import Layout from './Layout';
 import Home from '../components/Home/Home';
 import CategoryPick from '../components/CategoryBar/CategoryPick';
 import BrandPick from '../components/CategoryBar/BrandPick';
-import DrinkPick from '../components/Drinks/DrinkPick';
-import PostDrink from '../components/Drinks/PostDrink';
-import UpdateDrink from '../components/Drinks/UpdateDrink';
+import DrinkPick from '../components/DrinkPick/DrinkPick';
+import PostDrink from '../components/DrinkPick/PostDrink';
+import UpdateDrink from '../components/DrinkPick/UpdateDrink'
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/drink/:drinkId/update',
-            element: <UpdateDrink /> 
+            element: <UpdateDrink />
           }
         ]
       },
