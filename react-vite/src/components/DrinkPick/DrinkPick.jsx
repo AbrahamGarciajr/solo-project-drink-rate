@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { thunkDeleteDrink, thunkOneDrink } from "../../redux/drinks"
@@ -14,6 +14,8 @@ function DrinkPick() {
     let dispatch = useDispatch()
     let [isLoaded, setIsLoaded] = useState(false)
     let navigate = useNavigate()
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
 
     // console.log(drink, 'this is the user')
     useEffect(() => {
@@ -29,6 +31,33 @@ function DrinkPick() {
         navigate(`/drink/${drinkId}/update`)
     }
 
+
+
+    const toggleRev = (e) => {
+        e.stopPropagation();
+        setShowMenu(!showMenu);
+    };
+
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = (e) => {
+            if (ulRef.current && !ulRef.current.contains(e.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        document.addEventListener("click", closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+
+    const closeMenu = () => setShowMenu(false);
+
+    let postRev = () => {
+        toggleRev()
+    }
+    
     let deleteRev = (rev) => {
         // dispatch(thunkDeleteDrink(drinkInfo.id))
         //     .then(() => navigate('/'))
@@ -38,16 +67,9 @@ function DrinkPick() {
 
     let updateRev = (rev) => {
         // navigate(`/drink/${drinkId}/update`)
-        // console.log(rev)
+        console.log(rev)
         return rev
     }
-
-    let postRev = () => {
-        // console.log('will come soon')
-    }
-
-
-
     return (
         <div>
             {drink && isLoaded && (
@@ -69,7 +91,9 @@ function DrinkPick() {
                     </div>
                 </div>
             )}
-
+            {!isLoaded && (
+                <div> Details are loading... </div>
+            )}
 
             {user && drink.user_id == user.id && isLoaded && (
                 <div>
@@ -101,7 +125,7 @@ function DrinkPick() {
             )}
             {user && (
                 <div>
-                    {!drink.reviews && Number(user.id) !== Number(drink.user_id) && (
+                    {!drink.reviews && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
                         <div className="review-holder-one-drink">
                             <div>
                                 Would you like to leave a review for this drink?
@@ -109,7 +133,7 @@ function DrinkPick() {
                             <button onClick={postRev}>Post Review</button>
                         </div>
                     )}
-                    {!drink.reviews && Number(user.id) === Number(drink.user_id) && (
+                    {!drink.reviews && (Number(user.id) === Number(drink.user_id)) && isLoaded && (
                         <div className="review-holder-one-drink">
                             Someone will agree with you soon bud!
                         </div>
@@ -117,16 +141,14 @@ function DrinkPick() {
                 </div>
 
             )}
-            {!drink.reviews && !user && isLoaded &&(
+            {!drink.reviews && !user && isLoaded && (
                 <div className="review-holder-one-drink">
                     Login to be the first to leave your experience with this drink!
                 </div>
             )}
 
 
-            {!isLoaded && (
-                <div> Details are loading... </div>
-            )}
+
 
             {!drink && isLoaded && (
                 <div>I really do not understand how you got this far.

@@ -4,7 +4,11 @@ from wtforms.validators import DataRequired, Email, ValidationError, InputRequir
 
 
 class PostReview(FlaskForm):
-    drink_id = IntegerField('Drink', validators=[DataRequired()])
     review = TextAreaField('Review', validators=[DataRequired()])
     rating = IntegerField('Rating', validators=[DataRequired(), NumberRange(min=0, max=5)])
     submit = SubmitField('Post Review')
+
+
+
+# No more alerts, use a modal to show that something was delete or created or updated.
+# add extra question for risky user behavior: 'are you sure you want to delete? yes? no?'
