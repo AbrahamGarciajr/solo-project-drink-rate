@@ -4,7 +4,7 @@ const BRAND_DRINKS = 'drink/brandDrinks'
 const ONE_DRINK = 'drink/oneDrink'
 const DELETE_DRINK = 'drink/deleteDrink'
 const CREATE_DRINK = 'drink/createDrink'
-// const UPDATE_DRINK = 'drink/updateDrink'
+// const UPDATE_REV = 'rev/updateRev'
 
 
 const getAllDrinks = (data) => ({
@@ -32,8 +32,8 @@ const createDrink = (data) => ({
     payload: data
 })
 
-// const updateDrink = (data) => ({
-//     type: UPDATE_DRINK,
+// const updateRev = (data) => ({
+//     type: UPDATE_REV,
 //     payload: data
 // })
 
@@ -91,7 +91,7 @@ export const thunkDeleteDrink = (drinkId) => async dispatch => {
 }
 
 export const thunkCreateDrink = (drinkInfo) => async dispatch => {
-    console.log(drinkInfo)
+    // console.log(drinkInfo)
     let res = await fetch(`/api/drinks/post-drink`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -127,6 +127,43 @@ export const thunkUpdateDrink = (drinkInfo) => async () => {
         // dispatch(updateDrink(drinkInfo));
         // console.log(data, 'data')
         return data
+    } else if (res.status < 500) {
+        const errorMessages = await res.json();
+        return errorMessages
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
+}
+
+export const thunkUpdateRev = (revInfo) => async (dispatch) => {
+    // console.log(revInfo)
+    let res = await fetch(`/api/reviews/user/${revInfo.id}`, {
+        method: 'PATCH',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(revInfo)
+    })
+
+    if (res.ok) {
+        const data = await res.json();
+        // dispatch(updateRev(revInfo));
+        // console.log(data, 'data')
+        return data
+    } else if (res.status < 500) {
+        const errorMessages = await res.json();
+        return errorMessages
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
+}
+
+export const thunkDeleteRev = (revInfo) => async (dispatch) => {
+    let res = await fetch(`/api/reviews/user/${revInfo.id}`, {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json" }
+    })
+
+    if (res.ok) {
+        return await res.json()
     } else if (res.status < 500) {
         const errorMessages = await res.json();
         return errorMessages

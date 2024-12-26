@@ -64,6 +64,7 @@ def create_review(revId):
                 form = PostReview()
                 form['csrf_token'].data = request.cookies['csrf_token']
                 if (form.rating.data <= 5 and form.rating.data >= 1):
+                    # print(form.data,'this is the data')
                     rev.review = form.review.data
                     rev.rating = form.rating.data
                     db.session.commit()

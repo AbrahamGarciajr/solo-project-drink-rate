@@ -1,21 +1,21 @@
 /* TODO: Add sitewide styles */
 
-.category_bar{
+.category_bar {
     border: 1px, solid, black;
     width: 80%;
 }
 
-.category_bar_option_holder{
+.category_bar_option_holder {
     display: flex;
     justify-content: space-evenly;
 }
 
 
-.category_bar_options{
+.category_bar_options {
     border-color: brown;
 }
 
-.home_page_drinks_holder{
+.home_page_drinks_holder {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -23,14 +23,27 @@
     justify-content: space-between;
 }
 
-.home_page_drinks{
+.home_page_drinks {
     border: 1px, solid, black;
     width: 20rem;
     height: 150px;
     margin: 10px
 }
 
-.review-holder-one-drink{
+.review-holder-one-drink {
     border: 1px, solid, black;
     margin-top: 30px;
 }
+
+.delete-drink-option {
+    position: absolute;
+    margin-left: 30%;
+    border: 1px, solid, black;
+    background-color: white;
+    height: 10rem;
+    width: 30rem;
+}
+
+/* .drink-holder-delete {
+    background-color: gray;
+} */
