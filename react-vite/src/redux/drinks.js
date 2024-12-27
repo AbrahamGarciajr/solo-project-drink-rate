@@ -135,7 +135,7 @@ export const thunkUpdateDrink = (drinkInfo) => async () => {
     }
 }
 
-export const thunkUpdateRev = (revInfo) => async (dispatch) => {
+export const thunkUpdateRev = (revInfo) => async () => {
     // console.log(revInfo)
     let res = await fetch(`/api/reviews/user/${revInfo.id}`, {
         method: 'PATCH',
@@ -156,7 +156,7 @@ export const thunkUpdateRev = (revInfo) => async (dispatch) => {
     }
 }
 
-export const thunkDeleteRev = (revInfo) => async (dispatch) => {
+export const thunkDeleteRev = (revInfo) => async () => {
     let res = await fetch(`/api/reviews/user/${revInfo.id}`, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" }
@@ -172,7 +172,7 @@ export const thunkDeleteRev = (revInfo) => async (dispatch) => {
     }
 }
 
-export const thunkCreateRev = (revInfo) => async (dispatch) => {
+export const thunkCreateRev = (revInfo) => async () => {
     // console.log(revInfo)
     let res = await fetch(`/api/reviews/${revInfo.beverage_post_id}`, {
         method: 'POST',

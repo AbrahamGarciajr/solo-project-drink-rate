@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { thunkOneDrink, thunkUpdateRev } from "../../redux/drinks";
 import { useModal } from "../../context/Modal";
 // import "./LoginForm.css";
@@ -8,12 +8,11 @@ import { useModal } from "../../context/Modal";
 
 function ReviewUpdateForm({ review }) {
     const dispatch = useDispatch();
-    let navigate = useNavigate()
-    let {drinkId} = useParams()
+    let { drinkId } = useParams()
     const [rating, setRating] = useState(review.rating);
     const [rev, setRev] = useState(review.review);
     const [errors, setErrors] = useState({});
-    let {closeModal} = useModal()
+    let { closeModal } = useModal()
 
     // console.log(drinkId)
 
