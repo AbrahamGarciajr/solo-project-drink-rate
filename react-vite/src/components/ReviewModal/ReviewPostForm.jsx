@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { thunkOneDrink, thunkUpdateRev } from "../../redux/drinks";
-import { useModal } from "../../context/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { thunkCreateRev, thunkOneDrink } from "../../redux/drinks";
 // import "./LoginForm.css";
 
 
-function ReviewUpdateForm({ review }) {
+function ReviewPostForm({ setCreateRev }) {
     const dispatch = useDispatch();
-    let navigate = useNavigate()
-    let {drinkId} = useParams()
-    const [rating, setRating] = useState(review.rating);
-    const [rev, setRev] = useState(review.review);
+    let user = useSelector(state => state.session.user)
+    let { drinkId } = useParams()
+    const [rating, setRating] = useState(0);
+    const [rev, setRev] = useState('');
     const [errors, setErrors] = useState({});
-    let {closeModal} = useModal()
+    // let { closeModal } = useModal()
 
     // console.log(drinkId)
 
@@ -26,15 +25,18 @@ function ReviewUpdateForm({ review }) {
             if (rev.length > 3) {
                 setErrors({})
                 let newRev = {
-                    id: review.id,
+                    user_id: user.id,
+                    beverage_post_id: drinkId,
                     rating,
                     review: rev
                 }
-                let res = await dispatch(thunkUpdateRev(newRev))
+
+                // console.log(newRev)
+                let res = await dispatch(thunkCreateRev(newRev))
 
                 if (res.message) {
                     alert(res.message)
-                    closeModal()
+                    setCreateRev(false)
                     await dispatch(thunkOneDrink(drinkId))
 
                 } else {
@@ -53,7 +55,7 @@ function ReviewUpdateForm({ review }) {
 
     return (
         <div>
-            <h2>Update your review</h2>
+            <h2>Post your review</h2>
             <form onSubmit={handleSub}>
                 {errors.error && (
                     <p>{errors.error}</p>
@@ -89,4 +91,4 @@ function ReviewUpdateForm({ review }) {
     );
 }
 
-export default ReviewUpdateForm;
+export default ReviewPostForm;

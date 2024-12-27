@@ -7,6 +7,7 @@ import { SlOptions } from "react-icons/sl";
 import OpenReviewModal from '../ReviewModal/ReviewModal'
 import ReviewUpdateForm from "../ReviewModal/ReviewUpdateModal"
 import DeleteRevForm from "../ReviewModal/ReviewDeleteModal"
+import ReviewPostForm from "../ReviewModal/ReviewPostForm"
 // import UpdateDrink from "./UpdateDrink"
 
 
@@ -22,6 +23,7 @@ function DrinkPick() {
     const [showMenu, setShowMenu] = useState(false);
     const [showRevMenu, setShowRevMenu] = useState(false)
     const [delDrink, setDelDrink] = useState(true)
+    const [createRev, setCreateRev] = useState(false)
     // const [drinkHolder, setDrinkHolder] = useState('')
     const ulRef = useRef();
 
@@ -68,12 +70,16 @@ function DrinkPick() {
 
 
     let postRev = () => {
-        console.log('Hello')
+        setCreateRev(true)
     }
 
     // console.log(typeof(drink.reviews))
     // console.log(drink.reviews)
-    let found = drink.reviews.find(rev => rev.user_id === user.id)
+    let found
+    if (drink.reviews) {
+        found = drink.reviews.find(rev => rev.user_id === user.id)
+
+    }
     // console.log(found)
 
     return (
@@ -95,20 +101,24 @@ function DrinkPick() {
                     <div>
                         {drink.avgRating}/5 rating
                     </div>
-                </div>
-            )}
-            {!isLoaded && (
-                <div> Details are loading... </div>
-            )}
 
-            {user && drink.user_id == user.id && isLoaded && (
+                    {user && drink.user_id == user.id && isLoaded && (
                 <div>
                     <button onClick={deletePost}> Delete </button>
                     <button onClick={updateDrink}> Update </button>
                 </div>
 
             )}
+                </div>
+            )}
+            {!isLoaded && (
+                <div> Details are loading... </div>
+            )}
 
+
+
+
+{/* do the post for reviews and check logic behind most of the reviews in the return */}
 
             {showMenu && delDrink && (
                 <div className="delete-drink-option">
@@ -158,7 +168,7 @@ function DrinkPick() {
             )}
             {user && (
                 <div>
-                    {!found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
+                    {drink.reviews && !found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
                         <div className="review-holder-one-drink">
                             <div>
                                 Would you like to leave a review for this drink?
@@ -166,14 +176,21 @@ function DrinkPick() {
                             <button onClick={postRev}>Post Review</button>
                         </div>
                     )}
-                    {(Number(user.id) === Number(drink.user_id)) && isLoaded && (
+                    {!drink.reviews && (Number(user.id) === Number(drink.user_id)) && isLoaded && (
                         <div className="review-holder-one-drink">
                             Someone will agree with you soon bud!
                         </div>
                     )}
                 </div>
-
             )}
+
+
+            {createRev && (
+                <div className="delete-drink-option">
+                    <ReviewPostForm setCreateRev={setCreateRev} />
+                </div>
+            )}
+
             {!drink.reviews && !user && isLoaded && (
                 <div className="review-holder-one-drink">
                     Login to be the first to leave your experience with this drink!

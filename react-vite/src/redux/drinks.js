@@ -4,7 +4,7 @@ const BRAND_DRINKS = 'drink/brandDrinks'
 const ONE_DRINK = 'drink/oneDrink'
 const DELETE_DRINK = 'drink/deleteDrink'
 const CREATE_DRINK = 'drink/createDrink'
-// const UPDATE_REV = 'rev/updateRev'
+// const CREATE_REV = 'rev/createRev'
 
 
 const getAllDrinks = (data) => ({
@@ -32,8 +32,8 @@ const createDrink = (data) => ({
     payload: data
 })
 
-// const updateRev = (data) => ({
-//     type: UPDATE_REV,
+// const createRev = (data) => ({
+//     type: CREATE_REV,
 //     payload: data
 // })
 
@@ -164,6 +164,29 @@ export const thunkDeleteRev = (revInfo) => async (dispatch) => {
 
     if (res.ok) {
         return await res.json()
+    } else if (res.status < 500) {
+        const errorMessages = await res.json();
+        return errorMessages
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
+}
+
+export const thunkCreateRev = (revInfo) => async (dispatch) => {
+    // console.log(revInfo)
+    let res = await fetch(`/api/reviews/${revInfo.beverage_post_id}`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(revInfo)
+    })
+
+    // console.log(res, 'the res')
+    if (res.ok) {
+        let data = await res.json()
+        // console.log(data, 'the data')
+        // dispatch(createRev(revInfo))
+        return data
+
     } else if (res.status < 500) {
         const errorMessages = await res.json();
         return errorMessages
