@@ -24,7 +24,7 @@ function DrinkPick() {
     const [showRevMenu, setShowRevMenu] = useState(false)
     const [delDrink, setDelDrink] = useState(true)
     const [createRev, setCreateRev] = useState(false)
-    // const [drinkHolder, setDrinkHolder] = useState('')
+    const [message, setMessage] = useState('')
     const ulRef = useRef();
 
 
@@ -78,9 +78,16 @@ function DrinkPick() {
     let found
     if (drink.reviews) {
         found = drink.reviews.find(rev => rev.user_id === user.id)
-
     }
-    // console.log(found)
+
+    useEffect(() => {
+        if(message){
+            let message = () => {
+                setMessage('')
+            }
+            setTimeout(message, 3500)
+        }
+    })
 
     return (
         <div className={`drink-holder`}>
@@ -103,12 +110,12 @@ function DrinkPick() {
                     </div>
 
                     {user && drink.user_id == user.id && isLoaded && (
-                <div>
-                    <button onClick={deletePost}> Delete </button>
-                    <button onClick={updateDrink}> Update </button>
-                </div>
+                        <div>
+                            <button onClick={deletePost}> Delete </button>
+                            <button onClick={updateDrink}> Update </button>
+                        </div>
 
-            )}
+                    )}
                 </div>
             )}
             {!isLoaded && (
@@ -118,7 +125,7 @@ function DrinkPick() {
 
 
 
-{/* do the post for reviews and check logic behind most of the reviews in the return */}
+            {/* do the post for reviews and check logic behind most of the reviews in the return */}
 
             {showMenu && delDrink && (
                 <div className="delete-drink-option">
@@ -147,13 +154,13 @@ function DrinkPick() {
                                                     <OpenReviewModal
                                                         itemText='Delete'
                                                         onItemClick={closeRevMenu}
-                                                        modalComponent={<DeleteRevForm review={rev} />}
+                                                        modalComponent={<DeleteRevForm setMessage={setMessage} review={rev} />}
                                                     />
 
                                                     <OpenReviewModal
                                                         itemText='Update'
                                                         onItemClick={closeRevMenu}
-                                                        modalComponent={<ReviewUpdateForm review={rev} />}
+                                                        modalComponent={<ReviewUpdateForm setMessage={setMessage} review={rev} />}
                                                     />
                                                 </div>
                                             )}
@@ -168,7 +175,7 @@ function DrinkPick() {
             )}
             {user && (
                 <div>
-                    {drink.reviews && !found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
+                    {!found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
                         <div className="review-holder-one-drink">
                             <div>
                                 Would you like to leave a review for this drink?
@@ -181,13 +188,27 @@ function DrinkPick() {
                             Someone will agree with you soon bud!
                         </div>
                     )}
+                    {/* {!drink.reviews && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
+                        <div className="review-holder-one-drink">
+                            <div>
+                                Would you like to leave a review for this drink?
+                            </div>
+                            <button onClick={postRev}>Post Review</button>
+                        </div>
+                    )} */}
+                </div>
+            )}
+
+            {message && (
+                <div className="delete-drink-option">
+                    {message.message}
                 </div>
             )}
 
 
             {createRev && (
                 <div className="delete-drink-option">
-                    <ReviewPostForm setCreateRev={setCreateRev} />
+                    <ReviewPostForm setCreateRev={setCreateRev} setMessage={setMessage} />
                 </div>
             )}
 

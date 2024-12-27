@@ -6,7 +6,7 @@ import { useModal } from "../../context/Modal";
 // import "./LoginForm.css";
 
 
-function ReviewUpdateForm({ review }) {
+function ReviewUpdateForm({ review, setMessage }) {
     const dispatch = useDispatch();
     let { drinkId } = useParams()
     const [rating, setRating] = useState(review.rating);
@@ -32,10 +32,11 @@ function ReviewUpdateForm({ review }) {
                 let res = await dispatch(thunkUpdateRev(newRev))
 
                 if (res.message) {
-                    alert(res.message)
-                    closeModal()
-                    await dispatch(thunkOneDrink(drinkId))
+                    // alert(res.message)
 
+                    await dispatch(thunkOneDrink(drinkId))
+                    closeModal()
+                    setMessage(res)
                 } else {
                     setErrors(res)
                 }

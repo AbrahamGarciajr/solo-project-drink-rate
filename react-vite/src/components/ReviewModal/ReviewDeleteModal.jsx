@@ -5,11 +5,11 @@ import { useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 // import "./LoginForm.css";
 
-function DeleteRevForm({ review }) {
+function DeleteRevForm({ review, setMessage }) {
     const dispatch = useDispatch();
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
-    let {drinkId} = useParams()
+    let { drinkId } = useParams()
     const [errors, setErrors] = useState({});
     let { closeModal } = useModal()
 
@@ -20,9 +20,10 @@ function DeleteRevForm({ review }) {
         // setDelDrink(false)
         let res = await dispatch(thunkDeleteRev(review))
         if (res.message) {
-            alert(res.message)
+            // alert(res.message)
             await dispatch(thunkOneDrink(drinkId))
             closeModal()
+            setMessage(res)
 
         } else if (res.error) {
             setErrors(res)

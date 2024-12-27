@@ -5,7 +5,7 @@ import { thunkCreateRev, thunkOneDrink } from "../../redux/drinks";
 // import "./LoginForm.css";
 
 
-function ReviewPostForm({ setCreateRev }) {
+function ReviewPostForm({ setCreateRev, setMessage }) {
     const dispatch = useDispatch();
     let user = useSelector(state => state.session.user)
     let { drinkId } = useParams()
@@ -15,6 +15,10 @@ function ReviewPostForm({ setCreateRev }) {
     // let { closeModal } = useModal()
 
     // console.log(drinkId)
+
+    let cancelPost = () => {
+        setCreateRev(false)
+    }
 
     let handleSub = async (e) => {
         e.preventDefault()
@@ -35,8 +39,10 @@ function ReviewPostForm({ setCreateRev }) {
                 let res = await dispatch(thunkCreateRev(newRev))
 
                 if (res.message) {
-                    alert(res.message)
+                    // alert(res.message)
                     setCreateRev(false)
+                    // setPostMessage(true)
+                    setMessage(res)
                     await dispatch(thunkOneDrink(drinkId))
 
                 } else {
@@ -84,7 +90,10 @@ function ReviewPostForm({ setCreateRev }) {
                     </label>
                 </div>
                 <div>
-                    <button type='submit'>Update</button>
+                    <button type='submit'>Post</button>
+                </div>
+                <div>
+                    <button onClick={cancelPost}>Cancel</button>
                 </div>
             </form>
         </div>
