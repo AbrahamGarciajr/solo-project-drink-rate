@@ -74,7 +74,16 @@ def brand_selection(brandId):
     if brand:
         drinks = BeveragePost.query.filter_by(brand_id=brandId).all()
         if drinks:
-            return [drink.to_dict() for drink in drinks]
+            allDrinks = [drink.to_dict() for drink in drinks]
+            for drink in allDrinks:
+                revs = Review.query.filter_by(beverage_post_id=drink['id']).all()
+                if revs:
+                    total_ratings = sum(rev.rating for rev in revs)
+                    drink['avgRating'] = (
+                        total_ratings + drink['rating'])/(len(revs) + 1)
+                else:
+                    drink['avgRating'] = drink['rating']
+            return allDrinks
         else:
             return jsonify({'error': 'No Drinks are available for this brand yet'})
     else:

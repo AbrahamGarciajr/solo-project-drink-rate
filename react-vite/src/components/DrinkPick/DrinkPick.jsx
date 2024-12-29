@@ -46,6 +46,8 @@ function DrinkPick() {
         navigate(`/drink/${drinkId}/update`)
     }
 
+    // console.log(drink)
+
 
     const toggleRevMenu = (e) => {
         e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -73,15 +75,16 @@ function DrinkPick() {
         setCreateRev(true)
     }
 
-    // console.log(typeof(drink.reviews))
-    // console.log(drink.reviews)
     let found
     if (drink.reviews) {
-        found = drink.reviews.find(rev => rev.user_id === user.id)
+        if (user) {
+            found = drink.reviews.find(rev => rev.user_id === user.id)
+        }
+
     }
 
     useEffect(() => {
-        if(message){
+        if (message) {
             let message = () => {
                 setMessage('')
             }

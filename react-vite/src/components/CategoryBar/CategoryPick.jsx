@@ -6,7 +6,7 @@ import { thunkCategoryBrands } from "../../redux/categories"
 
 function CategoryPick() {
     let { categoryId } = useParams()
-    // let category = useSelector(state => state.categories.categories[categoryId])
+    let category = useSelector(state => state.categories.categories[categoryId])
     let brands = useSelector(state => state.categories.brands)
     let dispatch = useDispatch()
     let [isLoaded, setIsLoaded] = useState(false)
@@ -37,15 +37,21 @@ function CategoryPick() {
     return (
         <div >
             {arrBrands.length > 0 && isLoaded && (
-                <div className="home_page_drinks_holder">
-                    {arrBrands.map(brand => {
-                        return (
-                            <div className="home_page_drinks" key={brand.id} onClick={() => brandClick(brand)}>
-                                {brand.name}
-                            </div>
-                        )
-                    })}
+                <div>
+                    <div className="brands-for-brand-name">
+                        Brands for {category.name}:
+                    </div>
+                    <div className="home_page_drinks_holder">
+                        {arrBrands.map(brand => {
+                            return (
+                                <div className="category-page-brands" key={brand.id} onClick={() => brandClick(brand)}>
+                                    {brand.name}
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
+
             )}
             {!isLoaded && (
                 <div>...Loading</div>

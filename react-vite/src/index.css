@@ -2,32 +2,64 @@
 
 .category_bar {
     border: 1px, solid, black;
-    width: 80%;
+    width: 100%;
 }
 
 .category_bar_option_holder {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
 }
+
+.logout-user:hover {
+    cursor: pointer;
+}
+
+/* .the-whole-darn-thing {
+    background-color: aqua;
+    width:100%
+} */
 
 
 .category_bar_options {
-    border-color: brown;
+    font-size: 25px;
+}
+
+.category_bar_options:hover {
+    cursor: pointer;
+    font-weight: bolder;
+    color: chocolate;
+}
+
+.category_bar_options:active {
+    cursor: pointer;
+    font-weight: bolder;
+    color: white;
 }
 
 .home_page_drinks_holder {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 80%;
+    width: 90%;
+    margin-left: 50px;
     justify-content: space-between;
+
 }
 
 .home_page_drinks {
     border: 1px, solid, black;
     width: 20rem;
-    height: 150px;
-    margin: 10px
+    height: 220px;
+    margin: 10px;
+}
+
+.home_page_drinks:hover {
+    cursor: pointer;
+    background-color: chocolate;
+    font-weight: bold;
+    border: none;
 }
 
 .review-holder-one-drink {
@@ -47,3 +79,46 @@
 /* .drink-holder-delete {
     background-color: gray;
 } */
+
+.drink-preview-img {
+    height: 150px;
+    width: 150px
+}
+
+.star-for-rating {
+    color: gold;
+}
+
+
+.drink-img-holder {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.brands-for-brand-name {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.category-page-brands {
+    border: 1px, solid, black;
+    width: 20rem;
+    height: 100px;
+    margin: 10px;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-page-brands:hover {
+    cursor: pointer;
+    background-color: chocolate;
+    font-weight: bold;
+    border: none;
+}

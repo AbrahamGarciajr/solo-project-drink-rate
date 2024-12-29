@@ -25,10 +25,6 @@ export default function Layout() {
 
           {isLoaded && <Outlet />}
         </div>
-        {/* {isLoaded && <Outlet />}
-        <div className="category_bar">
-          <CategoryBar/>
-        </div> */}
         <Modal />
       </ModalProvider>
     </>

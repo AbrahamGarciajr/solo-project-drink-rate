@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkAllDrinks } from "../../redux/drinks"
 import { useNavigate } from "react-router-dom"
+import { FaStar } from "react-icons/fa";
 
 
-
-function Home(){
+function Home() {
     let drinks = useSelector(state => state.drinks.drinks)
     let dispatch = useDispatch()
     let navigate = useNavigate()
@@ -24,14 +24,24 @@ function Home(){
     }
 
 
-    return(
+
+
+    return (
         <div >
             {drinks && isLoaded && (
                 <div className="home_page_drinks_holder">
                     {arrDrinks.reverse().map(drink => {
                         return (
                             <div className="home_page_drinks" key={drink.id} onClick={() => drinkClick(drink)}>
-                                {drink.name}
+                                <div className="drink-img-holder">
+                                    <img className='drink-preview-img' src={drink.img} />
+                                </div>
+                                <div>
+                                    {drink.name}
+                                </div>
+                                <div>
+                                    {drink.avgRating.toFixed(2)}/5 <FaStar className="star-for-rating" />
+                                </div>
                             </div>
                         )
                     })}
