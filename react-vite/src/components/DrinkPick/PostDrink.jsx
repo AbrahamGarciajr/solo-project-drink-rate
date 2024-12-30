@@ -43,12 +43,23 @@ function PostDrink() {
         e.preventDefault()
         setErrors({})
 
+        if (desc.length < 5) {
+            let descError = { 'error': 'You need to say something more than that' }
+            setErrors(descError)
+        }
+        // if (String(rating)[0] == '0') {
+        //     let zeroGone = String(rating).slice(1)
+        //     // console.log(rating, 'without the zero ')
+        //     setRating(Number(zeroGone))
+        // }
+        // console.log(rating)
         let checkImg = img.split('.')
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
-                if (rating > 5 || rating < 0) {
-                    let ratingError = { 'error': 'The rating must be a whole number between 0-5' }
+                if (rating > 5 || rating < 0 || String(rating).length > 1) {
+                    let ratingError = { 'error': 'The rating must be a whole number between 0-5', 'error0': 'If your rating leads with 0, please delete it' }
                     setErrors(ratingError)
+
                 } else {
                     if (errors.error || errors.server) {
                         return
@@ -67,6 +78,7 @@ function PostDrink() {
                             sodium: Number(sodium),
                             desc: desc
                         }
+                        // console.log(newPost)
                         let serverResponse = await dispatch(thunkCreateDrink(newPost))
 
                         if (serverResponse) {
@@ -103,13 +115,13 @@ function PostDrink() {
     // console.log('this is the cats', arrCats)
 
     return (
-        <div>
+        <div className="post-a-drink-form-holder">
             <h1>Create a Post</h1>
             {errors.server && <p>{errors.server}</p>}
             <form onSubmit={handleSub}>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Name
+                        Name:
                         <input
                             type='text'
                             placeholder="Please use the whole name"
@@ -119,9 +131,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Picture
+                        Picture:
                         <input
                             type='text'
                             placeholder="A jpg, png, jpeg of drink"
@@ -131,9 +143,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        OZ
+                        OZ:
                         <input
                             type='number'
                             value={oz}
@@ -142,9 +154,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Alcohol Percentage
+                        Alcohol Percentage:
                         <input
                             type='number'
                             value={alc}
@@ -153,9 +165,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Rating
+                        Rating:
                         <input
                             type='number'
                             placeholder="Rating 1-5"
@@ -165,9 +177,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Calories
+                        Calories:
                         <input
                             type='number'
                             value={cal}
@@ -176,9 +188,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Carbs
+                        Carbs:
                         <input
                             type='number'
                             value={carbs}
@@ -187,9 +199,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Sodium
+                        Sodium:
                         <input
                             type='number'
                             value={sodium}
@@ -198,9 +210,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Description
+                        Description:
                         <textarea
                             type='text'
                             placeholder="Please describe your experience, minimum 15 characters"
@@ -210,9 +222,9 @@ function PostDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Category
+                        Category:
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
                             <option >Select the category</option>
                             {categories && (
@@ -227,9 +239,9 @@ function PostDrink() {
                         </select>
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
-                        Brands
+                        Brands:
                         <select value={brand} onChange={(e) => setBrand(e.target.value)}>
                             <option >Select the brand</option>
                             {categories && (
@@ -245,7 +257,10 @@ function PostDrink() {
                     </label>
                 </div>
                 {errors.error && (
-                    <p>{errors.error}</p>
+                    <p style={{color: "red"}}>{errors.error}</p>
+                )}
+                {errors.error0 && (
+                    <p style={{color: "orange"}}>{errors.error0}</p>
                 )}
 
                 <button type='submit'>Create Post</button>

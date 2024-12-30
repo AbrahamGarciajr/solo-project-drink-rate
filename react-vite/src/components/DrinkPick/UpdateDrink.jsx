@@ -118,11 +118,11 @@ function UpdateDrink() {
     let arrBrands = Object.values(brands)
 
     return (
-        <div>
+        <div className="post-a-drink-form-holder">
             <h1>Create a Post</h1>
             {errors.server && <p>{errors.server}</p>}
             <form onSubmit={handleSub}>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Name
                         <input
@@ -134,7 +134,7 @@ function UpdateDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Picture
                         <input
@@ -146,29 +146,29 @@ function UpdateDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         OZ
                         <input
                             type='number'
-                            value={oz}
+                            value={Number(oz).toFixed(2)}
                             onChange={(e) => setOz(e.target.value)}
                             required
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Alcohol Percentage
                         <input
                             type='number'
-                            value={alc}
+                            value={Number(alc).toFixed(2)}
                             onChange={(e) => setAlc(e.target.value)}
                             required
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Rating
                         <input
@@ -180,40 +180,40 @@ function UpdateDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Calories
                         <input
                             type='number'
-                            value={cal}
+                            value={Number(cal).toFixed(2)}
                             onChange={(e) => setCal(e.target.value)}
                             required
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Carbs
                         <input
                             type='number'
-                            value={carbs}
+                            value={Number(carbs).toFixed(2)}
                             onChange={(e) => setCarbs(e.target.value)}
                             required
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Sodium
                         <input
                             type='number'
-                            value={sodium}
+                            value={Number(sodium).toFixed(2)}
                             onChange={(e) => setSodium(e.target.value)}
                             required
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Description
                         <textarea
@@ -225,7 +225,7 @@ function UpdateDrink() {
                         />
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Category
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -243,7 +243,7 @@ function UpdateDrink() {
 
                     </label>
                 </div>
-                <div>
+                <div className="post-drink-form-detail">
                     <label>
                         Brands
                         <select value={brand} onChange={(e) => setBrand(e.target.value)}>

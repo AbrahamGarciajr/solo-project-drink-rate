@@ -15,7 +15,7 @@ function OpenReviewModal({
     };
 
     return (
-        <button onClick={onClick}>{itemText}</button>
+        <button className='button-to-post-rev' onClick={onClick}>{itemText}</button>
     );
 }
 

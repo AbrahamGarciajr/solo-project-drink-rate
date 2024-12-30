@@ -67,9 +67,9 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                     <p>{errors.error}</p>
                 )}
 
-                <div>
+                <div className='post-rev-form-details'>
                     <label>
-                        Rating
+                        Rating:
                         <input
                             type='number'
                             value={rating}
@@ -78,9 +78,9 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                         />
                     </label>
                 </div>
-                <div>
+                <div className='post-rev-form-details'>
                     <label>
-                        Review
+                        Review:
                         <input
                             type='text'
                             value={rev}
@@ -89,12 +89,15 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                         />
                     </label>
                 </div>
-                <div>
-                    <button type='submit'>Post</button>
+                <div className="post-rev-form-buttons">
+                    <div className='button-to-post-rev'>
+                        <button type='submit'>Post</button>
+                    </div>
+                    <div className='button-to-post-rev'>
+                        <button onClick={cancelPost}>Cancel</button>
+                    </div>
                 </div>
-                <div>
-                    <button onClick={cancelPost}>Cancel</button>
-                </div>
+
             </form>
         </div>
     );

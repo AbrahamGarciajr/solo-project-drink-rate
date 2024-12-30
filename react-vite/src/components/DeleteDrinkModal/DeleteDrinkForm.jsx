@@ -34,8 +34,8 @@ function DeleteDrinkForm({ drink, setShowMenu, setDelDrink }) {
         <>
             <h2>Are you sure you want to delete your post?</h2>
             <p>This is a serious decision, please select one:</p>
-            <button onClick={handleDelete}>Yes, delete drink</button>
-            <button onClick={handleNoDelete}>No, keep drink</button>
+            <button className="options-for-update-delete" onClick={handleDelete}>Yes, delete drink</button>
+            <button className="options-for-update-delete" onClick={handleNoDelete}>No, keep drink</button>
         </>
     );
 }

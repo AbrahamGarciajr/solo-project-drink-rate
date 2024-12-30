@@ -40,8 +40,11 @@ function DeleteRevForm({ review, setMessage }) {
             {errors.error && (
                 <p>{errors.error}</p>
             )}
-            <button onClick={handleDelete}>Yes, delete review</button>
-            <button onClick={handleNoDelete}>No, keep review</button>
+            <div className="delete-rev-buttons">
+                <button className="button-to-post-rev" onClick={handleDelete}>Yes, delete review</button>
+                <button className="button-to-post-rev" onClick={handleNoDelete}>No, keep review</button>
+            </div>
+
         </>
     );
 }

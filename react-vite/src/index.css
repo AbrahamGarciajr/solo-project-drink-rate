@@ -67,13 +67,14 @@
     margin-top: 30px;
 }
 
-.delete-drink-option {
+.review-drink-message {
     position: absolute;
-    margin-left: 30%;
+    margin-left: 80%;
+    margin-top: 50px;
     border: 1px, solid, black;
-    background-color: white;
-    height: 10rem;
-    width: 30rem;
+    background-color: rgba(210, 105, 30, 0.476);
+    height: 5rem;
+    width: 15rem;
 }
 
 /* .drink-holder-delete {
@@ -121,4 +122,197 @@
     background-color: chocolate;
     font-weight: bold;
     border: none;
+}
+
+.drink-post-pic {
+    height: 500px;
+    width: 500px;
+    overflow-y: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.one-drink-info {
+    display: flex;
+    height: auto;
+    font-size: large;
+    font-weight: bold;
+    border: 2px solid chocolate;
+    background-color: chocolate;
+}
+
+.drink-info-holder {
+    display: column;
+    margin-top: 10px;
+    width: 45%;
+    padding-right: 15%;
+    border-right: 1px solid black;
+    margin-bottom: 10px;
+    /* justify-content: space-between; */
+}
+
+.the-drinks-information {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.user-experience-holder {
+    margin-left: 200px;
+    display: column;
+    margin-top: 10px;
+}
+
+.user-experience {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+
+
+.user-desc-holder {
+    display: column;
+
+}
+
+.star-rating-for-drink {
+    margin-left: 5px;
+}
+
+.avg-rating {
+    margin-top: 250px;
+    border-style: ridge;
+    border-color: black;
+    border-width: 2px;
+    padding: 20px;
+    border-radius: 10px;
+    width: auto;
+    background-color: aliceblue;
+}
+
+.update-delete-buttons-one-drink {
+    position: absolute;
+    border: 1px solid black;
+    background-color: gray;
+    padding: 5px;
+    /* margin-top: 500px; */
+}
+
+.reviews-for-drink-name {
+    font-size: x-large;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* .review-details{
+    display: flex;
+} */
+
+.reviews {
+    margin-bottom: 10px;
+}
+
+
+.review-holder-one-drink {
+    margin-bottom: 30px;
+    padding-top: 10px;
+    background-color: rgba(128, 128, 128, 0.428);
+}
+
+
+.update-drink-form {
+    width: 300px;
+    height: auto;
+    display: block;
+    text-align: center;
+}
+
+.submit-update-drink {
+    margin-top: 10px;
+}
+
+
+.larger-print {
+    font-size: larger;
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.review-message-for-user {
+    margin-top: 30px;
+}
+
+
+.button-to-post-rev:hover {
+    cursor: pointer;
+}
+
+.button-to-post-rev:active {
+    background-color: chocolate;
+}
+
+.post-rev-form {
+    position: absolute;
+    background-color: white;
+    margin-left: 30%;
+    bottom: 20px;
+    height: auto;
+    width: 300px;
+    border: 1px solid black;
+    display: block;
+    text-align: center;
+}
+
+.post-rev-form-details {
+    margin-bottom: 5px;
+}
+
+.post-rev-form-buttons {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+
+.options-for-update-delete:hover {
+    cursor: pointer;
+}
+
+.delete-rev-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.delete-drink-option {
+    background-color: red;
+}
+
+
+.post-a-drink-form-holder {
+    display: block;
+    text-align: center;
+    height: auto;
+    border: 1px solid black;
+    width: auto;
+    padding-bottom: 20px;
+}
+
+.post-drink-form-detail {
+    margin-bottom: 10px;
+    font-size: large;
+    font-weight: bold;
+}
+
+
+.sign-up-log-in-holder {
+    width: 200px;
+    height: auto;
+    display: block;
+    text-align: center;
+}
+
+
+.sign-up-login-details{
+    margin-bottom: 5px;
 }

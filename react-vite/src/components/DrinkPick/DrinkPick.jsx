@@ -9,6 +9,8 @@ import ReviewUpdateForm from "../ReviewModal/ReviewUpdateModal"
 import DeleteRevForm from "../ReviewModal/ReviewDeleteModal"
 import ReviewPostForm from "../ReviewModal/ReviewPostForm"
 // import UpdateDrink from "./UpdateDrink"
+import { FaStar } from "react-icons/fa";
+
 
 
 
@@ -97,38 +99,77 @@ function DrinkPick() {
             {drink && isLoaded && (
                 <div className="one-drink-info">
                     <div>
-                        {drink.name} name
+                        <img className="drink-post-pic" src={drink.img} />
                     </div>
-                    <div>
-                        {drink.alc}% of alcohol
-                    </div>
-                    <div>
-                        {drink.oz} oz of drink
-                    </div>
-                    <div>
-                        {drink.desc}
-                    </div>
-                    <div>
-                        {drink.avgRating}/5 rating
+                    <div className="drink-info-holder">
+                        <div className="larger-print">
+                            Drink Info:
+                        </div>
+                        <div className="the-drinks-information">
+                            Name of beverage: {drink.name}
+                        </div>
+                        <div className="the-drinks-information">
+                            Alcohol: {Number(drink.alc).toFixed(2)}%
+                        </div>
+                        <div className="the-drinks-information">
+                            Oz: {Number(drink.oz).toFixed(2)} oz
+                        </div>
+                        <div className="the-drinks-information">
+                            Calories: {Number(drink.cal).toFixed(2)}
+                        </div>
+                        <div className="the-drinks-information">
+                            Carbs: {Number(drink.carbs).toFixed(2)}
+                        </div>
+                        <div className="the-drinks-information">
+                            Sodium: {Number(drink.sodium).toFixed(2)}
+                        </div>
                     </div>
 
+                    <div className="user-experience-holder">
+                        <div className="user-experience-border">
+                            <div className="larger-print">
+                                User Experience:
+                            </div>
+                            <div className="user-experience">
+                                User rating: {drink.rating.toFixed(2)}/5 rating
+                            </div>
+                            <div className="user-desc-holder">
+                                <div>
+                                    Description:
+                                </div>
+                                <div>
+                                    {drink.desc}
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div className="avg-rating">
+                            <div className="overall-rating">
+                                Overall Rating: {drink.avgRating.toFixed(2)}/5
+                                <span className="star-rating-for-drink">
+                                    <FaStar className="star-for-rating" />
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </div>
                     {user && drink.user_id == user.id && isLoaded && (
-                        <div>
+                        <div className="update-delete-buttons-one-drink">
                             <button onClick={deletePost}> Delete </button>
                             <button onClick={updateDrink}> Update </button>
                         </div>
-
                     )}
                 </div>
+
+
             )}
+
             {!isLoaded && (
                 <div> Details are loading... </div>
             )}
-
-
-
-
-            {/* do the post for reviews and check logic behind most of the reviews in the return */}
 
             {showMenu && delDrink && (
                 <div className="delete-drink-option">
@@ -138,36 +179,66 @@ function DrinkPick() {
                     />
                 </div>
             )}
+            {createRev && (
+                <div className="post-rev-form">
+                    <ReviewPostForm setCreateRev={setCreateRev} setMessage={setMessage} />
+                </div>
+            )}
+            {message && (
+                <div className="review-drink-message">
+                    {message.message}
+                </div>
+            )}
 
             {drink.reviews && isLoaded && (
                 <div className="review-holder-one-drink">
+                    <div className="reviews-for-drink-name">Reviews for {drink.name}</div>
                     {drink.reviews.length > 0 && (
                         drink.reviews.map(rev => {
                             return (
-                                <div key={rev.id}>
-                                    <div>{rev.review}</div>
-                                    <div>{rev.rating}/5 stars</div>
-                                    {user && rev.user_id == user.id && (
+                                <div className="reviews" key={rev.id}>
+                                    <div className="review-details">
                                         <div>
-                                            <SlOptions
-                                                onClick={toggleRevMenu}
-                                            />
-                                            {showRevMenu && (
+                                            <div>{rev.review}</div>
+                                            <div>{rev.rating}/5 stars</div>
+                                        </div>
+                                        <span>
+                                            {user && rev.user_id == user.id && (
                                                 <div>
-                                                    <OpenReviewModal
-                                                        itemText='Delete'
-                                                        onItemClick={closeRevMenu}
-                                                        modalComponent={<DeleteRevForm setMessage={setMessage} review={rev} />}
+                                                    <SlOptions
+                                                        className="options-for-update-delete"
+                                                        onClick={toggleRevMenu}
                                                     />
+                                                    {showRevMenu && (
+                                                        <div>
+                                                            <OpenReviewModal
+                                                                itemText='Delete'
+                                                                onItemClick={closeRevMenu}
+                                                                modalComponent={<DeleteRevForm setMessage={setMessage} review={rev} />}
+                                                            />
 
-                                                    <OpenReviewModal
-                                                        itemText='Update'
-                                                        onItemClick={closeRevMenu}
-                                                        modalComponent={<ReviewUpdateForm setMessage={setMessage} review={rev} />}
-                                                    />
+                                                            <OpenReviewModal
+                                                                itemText='Update'
+                                                                onItemClick={closeRevMenu}
+                                                                modalComponent={<ReviewUpdateForm setMessage={setMessage} review={rev} />}
+                                                            />
+                                                        </div>
+                                                    )}
+
                                                 </div>
                                             )}
-
+                                        </span>
+                                    </div>
+                                    {user && (
+                                        <div>
+                                            {!found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
+                                                <div className="review-message-for-user">
+                                                    <div>
+                                                        Would you like to leave a review for this drink?
+                                                    </div>
+                                                    <button className="button-to-post-rev" onClick={postRev}>Post Review</button>
+                                                </div>
+                                            )}
                                         </div>
                                     )}
                                 </div>
@@ -176,51 +247,30 @@ function DrinkPick() {
                     )}
                 </div>
             )}
-            {user && (
-                <div>
-                    {!found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
-                        <div className="review-holder-one-drink">
+
+            {!drink.reviews && isLoaded && (
+                <div className="review-holder-one-drink">
+                    <div className="reviews-for-drink-name">Reviews for {drink.name}</div>
+                    {!user && isLoaded && (
+                        <div>
+                            Login to be the first to leave your experience with this drink!
+                        </div>
+                    )}
+                    {user && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
+                        <div className="review-message-for-user">
                             <div>
                                 Would you like to leave a review for this drink?
                             </div>
-                            <button onClick={postRev}>Post Review</button>
+                            <button className="button-to-post-rev" onClick={postRev}>Post Review</button>
                         </div>
                     )}
-                    {!drink.reviews && (Number(user.id) === Number(drink.user_id)) && isLoaded && (
-                        <div className="review-holder-one-drink">
+                    {user && (Number(user.id) === Number(drink.user_id)) && isLoaded && (
+                        <div className="review-message-for-user">
                             Someone will agree with you soon bud!
                         </div>
                     )}
-                    {/* {!drink.reviews && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
-                        <div className="review-holder-one-drink">
-                            <div>
-                                Would you like to leave a review for this drink?
-                            </div>
-                            <button onClick={postRev}>Post Review</button>
-                        </div>
-                    )} */}
                 </div>
             )}
-
-            {message && (
-                <div className="delete-drink-option">
-                    {message.message}
-                </div>
-            )}
-
-
-            {createRev && (
-                <div className="delete-drink-option">
-                    <ReviewPostForm setCreateRev={setCreateRev} setMessage={setMessage} />
-                </div>
-            )}
-
-            {!drink.reviews && !user && isLoaded && (
-                <div className="review-holder-one-drink">
-                    Login to be the first to leave your experience with this drink!
-                </div>
-            )}
-
 
 
 
