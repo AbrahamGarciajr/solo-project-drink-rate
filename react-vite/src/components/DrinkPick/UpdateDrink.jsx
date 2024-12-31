@@ -64,7 +64,7 @@ function UpdateDrink() {
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
                 if (rating > 5 || rating < 1 || rating.toString().length > 1) {
-                    let ratingError = { 'error': 'The rating must be a whole number between 1-5' }
+                    let ratingError = { 'error': 'The rating must be a whole number between 1-5', 'error0': 'If your rating leads with 0, please delete it' }
                     setErrors(ratingError)
                 } else {
                     if (errors.error || errors.server) {
@@ -119,7 +119,7 @@ function UpdateDrink() {
 
     return (
         <div className="post-a-drink-form-holder">
-            <h1>Create a Post</h1>
+            <h1>Update Your Post</h1>
             {errors.server && <p>{errors.server}</p>}
             <form onSubmit={handleSub}>
                 <div className="post-drink-form-detail">
@@ -261,7 +261,10 @@ function UpdateDrink() {
                     </label>
                 </div>
                 {errors.error && (
-                    <p>{errors.error}</p>
+                    <p style={{ color: "red" }}>{errors.error}</p>
+                )}
+                {errors.error0 && (
+                    <p style={{ color: "orange" }}>{errors.error0}</p>
                 )}
                 <button type='submit'>Update Post</button>
             </form>

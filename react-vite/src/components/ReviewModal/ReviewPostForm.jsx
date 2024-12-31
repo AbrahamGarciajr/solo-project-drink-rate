@@ -53,7 +53,7 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                 setErrors(error)
             }
         } else {
-            let error = { 'error': 'The rating must be a whole number between 0-5' }
+            let error = { 'error': 'The rating must be a whole number between 0-5', 'error0': 'If your rating leads with 0, please delete it' }
             setErrors(error)
         }
     }
@@ -61,10 +61,13 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
 
     return (
         <div>
-            <h2>Post your review</h2>
+            <h2>Post Your Review</h2>
             <form onSubmit={handleSub}>
                 {errors.error && (
-                    <p>{errors.error}</p>
+                    <p style={{ color: "red" }}>{errors.error}</p>
+                )}
+                {errors.error0 && (
+                    <p style={{ color: "orange" }}>{errors.error0}</p>
                 )}
 
                 <div className='post-rev-form-details'>
