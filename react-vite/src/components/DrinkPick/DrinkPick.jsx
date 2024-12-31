@@ -241,6 +241,11 @@ function DrinkPick() {
                                             )}
                                         </div>
                                     )}
+                                    {!user && (
+                                        <div className="review-message-for-user">
+                                            Login to leave your experience with this drink!
+                                        </div>
+                                    )}
                                 </div>
                             )
                         })
