@@ -17,10 +17,10 @@ function DeleteDrinkForm({ drink, setShowMenu, setDelDrink }) {
         setShowMenu(false)
         setDelDrink(false)
         let res = await dispatch(thunkDeleteDrink(drink.id))
-        if (res.message){
+        if (res.message) {
             alert(res.message)
             navigate('/')
-        } else if (res.error){
+        } else if (res.error) {
             setErrors(res)
             alert(errors)
         }
@@ -34,8 +34,11 @@ function DeleteDrinkForm({ drink, setShowMenu, setDelDrink }) {
         <>
             <h2>Are you sure you want to delete your post?</h2>
             <p>This is a serious decision, please select one:</p>
-            <button className="options-for-update-delete" onClick={handleDelete}>Yes, delete drink</button>
-            <button className="options-for-update-delete" onClick={handleNoDelete}>No, keep drink</button>
+            <div className="holder-for-del-update-drink-buttons">
+                <button className="options-for-delete" onClick={handleDelete}>Yes, delete drink</button>
+                <button className="options-for-update" onClick={handleNoDelete}>No, keep drink</button>
+            </div>
+
         </>
     );
 }

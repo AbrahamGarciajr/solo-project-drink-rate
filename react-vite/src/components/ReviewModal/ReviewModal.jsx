@@ -15,7 +15,15 @@ function OpenReviewModal({
     };
 
     return (
-        <button className='button-to-post-rev' onClick={onClick}>{itemText}</button>
+        <>
+            {itemText === 'Delete' && (
+                <button className='options-for-delete' onClick={onClick}>{itemText}</button>
+            )}
+            {itemText === 'Update' && (
+                <button className='options-for-update' onClick={onClick}>{itemText}</button>
+            )}
+        </>
+
     );
 }
 

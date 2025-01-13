@@ -23,7 +23,7 @@ function DeleteRevForm({ review, setMessage }) {
             // alert(res.message)
             await dispatch(thunkOneDrink(drinkId))
             closeModal()
-            setMessage(res)
+            setMessage(res.message)
 
         } else if (res.error) {
             setErrors(res)
@@ -35,17 +35,17 @@ function DeleteRevForm({ review, setMessage }) {
     }
 
     return (
-        <>
+        <div className="delete-rev-form-holder">
             <h2>Are you sure you want to delete your post?</h2>
             {errors.error && (
                 <p>{errors.error}</p>
             )}
             <div className="delete-rev-buttons">
-                <button className="button-to-post-rev" onClick={handleDelete}>Yes, delete review</button>
-                <button className="button-to-post-rev" onClick={handleNoDelete}>No, keep review</button>
+                <button className="options-for-delete" onClick={handleDelete}>Yes, delete review</button>
+                <button className="options-for-update" onClick={handleNoDelete}>No, keep review</button>
             </div>
 
-        </>
+        </div>
     );
 }
 

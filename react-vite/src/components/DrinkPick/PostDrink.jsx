@@ -214,6 +214,7 @@ function PostDrink() {
                     <label>
                         Description:
                         <textarea
+                            className="description-text-area"
                             type='text'
                             placeholder="Please describe your experience, minimum 15 characters"
                             value={desc}
@@ -263,7 +264,7 @@ function PostDrink() {
                     <p style={{color: "orange"}}>{errors.error0}</p>
                 )}
 
-                <button type='submit'>Create Post</button>
+                <button className="options-for-post" type='submit'>Create Post</button>
             </form>
         </div>
     )

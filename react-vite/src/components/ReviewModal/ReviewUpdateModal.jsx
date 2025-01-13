@@ -36,7 +36,7 @@ function ReviewUpdateForm({ review, setMessage }) {
 
                     await dispatch(thunkOneDrink(drinkId))
                     closeModal()
-                    setMessage(res)
+                    setMessage(res.message)
                 } else {
                     setErrors(res)
                 }
@@ -52,7 +52,7 @@ function ReviewUpdateForm({ review, setMessage }) {
 
 
     return (
-        <div className="update-drink-form">
+        <div className="update-rev-form-holder">
             <h2>Update Your Review</h2>
             <form onSubmit={handleSub}>
                 {errors.error && (
@@ -85,7 +85,7 @@ function ReviewUpdateForm({ review, setMessage }) {
                     </label>
                 </div>
                 <div className="post-rev-form-details">
-                    <button className="submit-update-drink" type='submit'>Update</button>
+                    <button className="submit-update-rev" type='submit'>Update</button>
                 </div>
             </form>
         </div>

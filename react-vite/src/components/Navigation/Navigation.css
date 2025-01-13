@@ -20,10 +20,11 @@
   cursor: pointer;
   background-color: grey;
 }
-.profile-button-dropdown{
+
+.profile-button-dropdown {
   border-radius: 10px;
-  height:30px;
-  width:30px
+  height: 30px;
+  width: 30px
 }
 
 .home-profile-buttons-holder {
@@ -31,11 +32,11 @@
   justify-content: space-between;
   margin-left: 20px;
   margin-right: 20px;
-  width: 52%;
+  width: 55%;
   margin-bottom: 25px;
 }
 
-.profile-button{
+.profile-button {
   margin-top: 5px;
 }
 
@@ -45,13 +46,17 @@
   font-weight: bold;
 }
 
-.home-logo{
+.home-logo {
   text-decoration: none;
   color: black;
-  font-size:xx-large;
+  font-size: xx-large;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  padding: 10px 40px;
+  transition: .4s;
 }
 
-.home-logo:hover{
-  /* background-color: gold; */
-  color:chocolate;
+.home-logo:hover {
+  background-color: chocolate;
+  color: whitesmoke;
 }

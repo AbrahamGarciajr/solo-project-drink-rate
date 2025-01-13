@@ -14,7 +14,7 @@ export default function Layout() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="whole-page">
       <ModalProvider>
         <Navigation />
 
@@ -27,6 +27,6 @@ export default function Layout() {
         </div>
         <Modal />
       </ModalProvider>
-    </>
+    </div>
   );
 }

@@ -57,7 +57,7 @@ function LoginFormModal() {
           {errors.password && <p>{errors.password}</p>}
         </div>
         <div className="sign-up-login-details">
-          <button type="submit">Log In</button>
+          <button className="submit-button-hover" type="submit">Log In</button>
         </div>
 
 

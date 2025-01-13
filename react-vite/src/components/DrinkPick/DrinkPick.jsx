@@ -10,6 +10,7 @@ import DeleteRevForm from "../ReviewModal/ReviewDeleteModal"
 import ReviewPostForm from "../ReviewModal/ReviewPostForm"
 // import UpdateDrink from "./UpdateDrink"
 import { FaStar } from "react-icons/fa";
+import { useLocation } from 'react-router'
 
 
 
@@ -27,10 +28,18 @@ function DrinkPick() {
     const [delDrink, setDelDrink] = useState(true)
     const [createRev, setCreateRev] = useState(false)
     const [message, setMessage] = useState('')
+    // const [updateMessage, setUpdateMessage] = useState('')
     const ulRef = useRef();
+    const location = useLocation()
 
 
-    // console.log(drink, 'this is the user')
+    // console.log(location.state.data, 'this is the location')
+    // if (location.state) {
+    //     console.log(location.state, 'location state')
+    // }
+
+
+
     useEffect(() => {
         dispatch(thunkOneDrink(drinkId)).then(() => setIsLoaded(true))
     }, [dispatch, drinkId])
@@ -84,6 +93,15 @@ function DrinkPick() {
         }
 
     }
+    useEffect(() => {
+        if (location.state && location.state.data) {
+            // console.log(document.title);
+            setMessage('Your post was updated');
+            window.history.replaceState({}, '');
+        }
+
+    }, [location.state])
+
 
     useEffect(() => {
         if (message) {
@@ -158,8 +176,16 @@ function DrinkPick() {
                     </div>
                     {user && drink.user_id == user.id && isLoaded && (
                         <div className="update-delete-buttons-one-drink">
-                            <button onClick={deletePost}> Delete </button>
-                            <button onClick={updateDrink}> Update </button>
+                            <button className="options-for-delete" onClick={deletePost}> Delete </button>
+                            <button className="options-for-update" onClick={updateDrink}> Update </button>
+                        </div>
+                    )}
+                    {showMenu && delDrink && (
+                        <div className="delete-drink-option">
+                            <DeleteDrinkForm drink={drink}
+                                setShowMenu={setShowMenu}
+                                setDelDrink={setDelDrink}
+                            />
                         </div>
                     )}
                 </div>
@@ -168,25 +194,18 @@ function DrinkPick() {
             )}
 
             {!isLoaded && (
-                <div> Details are loading... </div>
+                <div className="loading-sign"> Details are loading... </div>
             )}
 
-            {showMenu && delDrink && (
-                <div className="delete-drink-option">
-                    <DeleteDrinkForm drink={drink}
-                        setShowMenu={setShowMenu}
-                        setDelDrink={setDelDrink}
-                    />
-                </div>
-            )}
+
             {createRev && (
                 <div className="post-rev-form">
                     <ReviewPostForm setCreateRev={setCreateRev} setMessage={setMessage} />
                 </div>
             )}
-            {message && (
+            {message && isLoaded && (
                 <div className="review-drink-message">
-                    {message.message}
+                    {message}
                 </div>
             )}
 

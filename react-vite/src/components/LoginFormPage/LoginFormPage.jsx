@@ -57,7 +57,7 @@ function LoginFormPage() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button className="submit-button-hover" type="submit">Log In</button>
       </form>
     </>
   );

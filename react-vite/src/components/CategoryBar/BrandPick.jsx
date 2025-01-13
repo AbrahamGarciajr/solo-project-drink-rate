@@ -53,12 +53,12 @@ function BrandPick() {
                 </div>
             )}
             {!isLoaded && (
-                <div>...Loading</div>
+                <div className="loading-sign">...Loading</div>
             )}
             {arrDrinks.length < 1 && isLoaded && (
-                <>
+                <div className="loading-sign">
                     There are no drink posts for this brand
-                </>
+                </div>
             )}
         </div>
     )

@@ -54,7 +54,7 @@ function CategoryPick() {
 
             )}
             {!isLoaded && (
-                <div>...Loading</div>
+                <div className="loading-sign">...Loading</div>
             )}
         </div>
     )

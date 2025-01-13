@@ -97,8 +97,8 @@ function UpdateDrink() {
                                     return arrDrinks
                                 })
                                 .then(() => {
-                                    alert(serverResponse.message)
-                                    navigate(`/drink/${drinkId}`)
+                                    // alert(serverResponse.message)
+                                    navigate(`/drink/${drinkId}`, { state: { data: serverResponse.message } })
                                 })
                         }
                     }
@@ -217,6 +217,7 @@ function UpdateDrink() {
                     <label>
                         Description
                         <textarea
+                            className="description-text-area"
                             type='text'
                             placeholder="Please describe your experience, minimum 15 characters"
                             value={desc}
@@ -266,7 +267,7 @@ function UpdateDrink() {
                 {errors.error0 && (
                     <p style={{ color: "orange" }}>{errors.error0}</p>
                 )}
-                <button type='submit'>Update Post</button>
+                <button className="options-for-post" type='submit'>Update Post</button>
             </form>
         </div>
     )

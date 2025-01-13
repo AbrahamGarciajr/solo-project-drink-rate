@@ -2,6 +2,7 @@
 
 .category_bar {
     border: 1px, solid, black;
+    background-color: whitesmoke;
     width: 100%;
 }
 
@@ -14,6 +15,8 @@
 
 .logout-user:hover {
     cursor: pointer;
+    background-color: rgb(255, 0, 0);
+    color: white;
 }
 
 /* .the-whole-darn-thing {
@@ -45,7 +48,6 @@
     width: 90%;
     margin-left: 50px;
     justify-content: space-between;
-
 }
 
 .home_page_drinks {
@@ -53,6 +55,11 @@
     width: 20rem;
     height: 220px;
     margin: 10px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.49), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: transform .25s;
+    text-align: center;
 }
 
 .home_page_drinks:hover {
@@ -60,21 +67,25 @@
     background-color: chocolate;
     font-weight: bold;
     border: none;
+    box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(0, 0, 0);
+    transform: scale(1.2);
 }
 
-.review-holder-one-drink {
-    border: 1px, solid, black;
-    margin-top: 30px;
-}
 
 .review-drink-message {
     position: absolute;
     margin-left: 80%;
     margin-top: 50px;
-    border: 1px, solid, black;
-    background-color: rgba(210, 105, 30, 0.476);
+    border: 2px, solid, black;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: larger;
+    background-color: rgba(210, 105, 30, 0.784);
     height: 5rem;
     width: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* .drink-holder-delete {
@@ -103,6 +114,16 @@
     font-size: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: whitesmoke;
+    font-weight: bold;
+    text-shadow: 2px 2px black, 3px 3px black;
+}
+
+.loading-sign {
+    font-size: 25px;
+    color: whitesmoke;
+    font-weight: bold;
+    text-shadow: 2px 2px black, 3px 3px black;
 }
 
 
@@ -112,9 +133,13 @@
     height: 100px;
     margin: 10px;
     font-size: x-large;
+    background-color: whitesmoke;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.49), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: transform .25s;
 }
 
 .category-page-brands:hover {
@@ -122,11 +147,15 @@
     background-color: chocolate;
     font-weight: bold;
     border: none;
+    box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(0, 0, 0);
+    transform: scale(1.2);
 }
 
 .drink-post-pic {
     height: 500px;
     width: 500px;
+    border: 2px solid black;
+    border-radius: 5px;
     overflow-y: auto;
     margin-top: 10px;
     margin-left: 10px;
@@ -136,9 +165,11 @@
 .one-drink-info {
     display: flex;
     height: auto;
+    margin-top: 20px;
     font-size: large;
     font-weight: bold;
-    border: 2px solid chocolate;
+    border: 2px solid black;
+    border-radius: 15px;
     background-color: chocolate;
 }
 
@@ -146,7 +177,7 @@
     display: column;
     margin-top: 10px;
     width: 45%;
-    padding-right: 15%;
+    padding-left: 10px;
     border-right: 1px solid black;
     margin-bottom: 10px;
     /* justify-content: space-between; */
@@ -158,13 +189,19 @@
 }
 
 .user-experience-holder {
-    margin-left: 200px;
+    /* text-align: end; */
+    /* margin-left: 200px; */
+    width: 500px;
     display: column;
     margin-top: 10px;
 }
 
+.user-experience-border {
+    text-align: center;
+}
+
 .user-experience {
-    display: flex;
+    /* display: flex; */
     margin-bottom: 30px;
 }
 
@@ -180,7 +217,9 @@
 }
 
 .avg-rating {
-    margin-top: 250px;
+    /* margin-top: 300px; */
+    position: absolute;
+    top: 570px;
     border-style: ridge;
     border-color: black;
     border-width: 2px;
@@ -193,15 +232,17 @@
 .update-delete-buttons-one-drink {
     position: absolute;
     border: 1px solid black;
-    background-color: gray;
+    background-color: whitesmoke;
     padding: 5px;
-    /* margin-top: 500px; */
+    border-radius: 5px;
 }
 
 .reviews-for-drink-name {
     font-size: x-large;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid black;
+    width: 400px;
 }
 
 /* .review-details{
@@ -210,15 +251,20 @@
 
 .reviews {
     margin-bottom: 10px;
+    background-color: rgba(128, 128, 128, 0.295);
+    border-radius: 5px;
+    border-bottom: 1px solid black;
 }
 
 
 .review-holder-one-drink {
     margin-bottom: 30px;
-    padding-top: 10px;
-    background-color: rgba(128, 128, 128, 0.428);
+    padding: 10px;
+    border: 1px, solid, black;
+    border-radius: 15px;
+    margin-top: 30px;
+    background-color: whitesmoke;
 }
-
 
 .update-drink-form {
     width: 300px;
@@ -231,6 +277,41 @@
     margin-top: 10px;
 }
 
+.submit-update-drink:hover {
+    cursor: pointer;
+}
+
+.submit-update-rev {
+    margin-top: 10px;
+    background-color: rgb(202, 134, 85);
+}
+
+.submit-update-rev:hover {
+    cursor: pointer;
+    background-color: rgb(212, 88, 0);
+    color: white;
+}
+
+.update-rev-form-holder {
+    text-align: center;
+    width: 300px;
+    /* border: 1px solid black; */
+    background-color: whitesmoke;
+}
+
+#modal-content {
+    background-color: whitesmoke;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.delete-rev-form-holder {
+    background-color: rgb(255, 125, 125);
+    height: auto;
+    padding: 30px 20px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
 
 .larger-print {
     font-size: larger;
@@ -245,26 +326,31 @@
 
 .button-to-post-rev:hover {
     cursor: pointer;
+    background-color: grey;
+    color: white;
 }
 
 .button-to-post-rev:active {
     background-color: chocolate;
 }
 
+
 .post-rev-form {
     position: absolute;
-    background-color: white;
+    background-color: whitesmoke;
     margin-left: 30%;
     bottom: 20px;
     height: auto;
     width: 300px;
-    border: 1px solid black;
+    border: 2px solid black;
+    border-radius: 5px;
     display: block;
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .post-rev-form-details {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .post-rev-form-buttons {
@@ -274,8 +360,34 @@
 }
 
 
-.options-for-update-delete:hover {
+.options-for-update:hover {
     cursor: pointer;
+    background-color: rgb(75, 75, 75);
+    color: white;
+}
+
+.options-for-update {
+    background-color: rgb(167, 167, 167);
+}
+
+.options-for-post:hover {
+    cursor: pointer;
+    background-color: rgb(214, 89, 0);
+    color: white;
+}
+
+.options-for-post {
+    background-color: rgb(212, 136, 83);
+}
+
+.options-for-delete:hover {
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}
+
+.options-for-delete {
+    background-color: rgb(254, 93, 93);
 }
 
 .delete-rev-buttons {
@@ -285,7 +397,18 @@
 
 
 .delete-drink-option {
-    background-color: red;
+    background-color: rgb(255, 125, 125);
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 300px;
+    padding: 0px 20px 30px 20px;
+    position: absolute;
+    text-align: center;
+}
+
+.holder-for-del-update-drink-buttons {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 
@@ -293,9 +416,19 @@
     display: block;
     text-align: center;
     height: auto;
-    border: 1px solid black;
-    width: auto;
-    padding-bottom: 20px;
+    border: 2px solid black;
+    width: 45%;
+    border-radius: 5px;
+    padding-bottom: 30px;
+    background-color: whitesmoke;
+    margin-left: 370px;
+}
+
+.description-text-area{
+    max-width: 300px;
+    max-height: 100px;
+    min-width: 150px;
+    min-height: 50px;
 }
 
 .post-drink-form-detail {
@@ -313,6 +446,16 @@
 }
 
 
-.sign-up-login-details{
+.sign-up-login-details {
     margin-bottom: 5px;
+}
+
+
+body {
+    background-image: url('https://allseasonsvcs.com/wp-content/uploads/2020/07/backyard-bbq.jpg');
+    background-color: #cccc;
+}
+
+.submit-button-hover:hover {
+    cursor: pointer;
 }

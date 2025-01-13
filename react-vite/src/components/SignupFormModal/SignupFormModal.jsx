@@ -92,7 +92,7 @@ function SignupFormModal() {
           {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         </div>
         <div className="sign-up-login-details">
-          <button type="submit">Sign Up</button>
+          <button className="submit-button-hover" type="submit">Sign Up</button>
         </div>
       </form>
     </div>

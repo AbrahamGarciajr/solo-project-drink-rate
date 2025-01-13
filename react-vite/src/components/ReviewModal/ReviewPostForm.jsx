@@ -42,7 +42,7 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                     // alert(res.message)
                     setCreateRev(false)
                     // setPostMessage(true)
-                    setMessage(res)
+                    setMessage(res.message)
                     await dispatch(thunkOneDrink(drinkId))
 
                 } else {
@@ -60,7 +60,7 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
 
 
     return (
-        <div>
+        <div className="post-rev-form-holder">
             <h2>Post Your Review</h2>
             <form onSubmit={handleSub}>
                 {errors.error && (
@@ -94,10 +94,10 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                 </div>
                 <div className="post-rev-form-buttons">
                     <div className='button-to-post-rev'>
-                        <button type='submit'>Post</button>
+                        <button className="options-for-post" type='submit'>Post</button>
                     </div>
                     <div className='button-to-post-rev'>
-                        <button onClick={cancelPost}>Cancel</button>
+                        <button className="options-for-update" onClick={cancelPost}>Cancel</button>
                     </div>
                 </div>
 
