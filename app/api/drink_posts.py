@@ -4,6 +4,7 @@ from app.models import User, db, BeveragePost, Review, Category, Brand
 # from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import PostDrink
+from app.forms import UpdateDrink
 from app.api.aws_s3 import upload_file_to_s3, get_unique_filename, allowed_file, remove_file_s3
 
 drink_posts = Blueprint('posts', __name__)
@@ -131,19 +132,19 @@ def del_patch_drink(postId):
 
     if current_user.to_dict()['id'] != good_drink['user_id']:
         return jsonify({'error': 'You do not own this post, you cannot mess with it'}), 403
-    remove = remove_file_s3(drink.img)
-    print(remove, 'the removeeee')
+    # remove = remove_file_s3(drink.img)
+    # print(remove)
 
 
-    if remove is not True:
-        return {"errors": "Failed to remove the file from S3"}, 500
+    # if remove is not True:
+    #     return {"errors": "Failed to remove the file from S3"}, 500
 
     if request.method == 'DELETE':
         if current_user:
 
-            # remove = remove_file_s3(drink.img)
-            # if remove is not True:
-            #     return {"errors": "Failed to remove the file from S3"}, 500
+            remove = remove_file_s3(drink.img)
+            if remove is not True:
+                return {"errors": "Failed to remove the file from S3"}, 500
 
             db.session.delete(drink)
             db.session.commit()
@@ -160,49 +161,55 @@ def del_patch_drink(postId):
         category_choices = [(cat['id'], cat['name']) for cat in available_cats]
         brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
 
-        form = PostDrink()
+        # form = PostDrink()
+        form = UpdateDrink()
         form['csrf_token'].data = request.cookies['csrf_token']
         form.category.choices = category_choices
         form.brand.choices = brand_choices
-        print(form.data, 'from the patch bbyyyyyy')
-        print(drink.to_dict(), 'this is the drinkkk')
+        # print(form.data, 'from the patch bbyyyyyy')
+        # print(drink.to_dict(), 'this is the drinkkk')
 
         if form.validate_on_submit():
             # if drink.img:
             #     print(drink.img, 'this is the img back')
 
-            image = form.img.data
-            if not allowed_file(image.filename):
-                return {"errors": "Invalid file type"}, 400
+            # image = form.img.data
+            # if not allowed_file(image.filename):
+            #     return {"errors": "Invalid file type"}, 400
 
-            image.filename = get_unique_filename(image.filename)
-            upload = upload_file_to_s3(image)
-            print(upload, 'the upload2')
+            # image.filename = get_unique_filename(image.filename)
+            # upload = upload_file_to_s3(image)
+            # print(upload, 'the upload2')
 
-            if 'errors' in upload:
-                return jsonify(upload), 400
+            # if 'errors' in upload:
+            #     return jsonify(upload), 400
 
-            url = upload['url']
+            # url = upload['url']
 # ASK ABOUT WHAT COuLD BE THE PROBLEM WITH THE UPDATE
 # I get the numbers from the front but the back reads it as none
 # unless I chang every field, was not happening before using append
             # print(drink, 'this is the drink')
 
-            if form.data['oz']:
-                drink.oz = form.data['oz']
-            if form.data['alc']:
-                drink.alc = form.data['alc']
-            if form.data['cal']:
-                drink.cal = form.data['cal']
-            if form.data['carbs']:
-                drink.carbs = form.data['carbs']
-            if form.data['sodium']:
-                drink.sodium = form.data['sodium']
+            # if form.data['oz']:
+            #     drink.oz = form.data['oz']
+            # if form.data['alc']:
+            #     drink.alc = form.data['alc']
+            # if form.data['cal']:
+            #     drink.cal = form.data['cal']
+            # if form.data['carbs']:
+            #     drink.carbs = form.data['carbs']
+            # if form.data['sodium']:
+            #     drink.sodium = form.data['sodium']
 
+            drink.oz = form.data['oz']
+            drink.alc = form.data['alc']
+            drink.cal = form.data['cal']
+            drink.carbs = form.data['carbs']
+            drink.sodium = form.data['sodium']
             drink.brand_id = form.data['brand']
             drink.category_id = form.data['category']
             drink.name = form.data['name']
-            drink.img = url
+            drink.img = drink.img
             drink.rating = form.data['rating']
             drink.desc = form.data['desc']
             db.session.commit()

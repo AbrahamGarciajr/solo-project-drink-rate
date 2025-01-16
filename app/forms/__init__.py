@@ -2,3 +2,4 @@ from .login_form import LoginForm
 from .signup_form import SignUpForm
 from .drink_post_form import PostDrink
 from .review_form import PostReview
+from .drink_post_update import UpdateDrink

@@ -15,7 +15,7 @@ function UpdateDrink() {
     let [brand, setBrand] = useState(0)
     let [category, setCategory] = useState(0)
     let [name, setName] = useState('')
-    let [img, setImg] = useState()
+    let [img, setImg] = useState('')
     let [oz, setOz] = useState(0)
     let [alc, setAlc] = useState(0)
     let [rating, setRating] = useState(0)
@@ -26,7 +26,6 @@ function UpdateDrink() {
     let [errors, setErrors] = useState({});
     let dispatch = useDispatch()
     let navigate = useNavigate()
-    // let [isLoaded, setIsLoaded] = useState(false)
 
     let okImg = ['jpg', 'png', 'jpeg']
 
@@ -39,24 +38,18 @@ function UpdateDrink() {
 
 
     useEffect(() => {
-        if (drink) {
-            setName(drink.name)
-            // setImg(drink.img)
-            setOz(Number(drink.oz).toFixed(2))
-            setAlc(Number(drink.alc).toFixed(2))
-            setRating(drink.rating)
-            setCal(Number(drink.cal).toFixed(2))
-            setCarbs(Number(drink.carbs).toFixed(2))
-            setSodium(Number(drink.sodium).toFixed(2))
-            setDesc(drink.desc)
-            setCategory(drink.category_id)
-            setBrand(drink.brand_id)
-        }
-
+        setName(drink.name)
+        setImg(drink.img)
+        setOz(Number(drink.oz).toFixed(2))
+        setAlc(Number(drink.alc).toFixed(2))
+        setRating(drink.rating)
+        setCal(Number(drink.cal).toFixed(2))
+        setCarbs(Number(drink.carbs).toFixed(2))
+        setSodium(Number(drink.sodium).toFixed(2))
+        setDesc(drink.desc)
+        setCategory(drink.category_id)
+        setBrand(drink.brand_id)
     }, [drink])
-
-    // console.log(oz, cal, carbs, sodium)
-
 
     useEffect(() => {
         if (category > 0) {
@@ -67,31 +60,33 @@ function UpdateDrink() {
     let handleSub = async (e) => {
         e.preventDefault()
         setErrors({})
-        let checkImg = img.name.split('.')
+        let checkImg = img.split('.')
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
-                if (rating > 5 || rating < 1 || !Number.isInteger(Number(rating))) {
+                if (rating > 5 || rating < 1 || rating.toString().length > 1) {
                     let ratingError = { 'error': 'The rating must be a whole number between 1-5', 'error0': 'If your rating leads with 0, please delete it' }
                     setErrors(ratingError)
                 } else {
                     if (errors.error || errors.server) {
                         return
                     } else {
-                        const formData = new FormData();
-                        // formData.append("user_id", user.id);
-                        formData.append("brand", brand);
-                        formData.append("category", category);
-                        formData.append("name", name);
-                        formData.append("img", img);
-                        formData.append("oz", oz);
-                        formData.append("alc", alc);
-                        formData.append("rating", rating);
-                        formData.append("cal", cal);
-                        formData.append("carbs", carbs);
-                        formData.append("sodium", sodium);
-                        formData.append("desc", desc);
-                        let serverResponse = await dispatch(thunkUpdateDrink(formData, drinkId))
-                        console.log(formData, 'the data from front ')
+                        let newPost = {
+                            id: Number(drinkId),
+                            user_id: Number(user.id),
+                            brand: Number(brand),
+                            category: Number(category),
+                            name: name,
+                            img: img,
+                            oz: Number(oz),
+                            alc: Number(alc),
+                            rating: Number(rating),
+                            cal: Number(cal),
+                            carbs: Number(carbs),
+                            sodium: Number(sodium),
+                            desc: desc
+                        }
+                        let serverResponse = await dispatch(thunkUpdateDrink(newPost))
+
                         if (!serverResponse.message) {
                             setErrors(serverResponse);
                         } else {
@@ -117,7 +112,7 @@ function UpdateDrink() {
             setErrors(imgError)
         }
     }
-    // console.log(img, 'from the front')
+
 
     let arrCats = Object.values(categories)
     let arrBrands = Object.values(brands)
@@ -128,7 +123,8 @@ function UpdateDrink() {
             {errors.server && <p>{errors.server}</p>}
             <form
                 onSubmit={handleSub}
-                encType="multipart/form-data">
+                // encType="multipart/form-data"
+                >
                 <div className="post-drink-form-detail">
                     <label>
                         Name
@@ -141,18 +137,18 @@ function UpdateDrink() {
                         />
                     </label>
                 </div>
-                <div className="post-drink-form-detail">
+                {/* <div className="post-drink-form-detail">
                     <label>
                         Picture
                         <input
                             type='file'
                             accept=".jpg, .png, .jpeg"
-                            // value={img}
+                            value={img}
                             onChange={(e) => setImg(e.target.files[0])}
                             required
                         />
                     </label>
-                </div>
+                </div> */}
                 <div className="post-drink-form-detail">
                     <label>
                         OZ
