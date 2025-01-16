@@ -4,6 +4,7 @@ from app.models import User, db, BeveragePost, Review, Category, Brand
 # from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import PostDrink
+from app.api.aws_s3 import upload_file_to_s3, get_unique_filename, allowed_file, remove_file_s3
 
 drink_posts = Blueprint('posts', __name__)
 
@@ -31,7 +32,6 @@ def recent_drinks():
         return jsonify({'message': 'There are currently no drinks posted'})
 
 
-
 @drink_posts.route('/categories')
 def all_categories():
     """
@@ -40,8 +40,6 @@ def all_categories():
     categories = Category.query.all()
 
     return [cat.to_dict() for cat in categories]
-
-
 
 
 @drink_posts.route('/categories/<int:categoryId>')
@@ -63,7 +61,6 @@ def category_selection(categoryId):
         return jsonify({'error': 'There are no categories just yet'}), 404
 
 
-
 @drink_posts.route('/brands/<int:brandId>')
 def brand_selection(brandId):
     """
@@ -76,7 +73,8 @@ def brand_selection(brandId):
         if drinks:
             allDrinks = [drink.to_dict() for drink in drinks]
             for drink in allDrinks:
-                revs = Review.query.filter_by(beverage_post_id=drink['id']).all()
+                revs = Review.query.filter_by(
+                    beverage_post_id=drink['id']).all()
                 if revs:
                     total_ratings = sum(rev.rating for rev in revs)
                     drink['avgRating'] = (
@@ -122,6 +120,7 @@ def del_patch_drink(postId):
     is owned by the user
     """
     drink = BeveragePost.query.get(postId)
+    # remove_file_s3(drink.img)
 
     # print(drink)
     if not drink:
@@ -132,9 +131,20 @@ def del_patch_drink(postId):
 
     if current_user.to_dict()['id'] != good_drink['user_id']:
         return jsonify({'error': 'You do not own this post, you cannot mess with it'}), 403
+    remove = remove_file_s3(drink.img)
+    print(remove, 'the removeeee')
+
+
+    if remove is not True:
+        return {"errors": "Failed to remove the file from S3"}, 500
 
     if request.method == 'DELETE':
         if current_user:
+
+            # remove = remove_file_s3(drink.img)
+            # if remove is not True:
+            #     return {"errors": "Failed to remove the file from S3"}, 500
+
             db.session.delete(drink)
             db.session.commit()
             return jsonify({'message': 'Your post has been deleted'})
@@ -152,27 +162,55 @@ def del_patch_drink(postId):
 
         form = PostDrink()
         form['csrf_token'].data = request.cookies['csrf_token']
-        form.category.choices=category_choices
-        form.brand.choices=brand_choices
-        # print('from the patch bbyyyyyy')
+        form.category.choices = category_choices
+        form.brand.choices = brand_choices
+        print(form.data, 'from the patch bbyyyyyy')
+        print(drink.to_dict(), 'this is the drinkkk')
+
         if form.validate_on_submit():
-            # return drink.to_dict()
+            # if drink.img:
+            #     print(drink.img, 'this is the img back')
+
+            image = form.img.data
+            if not allowed_file(image.filename):
+                return {"errors": "Invalid file type"}, 400
+
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            print(upload, 'the upload2')
+
+            if 'errors' in upload:
+                return jsonify(upload), 400
+
+            url = upload['url']
+# ASK ABOUT WHAT COuLD BE THE PROBLEM WITH THE UPDATE
+# I get the numbers from the front but the back reads it as none
+# unless I chang every field, was not happening before using append
+            # print(drink, 'this is the drink')
+
+            if form.data['oz']:
+                drink.oz = form.data['oz']
+            if form.data['alc']:
+                drink.alc = form.data['alc']
+            if form.data['cal']:
+                drink.cal = form.data['cal']
+            if form.data['carbs']:
+                drink.carbs = form.data['carbs']
+            if form.data['sodium']:
+                drink.sodium = form.data['sodium']
+
             drink.brand_id = form.data['brand']
             drink.category_id = form.data['category']
             drink.name = form.data['name']
-            drink.img = form.data['img']
-            drink.oz = form.data['oz']
-            drink.alc = form.data['alc']
+            drink.img = url
             drink.rating = form.data['rating']
-            drink.cal = form.data['cal']
-            drink.carbs = form.data['carbs']
-            drink.sodium = form.data['sodium']
             drink.desc = form.data['desc']
-            # print('from the patch', drink.to_dict())
             db.session.commit()
             return jsonify({'message': 'Your post was update'})
         else:
-            return form.errors, 400
+            print(form.data, 'the dataaaaaa')
+            print(form.errors, 'the errorssss')
+            return jsonify(form.errors), 400
 
 
 @drink_posts.route('/post-drink', methods=['POST'])
@@ -191,31 +229,48 @@ def create_post():
     category_choices = [(cat['id'], cat['name']) for cat in available_cats]
     brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
 
-    form=PostDrink()
+    form = PostDrink()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    form.category.choices=category_choices
-    form.brand.choices=brand_choices
-    # print(form.data, 'from the back')
-    # print(request.data, 'reqdata')
+    form.category.choices = category_choices
+    form.brand.choices = brand_choices
     picked_brand = Brand.query.filter_by(id=form.brand.data).first()
+
+    # print(form.data, 'the dataaaaa')
+
     if current_user:
         if picked_brand:
             if picked_brand.to_dict()['category_id'] == form.category.data:
                 if form.validate_on_submit():
+                    image = form.img.data
+                    # print(image, 'the image')
+
+                    if not allowed_file(image.filename):
+                        return {"errors": "Invalid file type"}, 400
+
+                    image.filename = get_unique_filename(image.filename)
+                    # print(type(image), 'filename')
+                    upload = upload_file_to_s3(image)
+                    print(upload, 'the upload')
+
+                    if 'errors' in upload:
+                        return jsonify(upload), 400
+
+                    url = upload['url']
+                    # print(url, 'from the route')
                     new_drink = BeveragePost(
-                        user_id = current_user.to_dict()['id'],
-                        brand_id = form.data['brand'],
-                        category_id = form.data['category'],
-                        name = form.data['name'],
-                        img = form.data['img'],
-                        oz = form.data['oz'],
-                        alc = form.data['alc'],
-                        rating = form.data['rating'],
-                        cal = form.data['cal'],
-                        carbs = form.data['carbs'],
-                        sodium = form.data['sodium'],
-                        desc = form.data['desc']
+                        user_id=current_user.to_dict()['id'],
+                        brand_id=form.data['brand'],
+                        category_id=form.data['category'],
+                        name=form.data['name'],
+                        img=url,
+                        oz=form.data['oz'],
+                        alc=form.data['alc'],
+                        rating=form.data['rating'],
+                        cal=form.data['cal'],
+                        carbs=form.data['carbs'],
+                        sodium=form.data['sodium'],
+                        desc=form.data['desc']
                     )
                     db.session.add(new_drink)
                     # print(new_drink)

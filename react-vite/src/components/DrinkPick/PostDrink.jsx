@@ -13,7 +13,7 @@ function PostDrink() {
     let [brand, setBrand] = useState(0)
     let [category, setCategory] = useState(0)
     let [name, setName] = useState('')
-    let [img, setImg] = useState('')
+    let [img, setImg] = useState()
     let [oz, setOz] = useState(0)
     let [alc, setAlc] = useState(0)
     let [rating, setRating] = useState(0)
@@ -25,6 +25,7 @@ function PostDrink() {
     let dispatch = useDispatch()
     let navigate = useNavigate()
 
+    // console.log(img)
     let okImg = ['jpg', 'png', 'jpeg']
 
     // console.log(category)
@@ -47,13 +48,8 @@ function PostDrink() {
             let descError = { 'error': 'You need to say something more than that' }
             setErrors(descError)
         }
-        // if (String(rating)[0] == '0') {
-        //     let zeroGone = String(rating).slice(1)
-        //     // console.log(rating, 'without the zero ')
-        //     setRating(Number(zeroGone))
-        // }
-        // console.log(rating)
-        let checkImg = img.split('.')
+        let checkImg = img.name.split('.')
+        // console.log(checkImg)
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
                 if (rating > 5 || rating < 0 || String(rating).length > 1) {
@@ -64,27 +60,27 @@ function PostDrink() {
                     if (errors.error || errors.server) {
                         return
                     } else {
-                        let newPost = {
-                            user_id: Number(user.id),
-                            brand: Number(brand),
-                            category: Number(category),
-                            name: name,
-                            img: img,
-                            oz: Number(oz),
-                            alc: Number(alc),
-                            rating: Number(rating),
-                            cal: Number(cal),
-                            carbs: Number(carbs),
-                            sodium: Number(sodium),
-                            desc: desc
-                        }
-                        // console.log(newPost)
-                        let serverResponse = await dispatch(thunkCreateDrink(newPost))
+                        // console.log(img, 'the imageee')
+                        const formData = new FormData();
+                        formData.append("user_id", user.id);
+                        formData.append("brand", brand);
+                        formData.append("category", category);
+                        formData.append("name", name);
+                        formData.append("img", img);
+                        formData.append("oz", oz);
+                        formData.append("alc", alc);
+                        formData.append("rating", rating);
+                        formData.append("cal", cal);
+                        formData.append("carbs", carbs);
+                        formData.append("sodium", sodium);
+                        formData.append("desc", desc);
+                        // console.log(formData['alc'], 'the form dataaaa')
+
+                        let serverResponse = await dispatch(thunkCreateDrink(formData))
 
                         if (serverResponse) {
                             setErrors(serverResponse);
                         } else {
-                            // console.log(serverResponse, 'serverres'
                             await dispatch(thunkAllDrinks())
                                 .then(() => {
                                     let arrDrinks = Object.values(drinks)
@@ -118,7 +114,9 @@ function PostDrink() {
         <div className="post-a-drink-form-holder">
             <h1>Create a Post</h1>
             {errors.server && <p>{errors.server}</p>}
-            <form onSubmit={handleSub}>
+            <form
+                onSubmit={handleSub}
+                encType="multipart/form-data">
                 <div className="post-drink-form-detail">
                     <label>
                         Name:
@@ -135,10 +133,10 @@ function PostDrink() {
                     <label>
                         Picture:
                         <input
-                            type='text'
-                            placeholder="A jpg, png, jpeg of drink"
-                            value={img}
-                            onChange={(e) => setImg(e.target.value)}
+                            type='file'
+                            // placeholder="A jpg, png, jpeg of drink"
+                            accept=".jpg, .png, .jpeg"
+                            onChange={(e) => setImg(e.target.files[0])}
                             required
                         />
                     </label>
@@ -258,10 +256,10 @@ function PostDrink() {
                     </label>
                 </div>
                 {errors.error && (
-                    <p style={{color: "red"}}>{errors.error}</p>
+                    <p style={{ color: "red" }}>{errors.error}</p>
                 )}
                 {errors.error0 && (
-                    <p style={{color: "orange"}}>{errors.error0}</p>
+                    <p style={{ color: "orange" }}>{errors.error0}</p>
                 )}
 
                 <button className="options-for-post" type='submit'>Create Post</button>
