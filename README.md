@@ -7,6 +7,7 @@ DrinkRate is a review site where the user is able to post a picture and key deta
 ### https://drink-rate.onrender.com
 
 # Screenshots of your app in action (once completed)
+(![image](https://github.com/user-attachments/assets/4c057173-21cc-4ab4-9ef5-ae9af4b49fc8))
 
 # Instructions on how to build/run the project (installation instructions)
 
