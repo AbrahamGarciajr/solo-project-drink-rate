@@ -1,18 +1,22 @@
 
 # DrinkRate
-### About
+## About
+DrinkRate is a review site where the user is able to post a picture and key details about a specific drink that they would like the world to know how they feel about. Some key details would include oz of the drink, the percentage of alcohol within the drink, and other nutritional facts about the drink. On the initial post they are also given a text area where they can drescribe their experience with the drink, whatever that may be, along with what they would rate the drink (1-5). From there, another logged in user is allowed to leave their own review for that specific drink as well. They will be given the same options to leave a written review and a rating of 1-5. 
 
 # Link to live site
 ### https://drink-rate.onrender.com
 
-# Summary of what the project is and what it does
 # Screenshots of your app in action (once completed)
+
 # Instructions on how to build/run the project (installation instructions)
+
 # List of techs/languages/plugins/APIs used
 ### tech
 ### Languages
 
 # To-dos/future features
+##
+
 # Technical implementation details
 # Anything you had to stop and think about before building
 # Descriptions of particular challenges
