@@ -7,13 +7,25 @@ DrinkRate is a review site where the user is able to post a picture and key deta
 ### https://drink-rate.onrender.com
 
 # Screenshots of your app in action (once completed)
-(![image](https://github.com/user-attachments/assets/4c057173-21cc-4ab4-9ef5-ae9af4b49fc8))
+### Home Page
+![image](https://github.com/user-attachments/assets/4c057173-21cc-4ab4-9ef5-ae9af4b49fc8)
+### A Users Drink Post
+![image](https://github.com/user-attachments/assets/cfed22df-f94b-484d-923b-0bc6fbf2d09e)
+### A Post's Reviews
+![image](https://github.com/user-attachments/assets/1296c723-be25-426c-8ca5-df5494a2de5c)
 
 # Instructions on how to build/run the project (installation instructions)
 
 # List of techs/languages/plugins/APIs used
-### tech
-### Languages
+Frameworks and Libraries
+Python Flask JavaScript React Redux CSS3 HTML5
+
+Database:
+Postgres
+
+Hosting:
+Render
+   
 
 # To-dos/future features
 ##
