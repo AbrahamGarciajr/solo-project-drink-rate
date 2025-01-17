@@ -1,12 +1,17 @@
 
 # DrinkRate
+### About
+
 # Link to live site
-  ## https://drink-rate.onrender.com
-# Optional Link to your backend repo if you have a separate one
+### https://drink-rate.onrender.com
+
 # Summary of what the project is and what it does
 # Screenshots of your app in action (once completed)
 # Instructions on how to build/run the project (installation instructions)
 # List of techs/languages/plugins/APIs used
+### tech
+### Languages
+
 # To-dos/future features
 # Technical implementation details
 # Anything you had to stop and think about before building
