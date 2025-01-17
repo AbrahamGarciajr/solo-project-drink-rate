@@ -545,12 +545,6 @@ def seed_reviews():
 
 
 
-
-
-
-
-
-    # 8/93 revs
     db.session.add(rev1)
     db.session.add(rev2)
     db.session.add(rev3)
