@@ -215,8 +215,8 @@ def del_patch_drink(postId):
             db.session.commit()
             return jsonify({'message': 'Your post was update'})
         else:
-            print(form.data, 'the dataaaaaa')
-            print(form.errors, 'the errorssss')
+            # print(form.data, 'the dataaaaaa')
+            # print(form.errors, 'the errorssss')
             return jsonify(form.errors), 400
 
 
@@ -258,7 +258,7 @@ def create_post():
                     image.filename = get_unique_filename(image.filename)
                     # print(type(image), 'filename')
                     upload = upload_file_to_s3(image)
-                    print(upload, 'the upload')
+                    print(upload)
 
                     if 'errors' in upload:
                         return jsonify(upload), 400
