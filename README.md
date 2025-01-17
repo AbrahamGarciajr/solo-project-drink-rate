@@ -1,3 +1,21 @@
+
+# DrinkRate
+# Link to live site
+  ## https://drink-rate.onrender.com
+# Optional Link to your backend repo if you have a separate one
+# Summary of what the project is and what it does
+# Screenshots of your app in action (once completed)
+# Instructions on how to build/run the project (installation instructions)
+# List of techs/languages/plugins/APIs used
+# To-dos/future features
+# Technical implementation details
+# Anything you had to stop and think about before building
+# Descriptions of particular challenges
+# Snippets or links to see code for these
+# Links to contact you (LinkedIn)
+# Endpoints (See example below)*
+
+
 # Flask React Project
 
 This is the starter for the Flask React project.
