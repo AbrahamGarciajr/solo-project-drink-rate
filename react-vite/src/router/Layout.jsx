@@ -15,23 +15,28 @@ export default function Layout() {
   }, [dispatch]);
 
   return (
-    <div className="whole-page">
-      <ModalProvider>
-        <Navigation />
+    <div>
+      <div className="whole-page">
+        <ModalProvider>
+          <Navigation />
 
-        <div className="layout">
-          <div className="category_bar">
-            <CategoryBar />
+          <div className="layout">
+            <div className="category_bar">
+              <CategoryBar />
+            </div>
+
+            {isLoaded && <Outlet />}
           </div>
 
-          {isLoaded && <Outlet />}
-          {isLoaded && <Footer />}
-          
-        </div>
-        <Modal />
 
-      </ModalProvider>
+          <Modal />
 
+        </ModalProvider>
+      </div>
+      <footer>
+        {isLoaded && <Footer />}
+      </footer>
     </div>
+
   );
 }

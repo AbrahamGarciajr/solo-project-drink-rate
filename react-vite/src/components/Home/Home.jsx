@@ -12,6 +12,8 @@ function Home() {
     let [isLoaded, setIsLoaded] = useState(false)
     // console.log(categories)
     let arrDrinks = Object.values(drinks)
+    // let mostRecent = []
+
     // console.log(arrDrinks)
 
     useEffect(() => {

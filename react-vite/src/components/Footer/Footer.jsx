@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
 
     return (
-        <div className="footer-holder">
+        <section className="footer-holder">
             <div >
                 <Link className="footer-links"
                     to='https://github.com/AbrahamGarciajr/solo-project-drink-rate'
@@ -20,6 +20,6 @@ export default function Footer() {
                     Linkedin
                 </Link>
             </div>
-        </div>
+        </section>
     )
 }

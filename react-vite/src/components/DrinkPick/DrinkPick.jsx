@@ -248,29 +248,36 @@ function DrinkPick() {
                                             )}
                                         </span>
                                     </div>
-                                    {user && (
-                                        <div>
-                                            {!found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
-                                                <div className="review-message-for-user">
-                                                    <div>
-                                                        Would you like to leave a review for this drink?
-                                                    </div>
-                                                    <button className="button-to-post-rev" onClick={postRev}>Post Review</button>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                    {!user && (
-                                        <div className="review-message-for-user">
-                                            Login to leave your experience with this drink!
-                                        </div>
-                                    )}
+
                                 </div>
                             )
                         })
                     )}
+
+                    {user && (
+                        <div>
+                            {!found && (Number(user.id) !== Number(drink.user_id)) && isLoaded && (
+                                <div className="review-message-for-user">
+                                    <div>
+                                        Would you like to leave a review for this drink?
+                                    </div>
+                                    <button className="button-to-post-rev" onClick={postRev}>Post Review</button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    {!user && (
+                        <div className="review-message-for-user">
+                            Login to leave your experience with this drink!
+                        </div>
+                    )}
+
                 </div>
             )}
+
+            {/* {drink.reviews && isLoaded &&(
+
+            )} */}
 
             {!drink.reviews && isLoaded && (
                 <div className="review-holder-one-drink">
