@@ -35,10 +35,40 @@ Render
 * The home page will show the 6 most recent posts, but I also want to add a filter that allows the user to search for: oldest posts, highest and lowest rating drinks.
 
 # Technical implementation details
-
 # Anything you had to stop and think about before building
 # Descriptions of particular challenges
 # Snippets or links to see code for these
 # Links to contact you (LinkedIn)
-# Endpoints (See example below)*
+
+
+# Endpoints
+
+ ## Auth Routes /api/auth
+   ### Authenticate User
+   * Purpose: Checks whether the user is authenticated and returns that users information
+   * Method: GET
+   * URL: /api/auth/
+   * Response:
+     ```js
+{ 
+id: 1,
+username: "demo-lition",
+email: "demo@aa.io"
+}
+```
+   * Error Response: 
+
+ ## Users /api/users
+   * Purpose: 
+   * Method:
+   * URL:
+   * Response:
+   * Error Response: 
+ ## Drinks /api/drinks
+   * Purpose: 
+   * Method:
+   * URL:
+   * Response:
+   * Error Response: 
+ ## Reviews /api/reviews
 
