@@ -61,6 +61,61 @@ email: "demo@aa.io"
 {'errors': {'message': 'Unauthorized'}}
 ```
 
+   ### Login
+   * Purpose: Logs in a user with the email and password combo 
+   * Method: POST
+   * URL: /api/auth/login
+   * Response:
+```js
+{ 
+id: 1,
+username: "demo-lition",
+email: "demo@aa.io"
+}
+```
+   * Error Response: Status code 401
+```js
+{'errors': 'different error messages for incorrect password or email or invalid login'}
+```
+
+   ### Logout
+   * Purpose: Logout a signed in user
+   * Method: GET
+   * URL: /api/auth/logout
+   * Response:
+```js
+{ 
+'message': 'User logged out'
+}
+```
+
+   ### Signup
+   * Purpose: Lets a user sign up for a new account and returns new user's data
+   * Method: POST
+   * URL: /api/auth/signup
+   * Response:
+```js
+{ 
+id: 1,
+username: "demo-lition",
+email: "demo@aa.io"
+}
+```
+   * Error Response: Status code 401
+```js
+{'errors': 'different error messages for improper email and password '}
+```
+
+   ### Unauthorized
+   * Purpose: Returns unauthorized JSON when flask-login authentication fails
+   * Method: GET
+   * URL: /api/auth/
+   * Response: 401
+```js
+{'errors': {'message': 'Unauthorized'}}
+```
+
+
  ## Users /api/users
    * Purpose: 
    * Method:
