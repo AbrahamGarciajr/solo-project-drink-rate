@@ -49,14 +49,17 @@ Render
    * Method: GET
    * URL: /api/auth/
    * Response:
-     ```js
+```js
 { 
 id: 1,
 username: "demo-lition",
 email: "demo@aa.io"
 }
 ```
-   * Error Response: 
+   * Error Response: Status code 401
+```js
+{'errors': {'message': 'Unauthorized'}}
+```
 
  ## Users /api/users
    * Purpose: 
