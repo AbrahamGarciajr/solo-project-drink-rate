@@ -9,7 +9,6 @@ DrinkRate is a review site where the user is able to post a picture and key deta
 # Linkedin
  https://www.linkedin.com/in/abraham-garcia-822a2a344/
 
-# Screenshots of your app in action (once completed)
 ### Home Page
 ![image](https://github.com/user-attachments/assets/4c057173-21cc-4ab4-9ef5-ae9af4b49fc8)
 ### A Users Drink Post
