@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, render_template
 from app.models import User, db, BeveragePost, Review, Category, Brand
 # from app.forms import LoginForm
 # from app.forms import SignUpForm
+from app.config import Config
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import PostDrink
 from app.forms import UpdateDrink
@@ -16,8 +17,19 @@ def recent_drinks():
     Home page returns a list of all the
     drinks from recent to oldest post
     """
-
+    # size = request.args.get('size')
+    # page = request.args.get('page', 1, type=int)
+    # page = request.args.get('page', 1, type=int)
+    # per_page = 5
+    # start = (page-1) * per_page
+    # end = start + per_page
+    # print('hellooooo', page)
+# .pagination(page=1, per_page=Config['POST_PER_PAGE'], error_out=False)
+    # paginate_drinks = BeveragePost.query.order_by(BeveragePost.created_at.desc())
+    # print(paginate_drinks, 'Hellooo')
     drinks = BeveragePost.query.all()
+
+    # print('HELLOOO',paginate_drinks)
     if drinks:
         allDrinks = [drink.to_dict() for drink in reversed(drinks)]
         for drink in allDrinks:
@@ -56,7 +68,6 @@ def category_selection(categoryId):
         if brands:
             return [brand.to_dict() for brand in brands]
         else:
-            # print('this is ittttttttt')
             return jsonify({'error': 'There are no brands for this category just yet'}), 404
     else:
         return jsonify({'error': 'There are no categories just yet'}), 404
@@ -135,7 +146,6 @@ def del_patch_drink(postId):
     # remove = remove_file_s3(drink.img)
     # print(remove)
 
-
     # if remove is not True:
     #     return {"errors": "Failed to remove the file from S3"}, 500
 
@@ -159,7 +169,8 @@ def del_patch_drink(postId):
         available_brands = [brand.to_dict() for brand in brands]
 
         category_choices = [(cat['id'], cat['name']) for cat in available_cats]
-        brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
+        brand_choices = [(brand['id'], brand['name'])
+                         for brand in available_brands]
 
         # form = PostDrink()
         form = UpdateDrink()
@@ -170,37 +181,6 @@ def del_patch_drink(postId):
         # print(drink.to_dict(), 'this is the drinkkk')
 
         if form.validate_on_submit():
-            # if drink.img:
-            #     print(drink.img, 'this is the img back')
-
-            # image = form.img.data
-            # if not allowed_file(image.filename):
-            #     return {"errors": "Invalid file type"}, 400
-
-            # image.filename = get_unique_filename(image.filename)
-            # upload = upload_file_to_s3(image)
-            # print(upload, 'the upload2')
-
-            # if 'errors' in upload:
-            #     return jsonify(upload), 400
-
-            # url = upload['url']
-# ASK ABOUT WHAT COuLD BE THE PROBLEM WITH THE UPDATE
-# I get the numbers from the front but the back reads it as none
-# unless I chang every field, was not happening before using append
-            # print(drink, 'this is the drink')
-
-            # if form.data['oz']:
-            #     drink.oz = form.data['oz']
-            # if form.data['alc']:
-            #     drink.alc = form.data['alc']
-            # if form.data['cal']:
-            #     drink.cal = form.data['cal']
-            # if form.data['carbs']:
-            #     drink.carbs = form.data['carbs']
-            # if form.data['sodium']:
-            #     drink.sodium = form.data['sodium']
-
             drink.oz = form.data['oz']
             drink.alc = form.data['alc']
             drink.cal = form.data['cal']
@@ -234,7 +214,8 @@ def create_post():
     available_brands = [brand.to_dict() for brand in brands]
 
     category_choices = [(cat['id'], cat['name']) for cat in available_cats]
-    brand_choices = [(brand['id'], brand['name']) for brand in available_brands]
+    brand_choices = [(brand['id'], brand['name'])
+                     for brand in available_brands]
 
     form = PostDrink()
     form['csrf_token'].data = request.cookies['csrf_token']
