@@ -32,11 +32,11 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
+    <div>
+      <h1>Login</h1>
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
+      <form className='login-holder' Submit={handleSubmit}>
         <label>
           Email
           <input
@@ -60,7 +60,7 @@ function LoginFormPage() {
 
         <button className="submit-button-hover" type="submit">Log In</button>
       </form>
-    </>
+    </div>
   );
 }
 

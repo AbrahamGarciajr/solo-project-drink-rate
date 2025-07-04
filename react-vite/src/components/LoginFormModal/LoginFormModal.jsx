@@ -43,7 +43,7 @@ function LoginFormModal() {
 
   return (
     <div className="sign-up-log-in-holder">
-      <h1>Log In</h1>
+      <h1 className="login-title">Login</h1>
       <form onSubmit={handleSubmit}>
         <div className="sign-up-login-details">
           <label>
@@ -57,6 +57,7 @@ function LoginFormModal() {
           </label>
           {errors.email && <p>{errors.email}</p>}
         </div>
+
         <div className="sign-up-login-details">
           <label>
             Password
@@ -69,7 +70,8 @@ function LoginFormModal() {
           </label>
           {errors.password && <p>{errors.password}</p>}
         </div>
-        <div className="sign-up-login-details">
+
+        <div className="sign-up-login-details-holder">
           <div className="login-modal-buttons">
             <button className="submit-button-hover" type="submit">Log In</button>
           </div>
@@ -77,10 +79,6 @@ function LoginFormModal() {
             <button className="submit-button-hover"
               onClick={demoLogin}>Demo Login</button>
           </div>
-
-
-
-
         </div>
 
 

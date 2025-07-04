@@ -14,7 +14,7 @@
 
 }
 
-.whole-page{
+.whole-page {
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -309,7 +309,7 @@
 }
 
 #modal-content {
-    background-color: whitesmoke;
+    background-color: chocolate;
     border: 2px solid black;
     border-radius: 5px;
 }
@@ -446,17 +446,37 @@
     font-weight: bold;
 }
 
+.login-title {
+    /* background-color: grey; */
+}
+
 
 .sign-up-log-in-holder {
     width: 200px;
     height: auto;
     display: block;
     text-align: center;
+    /* background-color: grey; */
+    padding: 10px 20px;
+    /* background-color: grey; */
+
 }
 
 
 .sign-up-login-details {
     margin-bottom: 5px;
+    font-size: large;
+    font-weight: 500;
+}
+
+.sign-up-login-details-holder {
+    margin-bottom: 5px;
+
+    /* display: flex; */
+    /* flex-direction: row;
+    justify-content: space-between; */
+    /* width: 170px; */
+    /* margin-left: 15px; */
 }
 
 
@@ -466,8 +486,17 @@ body {
     margin: 0;
 }
 
+.submit-button-hover {
+    transition: 0.5s;
+}
+
+
 .submit-button-hover:hover {
     cursor: pointer;
+    background-color: rgba(211, 149, 105, 0.599);
+    border-radius: 6px;
+    /* border-width: 3px; */
+    border: 3px solid rgba(0, 0, 0, 0.661);
 }
 
 
@@ -501,4 +530,6 @@ body {
 
 .login-modal-buttons {
     margin-bottom: 5px;
+    margin-top: 10px;
+
 }
