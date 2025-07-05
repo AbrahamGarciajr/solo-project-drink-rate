@@ -50,6 +50,11 @@
     width: 90%;
     margin-left: 50px;
     justify-content: space-between;
+    background-color: rgba(245, 245, 245, 0.603);
+    margin-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 .home_page_drinks {

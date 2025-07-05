@@ -26,7 +26,6 @@ function Home() {
 
 
 
-
     return (
         <div >
             {drinks && isLoaded && (
@@ -35,7 +34,7 @@ function Home() {
                         return (
                             <div className="home_page_drinks" key={drink.id} onClick={() => drinkClick(drink)}>
                                 <div className="drink-img-holder">
-                                    <img className='drink-preview-img' src={drink.img} />
+                                    <img loading='lazy' className='drink-preview-img' src={drink.img} />
                                 </div>
                                 <div>
                                     {drink.name}
