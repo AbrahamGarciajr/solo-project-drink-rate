@@ -112,9 +112,9 @@ function PostDrink() {
 
     return (
         <div className="post-a-drink-form-holder">
-            <h1>Create a Post</h1>
+            <h1 className="header-post-drink">Create a Post</h1>
             {errors.server && <p>{errors.server}</p>}
-            <form
+            <form className="text-in-post-drink"
                 onSubmit={handleSub}
                 encType="multipart/form-data">
                 <div className="post-drink-form-detail">
@@ -154,7 +154,7 @@ function PostDrink() {
                 </div>
                 <div className="post-drink-form-detail">
                     <label>
-                        Alcohol Percentage:
+                        Alcohol %:
                         <input
                             type='number'
                             value={alc}

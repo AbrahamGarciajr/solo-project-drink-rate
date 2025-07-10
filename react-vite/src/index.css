@@ -29,11 +29,14 @@
 
 .category_bar_options {
     font-size: 25px;
+    transition: 0.2s;
 }
 
 .category_bar_options:hover {
     cursor: pointer;
-    font-weight: bolder;
+    font-size:x-large;
+    font-weight: bold;
+    text-shadow: 1px 1px 30px black;
     color: chocolate;
 }
 
@@ -392,6 +395,7 @@
 
 .options-for-post {
     background-color: rgb(212, 136, 83);
+    margin-left: 80px;
 }
 
 .options-for-delete:hover {
@@ -428,14 +432,23 @@
 
 .post-a-drink-form-holder {
     display: block;
-    text-align: center;
+    /* text-align: center; */
+    /* padding-left: 20px; */
     height: auto;
     border: 2px solid black;
-    width: 45%;
+    width: 40%;
+    margin-top: 30px;
     border-radius: 5px;
     padding-bottom: 30px;
     background-color: whitesmoke;
-    margin-left: 370px;
+    margin-left: 400px;
+}
+
+.text-in-post-drink{
+    margin-left: 160px;
+}
+.header-post-drink{
+    text-align: center;
 }
 
 .description-text-area {
@@ -451,9 +464,9 @@
     font-weight: bold;
 }
 
-.login-title {
-    /* background-color: grey; */
-}
+/* .login-title {
+    background-color: grey;
+} */
 
 
 .sign-up-log-in-holder {
