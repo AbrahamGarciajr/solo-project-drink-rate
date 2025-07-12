@@ -86,3 +86,9 @@ def create_review(revId):
                 return jsonify({'error': 'This review does not belong to you'}), 403
         else:
             return ({'error': 'There is no review found'}), 404
+
+# @review_route('/users/<int:userId')
+# def getUserRevs(userId)
+#     """
+#     Get the users' review to display their userName
+#     """

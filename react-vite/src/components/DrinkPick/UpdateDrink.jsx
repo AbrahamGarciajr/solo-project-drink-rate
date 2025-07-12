@@ -119,9 +119,9 @@ function UpdateDrink() {
 
     return (
         <div className="post-a-drink-form-holder">
-            <h1>Update Your Post</h1>
+            <h1 className="header-post-drink">Update Your Post</h1>
             {errors.server && <p>{errors.server}</p>}
-            <form
+            <form className="text-in-post-drink"
                 onSubmit={handleSub}
                 // encType="multipart/form-data"
                 >
@@ -162,7 +162,7 @@ function UpdateDrink() {
                 </div>
                 <div className="post-drink-form-detail">
                     <label>
-                        Alcohol Percentage
+                        Alcohol %
                         <input
                             type='number'
                             value={alc}

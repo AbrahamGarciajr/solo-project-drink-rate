@@ -334,6 +334,7 @@
     font-size: larger;
     margin-bottom: 10px;
     font-weight: bolder;
+    border-bottom: 1px solid black;
 }
 
 .review-message-for-user {
