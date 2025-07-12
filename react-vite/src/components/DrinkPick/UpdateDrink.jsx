@@ -60,6 +60,7 @@ function UpdateDrink() {
     let handleSub = async (e) => {
         e.preventDefault()
         setErrors({})
+        // console.log(img)
         let checkImg = img.split('.')
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
@@ -85,6 +86,7 @@ function UpdateDrink() {
                             sodium: Number(sodium),
                             desc: desc
                         }
+                        // console.log(newPost)
                         let serverResponse = await dispatch(thunkUpdateDrink(newPost))
 
                         if (!serverResponse.message) {
