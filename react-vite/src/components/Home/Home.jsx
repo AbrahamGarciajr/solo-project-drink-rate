@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkAllDrinks } from "../../redux/drinks"
-import { useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { FaStar } from "react-icons/fa";
 
 
@@ -27,7 +27,8 @@ function Home() {
 
 
     return (
-        <div >
+        // <div >
+        <>
             {drinks && isLoaded && (
                 <div className="home_page_drinks_holder">
                     {arrDrinks.reverse().map(drink => {
@@ -47,7 +48,9 @@ function Home() {
                     })}
                 </div>
             )}
-        </div>
+        </>
+
+        // </div>
     )
 }
 

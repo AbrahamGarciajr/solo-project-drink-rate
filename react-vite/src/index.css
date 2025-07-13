@@ -17,7 +17,10 @@
 .whole-page {
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 10px;
+    /* min-height: 100%; */
 }
+
 
 .logout-user:hover {
     cursor: pointer;
@@ -52,6 +55,8 @@
     flex-wrap: wrap;
     width: 90%;
     margin-left: 50px;
+    max-height: 550px;
+    overflow: auto;
     justify-content: space-between;
     background-color: rgba(245, 245, 245, 0.603);
     margin-top: 25px;
@@ -514,7 +519,9 @@
 body {
     background-image: url('https://allseasonsvcs.com/wp-content/uploads/2020/07/backyard-bbq.jpg');
     background-color: #cccc;
-    margin: 0;
+    /* height: 100%; */
+    /* margin: 0; */
+    /* margin-bottom: 100px; */
 }
 
 .submit-button-hover {
@@ -531,20 +538,29 @@ body {
 }
 
 
+
 .footer-holder {
     /* position: fixed;
     bottom: 5px; */
+    /* position:relative; */
     width: 100%;
-    height: 100px;
-    margin-top: 30%;
+    height: 30px;
+    /* margin-top: 30%; */
+    position: fixed;
+    bottom: 0;
+    left: 0;
     background-color: burlywood;
-    /* border-radius: 10px; */
-    /* border: 1px solid black; */
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-}
 
+
+}
+/*
+html{
+    width:100%
+
+} */
 
 .footer-links {
     font-size: larger;
