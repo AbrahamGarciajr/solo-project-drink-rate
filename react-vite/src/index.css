@@ -49,6 +49,7 @@
     color: white;
 }
 
+
 .home_page_drinks_holder {
     display: flex;
     flex-direction: row;
@@ -57,13 +58,18 @@
     margin-left: 50px;
     max-height: 550px;
     overflow: auto;
+
+    scrollbar-width:none;
+    /* scrollbar-color: rgb(195, 157, 131) whitesmoke; */
     justify-content: space-between;
     background-color: rgba(245, 245, 245, 0.603);
     margin-top: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
     padding-top: 20px;
 }
+
+
 
 .home_page_drinks {
     border: 1px, solid, black;
@@ -556,6 +562,7 @@ body {
 
 
 }
+
 /*
 html{
     width:100%
