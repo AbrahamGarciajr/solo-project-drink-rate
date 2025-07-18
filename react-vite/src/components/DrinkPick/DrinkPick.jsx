@@ -189,8 +189,6 @@ function DrinkPick() {
                         </div>
                     )}
                 </div>
-
-
             )}
 
             {!isLoaded && (

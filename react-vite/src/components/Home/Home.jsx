@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { thunkAllDrinks } from "../../redux/drinks"
 import { useNavigate } from "react-router-dom"
 import { FaStar } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 
 function Home() {
@@ -13,6 +14,19 @@ function Home() {
     // console.log(categories)
     let arrDrinks = Object.values(drinks)
     // let mostRecent = []
+    let location = useLocation()
+    let [message, setMessage] = useState(false)
+
+
+    useEffect(() => {
+        if (location.state) {
+            setMessage(true)
+            let message = () => {
+                setMessage(false)
+            }
+            setTimeout(message, 3500)
+        }
+    }, [location.state])
 
 
     useEffect(() => {
@@ -46,6 +60,11 @@ function Home() {
                             </div>
                         )
                     })}
+                </div>
+            )}
+            {location.state && message && (
+                <div className="delete-message-holder">
+                    {location.state.message}
                 </div>
             )}
         </>

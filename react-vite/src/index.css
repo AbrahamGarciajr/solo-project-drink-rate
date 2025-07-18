@@ -68,6 +68,21 @@
     padding-bottom: 20px;
 }
 
+.delete-message-holder {
+    position: absolute;
+    right: 20px;
+    top: 600px;
+    border: 2px, solid, black;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: larger;
+    background-color: rgba(210, 105, 30, 0.904);
+    height: 5rem;
+    width: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 .home_page_drinks {
@@ -104,7 +119,7 @@
     border-radius: 10px;
     font-weight: bold;
     font-size: larger;
-    background-color: rgba(210, 105, 30, 0.784);
+    background-color: rgba(210, 105, 30, 0.884);
     height: 5rem;
     width: 15rem;
     display: flex;
@@ -561,7 +576,7 @@ body {
     transition: .4s;
 }
 
-.footer-holder:hover{
+.footer-holder:hover {
     height: 80px;
 }
 
