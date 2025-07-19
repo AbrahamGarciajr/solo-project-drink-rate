@@ -77,8 +77,7 @@ function PostDrink() {
                         // console.log(formData['alc'], 'the form dataaaa')
 
                         let serverResponse = await dispatch(thunkCreateDrink(formData))
-
-                        if (serverResponse) {
+                        if (serverResponse.error) {
                             setErrors(serverResponse);
                         } else {
                             await dispatch(thunkAllDrinks())
@@ -88,8 +87,9 @@ function PostDrink() {
                                     return arrDrinks
                                 })
                                 .then((arrDrinks) => {
-                                    alert('Post has been created :)')
-                                    navigate(`/drink/${arrDrinks[arrDrinks.length - 1].id}`)
+                                    // alert('Post has been created :)')
+                                    // console.log(serverResponse, 'from post')
+                                    navigate(`/drink/${arrDrinks[arrDrinks.length - 1].id}`, { state: { 'message': serverResponse.message } })
                                 })
                         }
                     }

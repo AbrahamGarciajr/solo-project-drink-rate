@@ -100,7 +100,7 @@ export const thunkCreateDrink = (drinkInfo) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(createDrink(data));
-        // return data
+        return data
         // console.log(data, 'data')
     } else if (res.status < 500) {
         const errorMessages = await res.json();
@@ -122,7 +122,7 @@ export const thunkUpdateDrink = (drinkInfo) => async () => {
     if (res.ok) {
         const data = await res.json();
         // dispatch(updateDrink(drinkInfo));
-        // console.log(data, 'data')
+        // console.log(data, 'dataaaaa')
         return data
     } else if (res.status < 500) {
         const errorMessages = await res.json();

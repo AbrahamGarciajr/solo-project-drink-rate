@@ -8,7 +8,6 @@ import OpenReviewModal from '../ReviewModal/ReviewModal'
 import ReviewUpdateForm from "../ReviewModal/ReviewUpdateModal"
 import DeleteRevForm from "../ReviewModal/ReviewDeleteModal"
 import ReviewPostForm from "../ReviewModal/ReviewPostForm"
-// import UpdateDrink from "./UpdateDrink"
 import { FaStar } from "react-icons/fa";
 import { useLocation } from 'react-router'
 
@@ -18,7 +17,6 @@ import { useLocation } from 'react-router'
 function DrinkPick() {
     let { drinkId } = useParams()
     let drink = useSelector(state => state.drinks.selected)
-    // let drinkRevs = useSelector(state => state.drinks.drinks[drinkId])
     let user = useSelector(state => state.session.user)
     let dispatch = useDispatch()
     let [isLoaded, setIsLoaded] = useState(false)
@@ -27,17 +25,15 @@ function DrinkPick() {
     const [showRevMenu, setShowRevMenu] = useState(false)
     const [delDrink, setDelDrink] = useState(true)
     const [createRev, setCreateRev] = useState(false)
-    const [message, setMessage] = useState('')
-    // const [updateMessage, setUpdateMessage] = useState('')
+    const [message, setMessage] = useState(false)
     const ulRef = useRef();
     const location = useLocation()
 
 
-    // console.log(location.state.data, 'this is the location')
+    // console.log(location.state, 'this is the location')
     // if (location.state) {
     //     console.log(location.state, 'location state')
     // }
-
 
 
     useEffect(() => {
@@ -47,9 +43,6 @@ function DrinkPick() {
     let deletePost = () => {
         setShowMenu(true)
         setDelDrink(true)
-        // console.log(drinkInfo)
-        // dispatch(thunkDeleteDrink(drinkInfo.id))
-        //     .then(() => navigate('/'))
 
     }
 
@@ -57,7 +50,6 @@ function DrinkPick() {
         navigate(`/drink/${drinkId}/update`)
     }
 
-    // console.log(drink)
 
 
     const toggleRevMenu = (e) => {
@@ -67,24 +59,21 @@ function DrinkPick() {
 
     useEffect(() => {
         if (!showRevMenu) return;
-
         const closeRevMenu = (e) => {
             if (ulRef.current && !ulRef.current.contains(e.target)) {
                 setShowRevMenu(false);
             }
         };
-
         document.addEventListener("click", closeRevMenu);
-
         return () => document.removeEventListener("click", closeRevMenu);
     }, [showRevMenu]);
-
     const closeRevMenu = () => setShowMenu(false);
 
 
     let postRev = () => {
         setCreateRev(true)
     }
+
 
     let found
     if (drink.reviews) {
@@ -93,24 +82,16 @@ function DrinkPick() {
         }
 
     }
-    useEffect(() => {
-        if (location.state && location.state.data) {
-            // console.log(document.title);
-            setMessage('Your post was updated');
-            window.history.replaceState({}, '');
-        }
 
-    }, [location.state])
-
-
-    useEffect(() => {
-        if (message) {
+        useEffect(() => {
+        if (location.state) {
+            setMessage(true)
             let message = () => {
-                setMessage('')
+                setMessage(false)
             }
             setTimeout(message, 3500)
         }
-    })
+    }, [location.state])
 
     return (
         <div className={`drink-holder`}>
@@ -203,7 +184,7 @@ function DrinkPick() {
             )}
             {message && isLoaded && (
                 <div className="review-drink-message">
-                    {message}
+                    {location.state.message || location.state.data}
                 </div>
             )}
 
