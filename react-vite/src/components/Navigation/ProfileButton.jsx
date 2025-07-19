@@ -47,13 +47,15 @@ function ProfileButton() {
       {showMenu && (
         <div className={"profile-dropdown"} ref={ulRef}>
           {user ? (
-            <>
+            <div className="profile-dropdown-info">
               <div>{user.username}</div>
               <div>{user.email}</div>
+              <div>Reviews</div>
+              <div>Posts</div>
               <div>
                 <button className="logout-user" onClick={logout}>Log Out</button>
               </div>
-            </>
+            </div>
           ) : (
             <>
               <OpenModalMenuItem
