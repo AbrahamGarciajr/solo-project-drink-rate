@@ -9,6 +9,7 @@
   /* max-height: max-content; */
   border-radius: 1rem;
   margin-top: 5px;
+  z-index: 1;
 }
 
 .profile-dropdown-info {
