@@ -57,18 +57,19 @@ function ProfileButton() {
               </div>
             </div>
           ) : (
-            <>
+            <div className="profile-dropdown-info-login-signup">
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem
+                // className="signup-button-space"
                 itemText="Sign Up"
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
-            </>
+            </div>
           )}
         </div>
       )}
