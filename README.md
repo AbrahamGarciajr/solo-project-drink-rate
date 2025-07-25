@@ -1,7 +1,7 @@
 
 # DrinkRate
 ## About
-DrinkRate is a review site where the user is able to post a picture and key details about a specific drink that they would like the world to know how they feel about. Some key details would include oz of the drink, the percentage of alcohol within the drink, and other nutritional facts about the drink. On the initial post they are also given a text area where they can drescribe their experience with the drink, whatever that may be, along with what they would rate the drink (1-5). From there, another logged in user is allowed to leave their own review for that specific drink as well. They will be given the same options to leave a written review and a rating of 1-5. 
+DrinkRate is a review site where the user is able to post a picture and key details about a specific drink that they would like the world to know how they feel about. Some key details would include oz of the drink, the percentage of alcohol within the drink, and other nutritional facts about the drink. On the initial post they are also given a text area where they can describe their experience with the drink, whatever that may be, along with what they would rate the drink (1-5). From there, another logged in user is allowed to leave their own review for that specific drink as well. They will be given the same options to leave a written review and a rating of 1-5.
 
 # Link to live site
  https://drink-rate.onrender.com
@@ -26,7 +26,7 @@ Postgres
 
 ### Hosting
 Render
-   
+
 
 # To-dos/future features
 * I would want to add a post feature for brands and categories so that when a user doesn't see the brand/category that matches their drink they are able to select a different option that will allow them to add a new brand/category to make their post for.
@@ -44,7 +44,7 @@ All patch, posts and deletes have @login_required and/or flask_login's current_u
    * URL: /api/auth/
    * Response:
 ```js
-{ 
+{
 id: 1,
 username: "demo-lition",
 email: "demo@aa.io"
@@ -56,12 +56,12 @@ email: "demo@aa.io"
 ```
 
    ### Login
-   * Purpose: Logs in a user with the email and password combo 
+   * Purpose: Logs in a user with the email and password combo
    * Method: POST
    * URL: /api/auth/login
    * Response:
 ```js
-{ 
+{
 id: 1,
 username: "demo-lition",
 email: "demo@aa.io"
@@ -78,7 +78,7 @@ email: "demo@aa.io"
    * URL: /api/auth/logout
    * Response:
 ```js
-{ 
+{
 'message': 'User logged out'
 }
 ```
@@ -89,7 +89,7 @@ email: "demo@aa.io"
    * URL: /api/auth/signup
    * Response:
 ```js
-{ 
+{
 id: 1,
 username: "demo-lition",
 email: "demo@aa.io"
@@ -336,7 +336,7 @@ This will also redirect to that post the user just made
 ```js
 {'error': 'How did you get here? You need to be logged in to delete YOUR post'} 401
 ```
-   ### Create Drink 
+   ### Create Drink
    * Purpose: This is for creating a drink post
    * Method: POSt
    * URL: /api/drinks/post-drink
