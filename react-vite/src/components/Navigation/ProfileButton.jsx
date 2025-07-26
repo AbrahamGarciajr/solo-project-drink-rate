@@ -5,12 +5,14 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useNavigate } from "react-router-dom";
 
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  let navigate = useNavigate()
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -19,25 +21,30 @@ function ProfileButton() {
 
   useEffect(() => {
     if (!showMenu) return;
-
     const closeMenu = (e) => {
       if (ulRef.current && !ulRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
-
     document.addEventListener("click", closeMenu);
-
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
   const closeMenu = () => setShowMenu(false);
+
+
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
   };
+
+
+
+  const userPosts = () => {
+    navigate('/user/posts')
+  }
 
   return (
     <>
@@ -50,8 +57,8 @@ function ProfileButton() {
             <div className="profile-dropdown-info">
               <div>{user.username}</div>
               <div>{user.email}</div>
-              <div>Reviews</div>
-              <div>Posts</div>
+              <div className="user-posts-profile" onClick={() => userPosts()}>Posts</div>
+              <div className="user-posts-profile" >Reviews</div>
               <div>
                 <button className="logout-user" onClick={logout}>Log Out</button>
               </div>

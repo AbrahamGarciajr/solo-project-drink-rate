@@ -71,7 +71,7 @@
   font-weight: bold;
 }
 
-.login-signup-profile-button + div {
+.login-signup-profile-button+div {
   margin-top: 8px;
 }
 
@@ -88,4 +88,15 @@
 .home-logo:hover {
   background-color: chocolate;
   color: whitesmoke;
+}
+
+.user-posts-profile {
+  /* transition: 0.5s ease-in-out; */
+  transition: 0.4s;
+}
+
+.user-posts-profile:hover {
+  cursor: pointer;
+  color: chocolate;
+  text-shadow: 0 0 15px black;
 }
