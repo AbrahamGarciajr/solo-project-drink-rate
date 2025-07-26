@@ -30,12 +30,6 @@ function DrinkPick() {
     const location = useLocation()
 
 
-    // console.log(location.state, 'this is the location')
-    // if (location.state) {
-    //     console.log(location.state, 'location state')
-    // }
-
-
     useEffect(() => {
         dispatch(thunkOneDrink(drinkId)).then(() => setIsLoaded(true))
     }, [dispatch, drinkId])

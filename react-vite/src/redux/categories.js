@@ -1,7 +1,6 @@
 // actions
 const GET_CATS = 'categories/getCats'
 const GET_BRANDS = 'brands/getCatBrands'
-// const RESET_STATE = 'state/reset'
 
 const getCats = (data) => ({
     type: GET_CATS,
@@ -12,10 +11,6 @@ const getCatBrands = (data) => ({
     type: GET_BRANDS,
     payload: data
 })
-
-// const resetState = () => ({
-//     type: RESET_STATE
-// })
 
 
 // thunks
@@ -39,7 +34,7 @@ export const thunkCategoryBrands = (catId) => async dispatch => {
         // console.log('from the thunk res', data)
         // dispatch(resetState())
         dispatch(getCatBrands(data))
-    } 
+    }
 }
 
 

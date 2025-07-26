@@ -17,18 +17,7 @@ def recent_drinks():
     Home page returns a list of all the
     drinks from recent to oldest post
     """
-    # size = request.args.get('size')
-    # page = request.args.get('page', 1, type=int)
-    # page = request.args.get('page', 1, type=int)
-    # per_page = 5
-    # start = (page-1) * per_page
-    # end = start + per_page
-    # print('hellooooo', page)
-# .pagination(page=1, per_page=Config['POST_PER_PAGE'], error_out=False)
-    # paginate_drinks = BeveragePost.query.order_by(BeveragePost.created_at.desc())
-    # print(paginate_drinks, 'Hellooo')
     drinks = BeveragePost.query.all()
-
     # print('HELLOOO',paginate_drinks)
     if drinks:
         allDrinks = [drink.to_dict() for drink in reversed(drinks)]

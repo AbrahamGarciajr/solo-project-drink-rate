@@ -4,7 +4,7 @@ const BRAND_DRINKS = 'drink/brandDrinks'
 const ONE_DRINK = 'drink/oneDrink'
 const DELETE_DRINK = 'drink/deleteDrink'
 const CREATE_DRINK = 'drink/createDrink'
-// const CREATE_REV = 'rev/createRev'
+const USER_DRINKS = 'rev/userPosts'
 
 
 const getAllDrinks = (data) => ({
@@ -32,10 +32,10 @@ const createDrink = (data) => ({
     payload: data
 })
 
-// const createRev = (data) => ({
-//     type: CREATE_REV,
-//     payload: data
-// })
+const userPosts = (data) => ({
+    type: USER_DRINKS,
+    payload: data
+})
 
 
 // thunks
@@ -192,6 +192,21 @@ export const thunkCreateRev = (revInfo) => async () => {
     }
 }
 
+export const thunkUserPosts = (userId) => async dispatch => {
+    // console.log(userId)
+    let res = await fetch(`/api/users/${userId}/posts`)
+    if (res.ok) {
+        let data = await res.json()
+        // console.log(data, 'the good data')
+        dispatch(userPosts(data))
+    } else {
+        let data = await res.json()
+        // console.log(data, 'the bad data')
+        return data
+    }
+    // console.log(res)
+}
+
 
 
 
@@ -238,10 +253,23 @@ function drinkReducer(state = initialState, action) {
             newState[action.payload.id] = action.payload
             return newState
         }
+        case USER_DRINKS: {
+            let newState = { ...state }
+            // console.log(action.payload)
+            newState.users = {}
+            if (action.payload.length > 0) {
+                action.payload.forEach(drink => {
+                    newState.users[drink.id] = drink
+                })
+            }
+            return newState
+        }
         default:
             return state
     }
 }
+
+
 
 
 export default drinkReducer
