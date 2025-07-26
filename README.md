@@ -37,7 +37,7 @@ Render
 # Endpoints
 All patch, posts and deletes have @login_required and/or flask_login's current_user associated with them for proper authentication that the user is in fact the owner of the post or review and that there is a user.
 
- ## Auth Routes /api/auth
+ ## Auth Routes
    ### Authenticate User
    * Purpose: Checks whether the user is authenticated and returns that users information
    * Method: GET
@@ -110,7 +110,7 @@ email: "demo@aa.io"
 ```
 
 
- ## Users /api/users
+ ## Users
    ### Users
    * Purpose: Returns data for all users
    * Method: GET
@@ -144,47 +144,86 @@ email: "demo@aa.io"
 }
 ```
 
- ## Drinks /api/drinks
-   ### Recent Drinks
-   * Purpose: Returns a list of all the drinks from recent to oldest post
+   ### User's Posts
+   * Purpose: Returns the logged in users posts they have made from newest to oldest
    * Method: GET
-   * URL: /api/drinks/
+   * URL: /api/users/:userId/posts
    * Response:
-```js
-[
-{
-id: 23,
-user_id: 3,
-brand_id: 1,
-category_id: 2,
-name: 'modelo',
-img: 'https://www.shutterstock.com/image-photo/marinettewiusaaug12019-single-bottle-bud-light-600nw-1469572235.jpg',
-oz: 20,
-alc: 4.4,
-rating: 3,
-cal: 120,
-carbs: 23,
-sodium: 23,
-desc: 'This is a generic desc filler for this readme'
-},
-{
-id: 22,
-user_id: 3,
-brand_id: 1,
-category_id: 2,
-name: 'modelo',
-img: 'https://www.shutterstock.com/image-photo/marinettewiusaaug12019-single-bottle-bud-light-600nw-1469572235.jpg',
-oz: 20,
-alc: 4.4,
-rating: 3,
-cal: 120,
-carbs: 23,
-sodium: 23,
-desc: 'This is a generic desc filler for this readme'
-}
-]
+   ```js
+      [
+   {
+   alc: "4.0000000000",
+   brand_id: 1,
+   cal: 4,
+   carbs: "4.0000000000",
+   category_id: 2,
+   desc: "jgfkjgsfg",
+   id: 32,
+   img: "http://drinkrate.s3.amazonaws.com/22e12d1afa18450c8d18dbbb0e36114b.png",
+   name: "sdkhfbskgjbsdf",
+   oz: "5.0000000000",
+   rating: 4,
+   sodium: "4.0000000000",
+   user_id: 1
+   },
+   {
+   alc: "40.0000000000",
+   brand_id: 10,
+   cal: 50,
+   carbs: "14.0000000000",
+   category_id: 3,
+   desc: "I saw that post about passion fruit so I got this one instead. Def recommend!",
+   id: 30,
+   img: "https://cdn11.bigcommerce.com/s-ryneghvxt8/images/stencil/original/products/4031/3844/SKYY-Agave_Lime-750_ml__79695.1697653614.jpg",
+   name: "Skyy agave lime",
+   oz: "25.0000000000",
+   rating: 4,
+   sodium: "4.0000000000",
+   user_id: 1
+   }, ...]
+      ```
+
+   ## Drinks
+      ### Recent Drinks
+      * Purpose: Returns a list of all the drinks from recent to oldest post
+      * Method: GET
+      * URL: /api/drinks/
+      * Response:
+   ```js
+   [
+   {
+   id: 23,
+   user_id: 3,
+   brand_id: 1,
+   category_id: 2,
+   name: 'modelo',
+   img: 'https://www.shutterstock.com/image-photo/marinettewiusaaug12019-single-bottle-bud-light-600nw-1469572235.jpg',
+   oz: 20,
+   alc: 4.4,
+   rating: 3,
+   cal: 120,
+   carbs: 23,
+   sodium: 23,
+   desc: 'This is a generic desc filler for this readme'
+   },
+   {
+   id: 22,
+   user_id: 3,
+   brand_id: 1,
+   category_id: 2,
+   name: 'modelo',
+   img: 'https://www.shutterstock.com/image-photo/marinettewiusaaug12019-single-bottle-bud-light-600nw-1469572235.jpg',
+   oz: 20,
+   alc: 4.4,
+   rating: 3,
+   cal: 120,
+   carbs: 23,
+   sodium: 23,
+   desc: 'This is a generic desc filler for this readme'
+   }
+   ]
 ```
-   * Error Response: Message wfor when there are no drinks posted
+   * Error Response: Message for when there are no drinks posted
 ```js
 {'message': 'There are currently no drinks posted'}
 ```
@@ -278,7 +317,7 @@ desc: 'This is generic filler info for this readme'
 ```
    * Error Response:
 ```js
-{'error': 'No Drinks are available for this brand yet} 404
+{'error': 'No Drinks are available for this brand yet'} 404
 {'error': 'there is no such brand just yet'} 404
 ```
 
@@ -350,7 +389,7 @@ This will also redirect to that post the user just made
 {"errors": "Invalid file type"} 400
 {'error': 'Please log in or create an account in order to post your drink'} 401
 ```
- ## Reviews /api/reviews
+ ## Reviews
    ### Post Review
    * Purpose: This is to make a review when selecting a post that doesn't belong to the user
    * Method: POST
@@ -392,6 +431,6 @@ This will also redirect to that post the user just made
 ```
    * Error Response:
 ```js
-{'error': 'This review does not belong to you'}), 403
-{'error': 'There is no review found'}), 404
+{'error': 'This review does not belong to you'}, 403
+{'error': 'There is no review found'}, 404
 ```
