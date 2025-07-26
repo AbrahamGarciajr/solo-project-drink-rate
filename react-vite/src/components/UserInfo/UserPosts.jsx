@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { thunkUserPosts } from "../../redux/drinks"
 import { useNavigate } from "react-router-dom"
 import { FaStar } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
 
 
 function UserPosts() {
@@ -31,9 +30,6 @@ function UserPosts() {
 
 
 
-
-
-
     return (
         <div>
             {drinks && isLoaded && (
@@ -55,11 +51,11 @@ function UserPosts() {
                     })}
                 </div>
             )}
-            {location.state && message && (
+            {/* {location.state && message && (
                 <div className="delete-message-holder">
                     {location.state.message}
                 </div>
-            )}
+            )} */}
         </div>
     )
 }
