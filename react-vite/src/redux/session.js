@@ -1,5 +1,6 @@
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const USER_REVS = 'session/userRevs'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -9,6 +10,11 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER
 });
+
+const userRevs = (data) => ({
+  type: USER_REVS,
+  payload: data
+})
 
 export const thunkAuthenticate = () => async (dispatch) => {
   const response = await fetch("/api/auth/");
@@ -67,7 +73,7 @@ export const thunkDemoLogin = () => async (dispatch) => {
   let response = await fetch('/api/auth/login', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({email: 'demo@aa.io', password: 'password'})
+    body: JSON.stringify({ email: 'demo@aa.io', password: 'password' })
   })
 
   if (response.ok) {
@@ -81,6 +87,17 @@ export const thunkDemoLogin = () => async (dispatch) => {
   }
 }
 
+export const thunkUserRevs = (id) => async (dispatch) => {
+  let res = await fetch(`/api/users/${id}/reviews`)
+  const data = await res.json()
+  if (res.ok) {
+    dispatch(userRevs(data))
+  } else {
+    return data
+  }
+  // console.log(res)
+}
+
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
@@ -89,6 +106,16 @@ function sessionReducer(state = initialState, action) {
       return { ...state, user: action.payload };
     case REMOVE_USER:
       return { ...state, user: null };
+    case USER_REVS: {
+      let newState = { ...state }
+      newState.revs = {}
+      if (action.payload.length) {
+        action.payload.forEach(rev => {
+          newState.revs[rev.id] = rev
+        })
+      }
+      return newState
+    }
     default:
       return state;
   }

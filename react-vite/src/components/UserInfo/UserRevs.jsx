@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { thunkUserPosts } from "../../redux/drinks"
 import { useNavigate } from "react-router-dom"
 import { FaStar } from "react-icons/fa";
+import { thunkUserRevs } from "../../redux/session";
 
 
 function UserRevs() {
     let userId = useSelector(state => state.session.user.id)
-    let drinks = useSelector(state => state.drinks.users)
+    // let drinks = useSelector(state => state.drinks.users)
     let dispatch = useDispatch()
     let navigate = useNavigate()
     let [isLoaded, setIsLoaded] = useState(false)
@@ -15,9 +15,9 @@ function UserRevs() {
     // let mostRecent = []
 
 
-    // useEffect(() => {
-    //     dispatch(thunkUserPosts(userId)).then(() => setIsLoaded(true))
-    // }, [dispatch, userId])
+    useEffect(() => {
+        dispatch(thunkUserRevs(userId)).then(() => setIsLoaded(true))
+    }, [dispatch, userId])
 
     // let arrDrinks
     // if (drinks) {
