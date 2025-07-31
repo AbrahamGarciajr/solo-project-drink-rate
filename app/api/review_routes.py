@@ -87,8 +87,3 @@ def create_review(revId):
         else:
             return ({'error': 'There is no review found'}), 404
 
-# @review_route('/users/<int:userId')
-# def getUserRevs(userId)
-#     """
-#     Get the users' review to display their userName
-#     """

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import User, BeveragePost, Review
 
 user_routes = Blueprint('users', __name__)
@@ -37,8 +37,9 @@ def user_posts(id):
         user_id=id).order_by(BeveragePost.id.desc())
     # print(posts, 'the postsssss')
     if not id:
-        return jsonify({'Error': 'User must be logged in'})
-
+        return jsonify({'Error': 'User must be logged in'}), 401
+    if id != current_user.id:
+        return jsonify({'Error': 'You do not have access to the reviews of this user'}), 403
     if posts:
         allDrinks = [post.to_dict() for post in posts]
         for drink in allDrinks:
@@ -51,3 +52,22 @@ def user_posts(id):
             else:
                 drink['avgRating'] = drink['rating']
         return allDrinks
+
+
+@user_routes.route('/<int:id>/reviews')
+@login_required
+def users_reviews(id):
+    """
+    Gathers all of the users reviews.
+    """
+    if not id:
+        # print('this is the error code')
+        return jsonify({'Error': 'User must be logged in'}), 401
+    if id != current_user.id:
+        return jsonify({'Error': 'You do not have access to the reviews of this user'}), 403
+    # print('current user',current_user.id)
+    revs = Review.query.filter_by(user_id=id)
+
+    if revs:
+        userRevs = [rev.to_dict() for rev in revs]
+        return userRevs
