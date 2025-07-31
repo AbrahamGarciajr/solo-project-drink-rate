@@ -42,8 +42,13 @@ function ProfileButton() {
 
 
 
-  const userPosts = () => {
-    navigate('/user/posts')
+  const userPosts = (num) => {
+    if (num === 1) {
+      navigate('/user/posts')
+    } else {
+      navigate('/user/reviews')
+    }
+    setShowMenu(false)
   }
 
   return (
@@ -57,8 +62,8 @@ function ProfileButton() {
             <div className="profile-dropdown-info">
               <div>{user.username}</div>
               <div>{user.email}</div>
-              <div className="user-posts-profile" onClick={() => userPosts()}>Posts</div>
-              <div className="user-posts-profile" >Reviews</div>
+              <div className="user-posts-profile" onClick={() => userPosts(1)}>Posts</div>
+              <div className="user-posts-profile" onClick={() => userPosts(2)}>Reviews</div>
               <div>
                 <button className="logout-user" onClick={logout}>Log Out</button>
               </div>
