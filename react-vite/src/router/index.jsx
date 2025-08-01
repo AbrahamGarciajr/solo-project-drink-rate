@@ -10,6 +10,7 @@ import PostDrink from '../components/DrinkPick/PostDrink';
 import UpdateDrink from '../components/DrinkPick/UpdateDrink'
 import UserPosts from '../components/UserInfo/UserPosts';
 import UserRevs from '../components/UserInfo/UserRevs';
+import UserReview from '../components/UserInfo/UserReview';
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
           {
             path: '/user/reviews',
             element: <UserRevs />
+          },
+          {
+            path: '/user/reviews/:revId',
+            element: <UserReview />
           }
         ]
       },
