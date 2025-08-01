@@ -90,6 +90,7 @@ export const thunkDemoLogin = () => async (dispatch) => {
 export const thunkUserRevs = (id) => async (dispatch) => {
   let res = await fetch(`/api/users/${id}/reviews`)
   const data = await res.json()
+  // console.log(data)
   if (res.ok) {
     dispatch(userRevs(data))
   } else {

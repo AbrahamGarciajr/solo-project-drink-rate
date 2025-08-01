@@ -52,7 +52,7 @@ function Home() {
                                     <img loading='lazy' className='drink-preview-img' src={drink.img} />
                                 </div>
                                 <div>
-                                    {drink.name}
+                                    {drink.name[0].toUpperCase() + drink.name.slice(1)}
                                 </div>
                                 <div>
                                     {drink.avgRating.toFixed(2)}/5 <FaStar className="star-for-rating" />
