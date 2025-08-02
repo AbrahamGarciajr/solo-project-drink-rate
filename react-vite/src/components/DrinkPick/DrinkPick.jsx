@@ -25,7 +25,8 @@ function DrinkPick() {
     const [showRevMenu, setShowRevMenu] = useState(false)
     const [delDrink, setDelDrink] = useState(true)
     const [createRev, setCreateRev] = useState(false)
-    const [message, setMessage] = useState(false)
+    const [openMessage, setOpenMessage] = useState(false)
+    const [message, setMessage] = useState('')
     const ulRef = useRef();
     const location = useLocation()
 
@@ -77,15 +78,35 @@ function DrinkPick() {
 
     }
 
-        useEffect(() => {
-        if (location.state) {
-            setMessage(true)
-            let message = () => {
-                setMessage(false)
+    useEffect(() => {
+        if (location.state || message) {
+            // console.log(location.state)
+            setOpenMessage(true)
+            let close = () => {
+                setOpenMessage(false)
+                setMessage('')
             }
-            setTimeout(message, 3500)
+            setTimeout(close, 3500)
         }
-    }, [location.state])
+    }, [location.state, message])
+
+    // if(location.state){
+    //     console.log(location.state)
+    //     console.log(openMessage)
+    // }
+
+    // if (openMessage) {
+    //     let close = () => {
+    //         setOpenMessage(false)
+    //     }
+    //     setTimeout(close, 3500)
+    // }
+
+    // useEffect(() => {
+    //     if (location.state){
+    //         console.log(location.state, 'the update')
+    //     }
+    // },[location.state])
 
     return (
         <div className={`drink-holder`}>
@@ -176,9 +197,14 @@ function DrinkPick() {
                     <ReviewPostForm setCreateRev={setCreateRev} setMessage={setMessage} />
                 </div>
             )}
-            {message && isLoaded && (
+            {openMessage && isLoaded && location.state.data && (
                 <div className="review-drink-message">
-                    {location.state.message || location.state.data}
+                    {location.state.data}
+                </div>
+            )}
+            {openMessage && isLoaded && message && (
+                <div className="review-drink-message">
+                    {message}
                 </div>
             )}
 
@@ -207,13 +233,13 @@ function DrinkPick() {
                                                             <OpenReviewModal
                                                                 itemText='Delete'
                                                                 onItemClick={closeRevMenu}
-                                                                modalComponent={<DeleteRevForm setMessage={setMessage} review={rev} />}
+                                                                modalComponent={<DeleteRevForm setMessage={setMessage} setOpenMessage={setOpenMessage} review={rev} />}
                                                             />
 
                                                             <OpenReviewModal
                                                                 itemText='Update'
                                                                 onItemClick={closeRevMenu}
-                                                                modalComponent={<ReviewUpdateForm setMessage={setMessage} review={rev} />}
+                                                                modalComponent={<ReviewUpdateForm setMessage={setMessage} setOpenMessage={setOpenMessage} review={rev} />}
                                                             />
                                                         </div>
                                                     )}
@@ -249,9 +275,6 @@ function DrinkPick() {
                 </div>
             )}
 
-            {/* {drink.reviews && isLoaded &&(
-
-            )} */}
 
             {!drink.reviews && isLoaded && (
                 <div className="review-holder-one-drink">

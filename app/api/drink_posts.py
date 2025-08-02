@@ -182,7 +182,7 @@ def del_patch_drink(postId):
             drink.rating = form.data['rating']
             drink.desc = form.data['desc']
             db.session.commit()
-            return jsonify({'message': 'Your post was update'})
+            return jsonify({'message': 'Your post was updated'})
         else:
             # print(form.data, 'the dataaaaaa')
             # print(form.errors, 'the errorssss')

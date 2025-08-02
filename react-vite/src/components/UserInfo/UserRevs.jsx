@@ -29,7 +29,7 @@ function UserRevs() {
     }
 
     let drinkClick = (rev) => {
-        navigate(`/user/reviews/${rev.id}`)
+        navigate(`/drink/${drinks[rev.beverage_post_id].id}`, {state: {revId: rev.id}})
         // console.log(rev)
     }
 
