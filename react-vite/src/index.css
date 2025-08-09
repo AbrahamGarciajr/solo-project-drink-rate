@@ -349,7 +349,7 @@
 .update-rev-form-holder {
     text-align: center;
     width: 300px;
-    height: 150px;
+    height: fit-content;
     padding-top: 10px;
     padding-bottom: 35px;
     /* border: 1px solid black; */
@@ -384,7 +384,7 @@
 
 .button-to-post-rev:hover {
     cursor: pointer;
-    background-color: grey;
+    /* background-color: grey; */
     color: white;
 }
 
@@ -435,6 +435,17 @@
 }
 
 .options-for-post {
+    background-color: rgb(212, 136, 83);
+    /* margin-left: 80px; */
+}
+
+.options-for-post-drink:hover {
+    cursor: pointer;
+    background-color: rgb(214, 89, 0);
+    color: white;
+}
+
+.options-for-post-drink {
     background-color: rgb(212, 136, 83);
     margin-left: 80px;
 }

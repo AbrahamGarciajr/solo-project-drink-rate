@@ -27,7 +27,7 @@ def post_rev(postId):
                 form = PostReview()
                 if not review:
                     form['csrf_token'].data = request.cookies['csrf_token']
-                    if (form.rating.data <= 5 and form.rating.data >= 1):
+                    if (form.rating.data <= 5 and form.rating.data >= 0):
                         newRev = Review(
                             user_id=current_user.to_dict()['id'],
                             beverage_post_id=int(postId),
@@ -38,7 +38,7 @@ def post_rev(postId):
                         db.session.commit()
                         return jsonify({'message': 'Your review was created'}), 201
                     else:
-                        return jsonify({'error': 'The rating has to be a whole number between 1-5'}), 400
+                        return jsonify({'error': 'The rating has to be a whole number between 0-5'}), 400
                 else:
                     return jsonify({'error': 'You already have a review for this post'}), 403
             else:
@@ -63,14 +63,14 @@ def create_review(revId):
             if current_user.id == rev.user_id:
                 form = PostReview()
                 form['csrf_token'].data = request.cookies['csrf_token']
-                if (form.rating.data <= 5 and form.rating.data >= 1):
+                if (form.rating.data <= 5 and form.rating.data >= 0):
                     # print(form.data,'this is the data')
                     rev.review = form.review.data
                     rev.rating = form.rating.data
                     db.session.commit()
                     return jsonify({'message': 'The review has been updated'}), 200
                 else:
-                    return jsonify({'error': 'The rating has to be a whole number between 1-5'}), 400
+                    return jsonify({'error': 'The rating has to be a whole number between 0-5'}), 400
             else:
                 return jsonify({'error': 'This review does not belong to you'}), 403
         else:
@@ -86,4 +86,3 @@ def create_review(revId):
                 return jsonify({'error': 'This review does not belong to you'}), 403
         else:
             return ({'error': 'There is no review found'}), 404
-

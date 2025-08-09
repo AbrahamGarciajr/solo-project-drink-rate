@@ -262,7 +262,7 @@ function PostDrink() {
                     <p style={{ color: "orange" }}>{errors.error0}</p>
                 )}
 
-                <button className="options-for-post" type='submit'>Create Post</button>
+                <button className="options-for-post-drink" type='submit'>Create Post</button>
             </form>
         </div>
     )

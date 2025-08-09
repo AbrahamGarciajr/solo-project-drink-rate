@@ -21,7 +21,7 @@ function ReviewUpdateForm({ review, setMessage, setOpenMessage }) {
         // console.log(rating)
         // console.log(rev)
 
-        if (rating > 0 && rating <= 5 && rating.toString().length < 2) {
+        if (rating >= 0 && rating <= 5 && rating.toString().length < 2) {
             if (rev.length > 3) {
                 setErrors({})
                 let newRev = {
@@ -30,7 +30,7 @@ function ReviewUpdateForm({ review, setMessage, setOpenMessage }) {
                     review: rev
                 }
                 let res = await dispatch(thunkUpdateRev(newRev))
-                
+
                 if (res.message) {
                     // alert(res.message)
 

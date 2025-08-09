@@ -197,7 +197,7 @@ function DrinkPick() {
                     <ReviewPostForm setCreateRev={setCreateRev} setMessage={setMessage} />
                 </div>
             )}
-            {openMessage && isLoaded && location.state.data && (
+            {openMessage && isLoaded && location.state?.data && (
                 <div className="review-drink-message">
                     {location.state.data}
                 </div>

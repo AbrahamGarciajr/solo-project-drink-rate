@@ -26,7 +26,7 @@ def recent_drinks():
             if revs:
                 total_ratings = sum(rev.rating for rev in revs)
                 drink['avgRating'] = (
-                    total_ratings + drink['rating'])/(len(revs) + 1)
+                    total_ratings + drink['rating'])/(len(revs)+1)
             else:
                 drink['avgRating'] = drink['rating']
         return allDrinks
