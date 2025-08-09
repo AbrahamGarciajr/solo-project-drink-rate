@@ -516,10 +516,10 @@
     height: auto;
     display: block;
     text-align: center;
-    /* background-color: grey; */
+    background-color: whitesmoke;
     padding: 10px 20px;
-    /* background-color: grey; */
-
+    border-radius: 6px;
+    padding-bottom: 15px;
 }
 
 
