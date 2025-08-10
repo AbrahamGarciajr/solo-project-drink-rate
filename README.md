@@ -209,6 +209,11 @@ email: "demo@aa.io"
         ...
    ]
    ```
+      * Error Response: Message for when user is not logged in or it is not their reviews they are accessing
+   ```js
+   {'Error': 'User must be logged in'} 401
+   {'Error': 'You do not have access to the reviews of this user'} 403
+   ```
 
 ## Drinks
    ### Recent Drinks
@@ -254,8 +259,9 @@ email: "demo@aa.io"
 ```js
 {'message': 'There are currently no drinks posted'}
 
-
 ```
+
+
    ### All Categories
    * Purpose: Gets all of the categories
    * Method: GET
