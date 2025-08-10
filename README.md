@@ -111,6 +111,7 @@ email: "demo@aa.io"
 
 
  ## Users
+
    ### Users
    * Purpose: Returns data for all users
    * Method: GET
@@ -181,10 +182,41 @@ email: "demo@aa.io"
    sodium: "4.0000000000",
    user_id: 1
    }, ...]
-      ```
+   ```
 
-   ## Drinks
-      ### Recent Drinks
+
+   ### User's Reviews
+   * Purpose: Returns a specific user's reviews
+   * Method: GET
+   * URL: /api/users/:userId/reviews
+   * Response:
+   ```js
+   [
+      {
+            id: 1,
+            user_id: 1,
+            beverage_post_id: 2,
+            review: 'This drink was okay, I would try again',
+            rating: 3
+        },
+        {
+            id: 2,
+            user_id: 1,
+            beverage_post_id: 4,
+            review: 'I did like this drink but was too strong for me to get it again',
+            rating: 4
+        },
+        ...
+   ]
+   ```
+      * Error Response: Message for when user is not logged in or it is not their reviews they are accessing
+   ```js
+   {'Error': 'User must be logged in'} 401
+   {'Error': 'You do not have access to the reviews of this user'} 403
+   ```
+
+## Drinks
+   ### Recent Drinks
       * Purpose: Returns a list of all the drinks from recent to oldest post
       * Method: GET
       * URL: /api/drinks/
@@ -226,7 +258,9 @@ email: "demo@aa.io"
    * Error Response: Message for when there are no drinks posted
 ```js
 {'message': 'There are currently no drinks posted'}
+
 ```
+
 
    ### All Categories
    * Purpose: Gets all of the categories
