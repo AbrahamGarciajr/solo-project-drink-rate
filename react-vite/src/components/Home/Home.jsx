@@ -38,7 +38,7 @@ function Home() {
     let drinkClick = (drink) => {
         navigate(`/drink/${drink.id}`)
     }
-    // console.log(order)
+    // console.log(arrDrinks.sort((a,b) => a['avgRating'] - b['avgRating']))
 
     return (
         // <div >
@@ -72,6 +72,24 @@ function Home() {
 
                     {order === 'Oldest' && (
                         arrDrinks.map(drink => {
+                            return (
+                                <div className="home_page_drinks" key={drink.id} onClick={() => drinkClick(drink)}>
+                                    <div className="drink-img-holder">
+                                        <img loading='lazy' className='drink-preview-img' src={drink.img} />
+                                    </div>
+                                    <div>
+                                        {drink.name[0].toUpperCase() + drink.name.slice(1)}
+                                    </div>
+                                    <div>
+                                        {drink.avgRating.toFixed(2)}/5 <FaStar className="star-for-rating" />
+                                    </div>
+                                </div>
+                            )
+                        })
+                    )}
+
+                    {order === 'Highest Rating' && (
+                        arrDrinks.sort((a,b) => b['avgRating'] - a['avgRating']).map(drink => {
                             return (
                                 <div className="home_page_drinks" key={drink.id} onClick={() => drinkClick(drink)}>
                                     <div className="drink-img-holder">
