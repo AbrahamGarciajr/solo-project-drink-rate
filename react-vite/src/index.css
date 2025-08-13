@@ -627,10 +627,19 @@ html{
 }
 
 
-.select-order{
+.select-order {
     height: 20px;
     width: fit-content;
     position: absolute;
     left: 75px;
-    top: 155px;
+    top: 153px;
+}
+
+
+.select-order-category {
+    height: 20px;
+    width: fit-content;
+    position: absolute;
+    left: 75px;
+    top: 193px;
 }

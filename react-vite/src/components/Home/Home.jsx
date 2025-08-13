@@ -38,7 +38,7 @@ function Home() {
     let drinkClick = (drink) => {
         navigate(`/drink/${drink.id}`)
     }
-    console.log(order)
+    // console.log(order)
 
     return (
         // <div >
