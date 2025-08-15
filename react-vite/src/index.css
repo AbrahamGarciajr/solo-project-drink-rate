@@ -635,6 +635,10 @@ html{
     top: 153px;
 }
 
+.select-order:hover {
+    cursor: pointer;
+}
+
 
 .select-order-category {
     height: 20px;
@@ -643,3 +647,41 @@ html{
     left: 75px;
     top: 193px;
 }
+
+
+.select-order-user-posts {
+    height: 20px;
+    width: fit-content;
+    position: absolute;
+    left: 75px;
+    top: 153px;
+}
+
+/* select,
+::picker(select) {
+    appearance: ;
+} */
+
+
+/* option {
+    background-color: #fff;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 5px 10px;
+} */
+
+/* Styling for selected option (limited support across browsers) */
+option:checked {
+    background-color: rgba(210, 105, 30, 0.445);
+    color: #000;
+}
+
+
+
+
+
+/* .order-options:hover,
+.order-options:focus {
+    background: plum;
+} */

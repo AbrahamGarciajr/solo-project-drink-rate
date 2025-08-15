@@ -37,9 +37,9 @@ function BrandPick() {
             {arrDrinks.length > 0 && isLoaded && (
                 <div className="home_page_drinks_holder">
                     <select name='order' className="select-order-category" onChange={(e) => setOrder(e.target.value)} defaultValue='Recent'>
-                        <option value='Recent' >Recent Posts</option>
-                        <option value='Oldest'>Oldest Posts</option>
-                        <option value='Highest Rating'>Highest Rated</option>
+                        <option className='order-options' value='Recent' >Recent Posts</option>
+                        <option className='order-options' value='Oldest'>Oldest Posts</option>
+                        <option className='order-options' value='Highest Rating'>Highest Rated</option>
                     </select>
 
                     {(order === 'Recent' || order === '') && (
@@ -77,7 +77,7 @@ function BrandPick() {
                             )
                         })
                     )}
-                    
+
                     {order === 'Highest Rating' && (
                         arrDrinks.sort((a, b) => b['avgRating'] - a['avgRating']).map(drink => {
                             return (
