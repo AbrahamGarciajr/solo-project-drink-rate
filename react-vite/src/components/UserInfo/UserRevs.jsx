@@ -18,7 +18,7 @@ function UserRevs() {
     // let mostRecent = []
 
 
-
+    // console.log(userId)
     useEffect(() => {
         dispatch(thunkUserRevs(userId)).then(() => setIsLoaded(true))
         dispatch(thunkAllDrinks())
@@ -56,28 +56,29 @@ function UserRevs() {
                         <option className='order-options' value='Oldest'>Oldest Posts</option>
                         <option className='order-options' value='Highest Rating'>Highest Rated</option>
                     </select>
-                    {/* {revs.reverse().map(rev => {
-                        return (
-                            <div className="home_page_drinks" key={rev.id} onClick={() => drinkClick(rev)}>
-                                <div className="drink-img-holder">
-                                    <img className="drink-preview-img" src={drinks[rev.beverage_post_id]['img']} />
-                                </div>
-                                {rev.review.length > 25 ? (
-                                    <div>
-                                        {rev.review[0].toUpperCase() + rev.review.slice(1, 25) + '...'}
+                    {(order === 'Recent' || order === '') && (
+                        revs.reverse().map(rev => {
+                            return (
+                                <div className="home_page_drinks" key={rev.id} onClick={() => drinkClick(rev)}>
+                                    <div className="drink-img-holder">
+                                        <img className="drink-preview-img" src={drinks[rev.beverage_post_id]['img']} />
                                     </div>
-                                ) : (
+                                    {rev.review.length > 25 ? (
+                                        <div>
+                                            {rev.review[0].toUpperCase() + rev.review.slice(1, 25) + '...'}
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            {rev.review[0].toUpperCase() + rev.review.slice(1)}
+                                        </div>
+                                    )}
                                     <div>
-                                        {rev.review[0].toUpperCase() + rev.review.slice(1)}
+                                        {stars(rev.rating)}
                                     </div>
-                                )}
-                                <div>
-                                    {stars(rev.rating)}
                                 </div>
-                            </div>
-                        )
-                    })} */}
-
+                            )
+                        })
+                    )}
                     {revs.reverse().map(rev => {
                         return (
                             <div className="home_page_drinks" key={rev.id} onClick={() => drinkClick(rev)}>
@@ -99,6 +100,8 @@ function UserRevs() {
                             </div>
                         )
                     })}
+
+
                 </div>
             )}
             {/* {location.state && message && (
