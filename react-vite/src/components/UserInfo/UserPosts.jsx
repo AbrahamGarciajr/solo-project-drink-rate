@@ -25,6 +25,8 @@ function UserPosts() {
         arrDrinks = Object.values(drinks)
     }
 
+    // console.log(isLoaded)
+
     let drinkClick = (drink) => {
         navigate(`/drink/${drink.id}`)
     }
@@ -33,7 +35,7 @@ function UserPosts() {
 
     return (
         <div>
-            {arrDrinks.length > 0 && isLoaded && (
+            {arrDrinks && isLoaded && (
                 <div className="home_page_drinks_holder">
                     <select name='order' className="select-order-user-posts" onChange={(e) => setOrder(e.target.value)} defaultValue='Recent'>
                         <option className='order-options' value='Recent' >Recent Posts</option>
@@ -101,31 +103,11 @@ function UserPosts() {
             {!isLoaded && (
                 <div className="loading-sign">...Loading</div>
             )}
-            {arrDrinks.length < 1 && isLoaded && (
+            {!arrDrinks && isLoaded && (
                 <div className="loading-sign">
                     Once you have made a post they will be here.
                 </div>
             )}
-            {/* {drinks && isLoaded && (
-                <div className="home_page_drinks_holder">
-                    {arrDrinks.reverse().map(drink => {
-                        return (
-                            <div className="home_page_drinks" key={drink.id} onClick={() => drinkClick(drink)}>
-                                <div className="drink-img-holder">
-                                    <img loading='lazy' className='drink-preview-img' src={drink.img} />
-                                </div>
-                                <div>
-                                    {drink.name}
-                                </div>
-                                <div>
-                                    {drink.avgRating.toFixed(2)}/5 <FaStar className="star-for-rating" />
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-            )} */}
-
 
         </div>
     )
