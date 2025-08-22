@@ -13,6 +13,7 @@ function UserRevs() {
     let dispatch = useDispatch()
     let navigate = useNavigate()
     let [isLoaded, setIsLoaded] = useState(false)
+    let [order, setOrder] = useState('')
     // console.log(userRevs)
     // let mostRecent = []
 
@@ -29,7 +30,7 @@ function UserRevs() {
     }
 
     let drinkClick = (rev) => {
-        navigate(`/drink/${drinks[rev.beverage_post_id].id}`, {state: {revId: rev.id}})
+        navigate(`/drink/${drinks[rev.beverage_post_id].id}`, { state: { revId: rev.id } })
         // console.log(rev)
     }
 
@@ -50,6 +51,33 @@ function UserRevs() {
             {revs && isLoaded && (
                 // <>hello</>
                 <div className="home_page_drinks_holder">
+                    <select name='order' className="select-order-user-posts" onChange={(e) => setOrder(e.target.value)} defaultValue='Recent'>
+                        <option className='order-options' value='Recent' >Recent Posts</option>
+                        <option className='order-options' value='Oldest'>Oldest Posts</option>
+                        <option className='order-options' value='Highest Rating'>Highest Rated</option>
+                    </select>
+                    {/* {revs.reverse().map(rev => {
+                        return (
+                            <div className="home_page_drinks" key={rev.id} onClick={() => drinkClick(rev)}>
+                                <div className="drink-img-holder">
+                                    <img className="drink-preview-img" src={drinks[rev.beverage_post_id]['img']} />
+                                </div>
+                                {rev.review.length > 25 ? (
+                                    <div>
+                                        {rev.review[0].toUpperCase() + rev.review.slice(1, 25) + '...'}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {rev.review[0].toUpperCase() + rev.review.slice(1)}
+                                    </div>
+                                )}
+                                <div>
+                                    {stars(rev.rating)}
+                                </div>
+                            </div>
+                        )
+                    })} */}
+
                     {revs.reverse().map(rev => {
                         return (
                             <div className="home_page_drinks" key={rev.id} onClick={() => drinkClick(rev)}>
@@ -66,7 +94,6 @@ function UserRevs() {
                                     </div>
                                 )}
                                 <div>
-                                    {/* {rev.rating} <FaStar className="star-for-rating" /> */}
                                     {stars(rev.rating)}
                                 </div>
                             </div>
