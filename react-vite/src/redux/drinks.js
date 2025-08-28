@@ -177,11 +177,10 @@ export const thunkCreateRev = (revInfo) => async () => {
         body: JSON.stringify(revInfo)
     })
 
-    // console.log(res, 'the res')
+    
     if (res.ok) {
         let data = await res.json()
-        // console.log(data, 'the data')
-        // dispatch(createRev(revInfo))
+
         return data
 
     } else if (res.status < 500) {
