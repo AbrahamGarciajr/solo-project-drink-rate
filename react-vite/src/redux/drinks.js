@@ -170,7 +170,6 @@ export const thunkDeleteRev = (revInfo) => async () => {
 }
 
 export const thunkCreateRev = (revInfo) => async () => {
-    // console.log(revInfo)
     let res = await fetch(`/api/reviews/${revInfo.beverage_post_id}`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
