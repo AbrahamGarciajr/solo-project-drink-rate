@@ -133,7 +133,6 @@ export const thunkUpdateDrink = (drinkInfo) => async () => {
 }
 
 export const thunkUpdateRev = (revInfo) => async () => {
-    // console.log(revInfo)
     let res = await fetch(`/api/reviews/user/${revInfo.id}`, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
@@ -142,8 +141,6 @@ export const thunkUpdateRev = (revInfo) => async () => {
 
     if (res.ok) {
         const data = await res.json();
-        // dispatch(updateRev(revInfo));
-        // console.log(data, 'data')
         return data
     } else if (res.status < 500) {
         const errorMessages = await res.json();
