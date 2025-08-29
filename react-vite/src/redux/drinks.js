@@ -66,17 +66,14 @@ export const thunkOneDrink = (drinkId) => async dispatch => {
     const res = await fetch(`/api/drinks/${drinkId}`)
     if (res.ok) {
         let data = await res.json()
-        // console.log(data, 'the good data')
         dispatch(oneDrink(data))
     } else {
         let data = await res.json()
-        // console.log(data, 'the bad data')
         return data
     }
 }
 
 export const thunkDeleteDrink = (drinkId) => async dispatch => {
-    // console.log(drinkId, 'from the thunk')
     const res = await fetch(`/api/drinks/${drinkId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
@@ -91,7 +88,6 @@ export const thunkDeleteDrink = (drinkId) => async dispatch => {
 }
 
 export const thunkCreateDrink = (drinkInfo) => async dispatch => {
-    // console.log(drinkInfo)
     let res = await fetch(`/api/drinks/post-drink`, {
         method: 'POST',
         body: drinkInfo
