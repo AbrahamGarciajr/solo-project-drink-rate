@@ -45,7 +45,6 @@ export const thunkAllDrinks = () => async dispatch => {
 
     if (res.ok) {
         const data = await res.json()
-        // console.log(data)
         dispatch(getAllDrinks(data))
     } else {
         return await res.json()
@@ -209,7 +208,6 @@ function drinkReducer(state = initialState, action) {
         }
         case BRAND_DRINKS: {
             let newState = { ...state }
-            // console.log(action.payload)
             newState.drinks = {}
             if (action.payload.length > 0) {
                 action.payload.forEach(drink => {
