@@ -190,18 +190,15 @@ export const thunkCreateRev = (revInfo) => async () => {
 }
 
 export const thunkUserPosts = (userId) => async dispatch => {
-    // console.log(userId)
     let res = await fetch(`/api/users/${userId}/posts`)
     if (res.ok) {
         let data = await res.json()
-        // console.log(data, 'the good data')
         dispatch(userPosts(data))
     } else {
         let data = await res.json()
-        // console.log(data, 'the bad data')
         return data
     }
-    // console.log(res)
+
 }
 
 
