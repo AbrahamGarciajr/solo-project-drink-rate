@@ -101,7 +101,6 @@ export const thunkCreateDrink = (drinkInfo) => async dispatch => {
         const data = await res.json();
         dispatch(createDrink(data));
         return data
-        // console.log(data, 'data')
     } else if (res.status < 500) {
         const errorMessages = await res.json();
         return errorMessages
@@ -112,7 +111,6 @@ export const thunkCreateDrink = (drinkInfo) => async dispatch => {
 }
 
 export const thunkUpdateDrink = (drinkInfo) => async () => {
-    // console.log(drinkInfo)
     let res = await fetch(`/api/drinks/${drinkInfo.id}`, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
