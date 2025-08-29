@@ -121,8 +121,6 @@ export const thunkUpdateDrink = (drinkInfo) => async () => {
 
     if (res.ok) {
         const data = await res.json();
-        // dispatch(updateDrink(drinkInfo));
-        // console.log(data, 'dataaaaa')
         return data
     } else if (res.status < 500) {
         const errorMessages = await res.json();
