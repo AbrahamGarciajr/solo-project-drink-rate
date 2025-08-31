@@ -51,26 +51,20 @@ function categoryReducer(state = initialState, action) {
     switch (action.type) {
         case GET_CATS: {
             let newState = { ...state }
-            // console.log(newState)
-            // console.log(action.payload)
             action.payload.forEach(cat => {
                 newState.categories[cat.id] = cat
-                // console.log(cat)
             });
             return newState
         }
         case GET_BRANDS: {
             let newState = { ...state }
-            // console.log(newState, ' from reducer')
             newState.brands = {}
             action.payload.forEach(brand => {
                 newState.brands[brand.id] = brand
             })
-            // console.log(newState)
             return newState
         }
-        // case RESET_STATE:
-        //     return initialState
+
         default:
             return state
     }
