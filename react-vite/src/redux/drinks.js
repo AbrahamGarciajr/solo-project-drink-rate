@@ -218,25 +218,21 @@ function drinkReducer(state = initialState, action) {
         }
         case ONE_DRINK: {
             let newState = { ...state }
-            // console.log(action.payload)
             newState.selected = action.payload
             return newState
         }
         case DELETE_DRINK: {
             let newState = { ...state }
             delete newState.drinks[action.payload]
-            // console.log(action.payload, 'the payload')
             return newState
         }
         case CREATE_DRINK: {
             let newState = { ...state }
-            // console.log(action.payload)
             newState[action.payload.id] = action.payload
             return newState
         }
         case USER_DRINKS: {
             let newState = { ...state }
-            // console.log(action.payload)
             newState.users = {}
             if (action.payload.length > 0) {
                 action.payload.forEach(drink => {
