@@ -128,11 +128,6 @@ def del_patch_drink(postId):
     good_drink = drink.to_dict()
     if current_user.to_dict()['id'] != good_drink['user_id']:
         return jsonify({'error': 'You do not own this post, you cannot mess with it'}), 403
-    # remove = remove_file_s3(drink.img)
-    # print(remove)
-
-    # if remove is not True:
-    #     return {"errors": "Failed to remove the file from S3"}, 500
 
     if request.method == 'DELETE':
         if current_user:
