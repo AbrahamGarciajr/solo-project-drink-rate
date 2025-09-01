@@ -26,13 +26,11 @@ export const thunkAllCategories = () => async dispatch => {
 }
 
 export const thunkCategoryBrands = (catId) => async dispatch => {
-    // console.log(catId, 'this is the cat id')
     const res = await fetch(`/api/drinks/categories/${catId}`)
 
     if (res.ok) {
         let data = await res.json()
-        // console.log('from the thunk res', data)
-        // dispatch(resetState())
+
         dispatch(getCatBrands(data))
     }
 }
