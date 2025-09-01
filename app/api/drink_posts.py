@@ -121,15 +121,11 @@ def del_patch_drink(postId):
     is owned by the user
     """
     drink = BeveragePost.query.get(postId)
-    # remove_file_s3(drink.img)
 
-    # print(drink)
     if not drink:
         return jsonify({'error': 'How did you get here? A post for this drink does not exist'}), 404
 
     good_drink = drink.to_dict()
-    # print(good_drink)
-
     if current_user.to_dict()['id'] != good_drink['user_id']:
         return jsonify({'error': 'You do not own this post, you cannot mess with it'}), 403
     # remove = remove_file_s3(drink.img)
