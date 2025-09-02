@@ -1,7 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template
 from app.models import User, db, BeveragePost, Review, Category, Brand
-# from app.forms import LoginForm
-# from app.forms import SignUpForm
+
 from app.config import Config
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import PostDrink
