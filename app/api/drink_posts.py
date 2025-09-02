@@ -1,11 +1,12 @@
 from flask import Blueprint, request, jsonify, render_template
-from app.models import User, db, BeveragePost, Review, Category, Brand
-
-from app.config import Config
 from flask_login import current_user, login_user, logout_user, login_required
+
+from app.api.aws_s3 import upload_file_to_s3, get_unique_filename, allowed_file, remove_file_s3
+from app.models import User, db, BeveragePost, Review, Category, Brand
+from app.config import Config
 from app.forms import PostDrink
 from app.forms import UpdateDrink
-from app.api.aws_s3 import upload_file_to_s3, get_unique_filename, allowed_file, remove_file_s3
+
 
 drink_posts = Blueprint('posts', __name__)
 
