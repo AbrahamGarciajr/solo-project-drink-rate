@@ -18,7 +18,6 @@ def recent_drinks():
     drinks from recent to oldest post
     """
     drinks = BeveragePost.query.all()
-    # print('HELLOOO',paginate_drinks)
     if drinks:
         allDrinks = [drink.to_dict() for drink in reversed(drinks)]
         for drink in allDrinks:
@@ -50,7 +49,6 @@ def category_selection(categoryId):
     For when a user selects a category of beverages it will return a
     list of all the brands associated with that category
     """
-    # categories = Category.query.all()
     category = Category.query.filter_by(id=categoryId).first()
     if category:
         brands = Brand.query.filter_by(category_id=categoryId).all()
