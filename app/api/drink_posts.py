@@ -108,9 +108,7 @@ def selected_drink(postId):
             good_drink['avgRating'] = good_drink['rating']
         return good_drink
     else:
-        # print(drink)
         return jsonify({'error': 'How did you get here? A post for this drink does not exist'}), 404
-    # print(postId)
 
 
 @drink_posts.route('/<int:postId>', methods=['DELETE', 'PATCH'])
