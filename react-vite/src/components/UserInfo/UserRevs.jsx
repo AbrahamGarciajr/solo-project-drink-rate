@@ -14,11 +14,8 @@ function UserRevs() {
     let navigate = useNavigate()
     let [isLoaded, setIsLoaded] = useState(false)
     let [order, setOrder] = useState('')
-    // console.log(userRevs)
-    // let mostRecent = []
 
 
-    // console.log(userId)
     useEffect(() => {
         dispatch(thunkUserRevs(userId)).then(() => setIsLoaded(true))
         dispatch(thunkAllDrinks())
@@ -31,7 +28,6 @@ function UserRevs() {
 
     let drinkClick = (rev) => {
         navigate(`/drink/${drinks[rev.beverage_post_id].id}`, { state: { revId: rev.id } })
-        // console.log(rev)
     }
 
     let stars = function (stars) {
@@ -49,7 +45,6 @@ function UserRevs() {
     return (
         <div>
             {revs && isLoaded && (
-                // <>hello</>
                 <div className="home_page_drinks_holder">
                     <select name='order' className="select-order-user-posts" onChange={(e) => setOrder(e.target.value)} defaultValue='Recent'>
                         <option className='order-options' value='Recent' >Recent Posts</option>
