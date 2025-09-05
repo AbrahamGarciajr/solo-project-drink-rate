@@ -12,8 +12,7 @@ function UserPosts() {
     let navigate = useNavigate()
     let [isLoaded, setIsLoaded] = useState(false)
     let [order, setOrder] = useState('')
-    // console.log(categories)
-    // let mostRecent = []
+
 
 
     useEffect(() => {
@@ -25,7 +24,6 @@ function UserPosts() {
         arrDrinks = Object.values(drinks)
     }
 
-    // console.log(isLoaded)
 
     let drinkClick = (drink) => {
         navigate(`/drink/${drink.id}`)
