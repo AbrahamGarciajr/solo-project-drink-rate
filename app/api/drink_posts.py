@@ -148,13 +148,10 @@ def del_patch_drink(postId):
         brand_choices = [(brand['id'], brand['name'])
                          for brand in available_brands]
 
-        # form = PostDrink()
         form = UpdateDrink()
         form['csrf_token'].data = request.cookies['csrf_token']
         form.category.choices = category_choices
         form.brand.choices = brand_choices
-        # print(form.data, 'from the patch bbyyyyyy')
-        # print(drink.to_dict(), 'this is the drinkkk')
 
         if form.validate_on_submit():
             drink.oz = form.data['oz']
@@ -171,8 +168,6 @@ def del_patch_drink(postId):
             db.session.commit()
             return jsonify({'message': 'Your post was updated'})
         else:
-            # print(form.data, 'the dataaaaaa')
-            # print(form.errors, 'the errorssss')
             return jsonify(form.errors), 400
 
 
