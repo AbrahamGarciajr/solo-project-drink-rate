@@ -205,9 +205,7 @@ def create_post():
                         return {"errors": "Invalid file type"}, 400
 
                     image.filename = get_unique_filename(image.filename)
-                    # print(type(image), 'filename')
                     upload = upload_file_to_s3(image)
-                    # print(upload)
 
                     if 'errors' in upload:
                         return jsonify(upload), 400
