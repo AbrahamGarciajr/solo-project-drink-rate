@@ -195,14 +195,11 @@ def create_post():
     form.brand.choices = brand_choices
     picked_brand = Brand.query.filter_by(id=form.brand.data).first()
 
-    # print(form.data, 'the dataaaaa')
-
     if current_user:
         if picked_brand:
             if picked_brand.to_dict()['category_id'] == form.category.data:
                 if form.validate_on_submit():
                     image = form.img.data
-                    # print(image, 'the image')
 
                     if not allowed_file(image.filename):
                         return {"errors": "Invalid file type"}, 400
