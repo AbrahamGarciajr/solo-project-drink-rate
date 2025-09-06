@@ -211,7 +211,6 @@ def create_post():
                         return jsonify(upload), 400
 
                     url = upload['url']
-                    # print(url, 'from the route')
                     new_drink = BeveragePost(
                         user_id=current_user.to_dict()['id'],
                         brand_id=form.data['brand'],
@@ -227,7 +226,6 @@ def create_post():
                         desc=form.data['desc']
                     )
                     db.session.add(new_drink)
-                    # print(new_drink)
                     db.session.commit()
                     return jsonify({'message': 'Your post was created'}), 201
             else:
