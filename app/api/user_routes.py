@@ -61,11 +61,9 @@ def users_reviews(id):
     Gathers all of the users reviews.
     """
     if not id:
-        # print('this is the error code')
         return jsonify({'Error': 'User must be logged in'}), 401
     if id != current_user.id:
         return jsonify({'Error': 'You do not have access to the reviews of this user'}), 403
-    # print('current user',current_user.id)
     revs = Review.query.filter_by(user_id=id)
 
     if revs:
