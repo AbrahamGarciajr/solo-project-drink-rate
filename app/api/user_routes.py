@@ -32,10 +32,8 @@ def user_posts(id):
     retrieves all the user's posts
     """
 
-    # print(id, 'the iddddddd')
     posts = BeveragePost.query.filter_by(
         user_id=id).order_by(BeveragePost.id.desc())
-    # print(posts, 'the postsssss')
     if not id:
         return jsonify({'Error': 'User must be logged in'}), 401
     if id != current_user.id:
