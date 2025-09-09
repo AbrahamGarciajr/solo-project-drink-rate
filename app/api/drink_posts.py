@@ -232,5 +232,3 @@ def create_post():
                 return jsonify({'error': 'The brand does not match the category of drink'}), 400
     else:
         return jsonify({'error': 'Please log in or create an account in order to post your drink'}), 401
-    # return jsonify({'message': 'Your post was created'}), 201
-    # return render_template('post_drink.html', form=form)
