@@ -55,7 +55,6 @@ def create_review(revId):
     """
     This is to update and or delete the users review
     """
-    # print(revId)
     rev = Review.query.filter_by(id=revId).first()
 
     if request.method == 'PATCH':
@@ -64,7 +63,6 @@ def create_review(revId):
                 form = PostReview()
                 form['csrf_token'].data = request.cookies['csrf_token']
                 if (form.rating.data <= 5 and form.rating.data >= 0):
-                    # print(form.data,'this is the data')
                     rev.review = form.review.data
                     rev.rating = form.rating.data
                     db.session.commit()
