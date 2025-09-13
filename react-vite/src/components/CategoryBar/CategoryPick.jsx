@@ -17,8 +17,6 @@ function CategoryPick() {
             .then(() => setIsLoaded(true))
     }, [dispatch, categoryId])
 
-    // console.log(category, 'this')
-    // console.log(brands, 'that')
 
 
     let brandClick = (brand) => {
