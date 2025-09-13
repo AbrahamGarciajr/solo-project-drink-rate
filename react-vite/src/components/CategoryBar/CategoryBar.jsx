@@ -11,9 +11,7 @@ function CategoryBar() {
     let [isLoaded, setIsLoaded] = useState(false)
     let dispatch = useDispatch()
     let navigate = useNavigate()
-    // console.log(categories)
     let arrCats = Object.values(categories)
-    // console.log(arrCats)
 
     useEffect(() => {
         dispatch(thunkAllCategories()).then(() => setIsLoaded(true))
