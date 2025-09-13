@@ -14,7 +14,6 @@ function BrandPick() {
     let [isLoaded, setIsLoaded] = useState(false)
     let navigate = useNavigate()
     let [order, setOrder] = useState('')
-    // console.log(drinks, 'drinks from the brandPick')
 
     useEffect(() => {
         dispatch(thunkBrandDrinks(brandId))
