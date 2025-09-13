@@ -11,8 +11,6 @@ function CategoryPick() {
     let dispatch = useDispatch()
     let [isLoaded, setIsLoaded] = useState(false)
     let navigate = useNavigate()
-    // console.log(categories)
-    // console.log(categoryId)
 
     useEffect(() => {
         dispatch(thunkCategoryBrands(categoryId))
