@@ -28,7 +28,6 @@ function CategoryPick() {
     //     return brand.category_id == categoryId
     // })
 
-    // console.log(actualBrands)
 
     return (
         <div >
