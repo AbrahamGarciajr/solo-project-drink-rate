@@ -25,8 +25,7 @@ function CategoryPick() {
 
     let arrBrands = Object.values(brands)
     // let actualBrands = arrBrands.filter(brand => {
-    //     return brand.category_id == categoryId
-    // })
+ 
 
 
     return (
