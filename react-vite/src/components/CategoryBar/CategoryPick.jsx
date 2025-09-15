@@ -24,9 +24,6 @@ function CategoryPick() {
     }
 
     let arrBrands = Object.values(brands)
-    // let actualBrands = arrBrands.filter(brand => {
- 
-
 
     return (
         <div >
