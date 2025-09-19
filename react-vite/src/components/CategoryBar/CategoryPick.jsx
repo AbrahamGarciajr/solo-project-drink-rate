@@ -17,12 +17,9 @@ function CategoryPick() {
             .then(() => setIsLoaded(true))
     }, [dispatch, categoryId])
 
-
-
     let brandClick = (brand) => {
         navigate(`/brand/${brand.id}`)
     }
-
     let arrBrands = Object.values(brands)
 
     return (

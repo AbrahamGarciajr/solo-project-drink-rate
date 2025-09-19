@@ -27,7 +27,6 @@ function BrandPick() {
 
     let arrDrinks = Object.values(drinks)
 
-
     return (
         <div>
             <div className="brands-for-brand-name">
@@ -94,13 +93,13 @@ function BrandPick() {
                             )
                         })
                     )}
-
-
                 </div>
+
             )}
             {!isLoaded && (
                 <div className="loading-sign">...Loading</div>
             )}
+            
             {arrDrinks.length < 1 && isLoaded && (
                 <div className="loading-sign">
                     There are no drink posts for this brand

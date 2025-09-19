@@ -42,7 +42,6 @@ function CategoryBar() {
                             Create a Post
                         </div>
                     )}
-
                 </div>
             )}
         </>
