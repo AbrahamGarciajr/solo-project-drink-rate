@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 function DeleteDrinkForm({ drink, setShowMenu, setDelDrink }) {
     const dispatch = useDispatch();
     let navigate = useNavigate()
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
     let handleDelete = async (e) => {
