@@ -2,7 +2,6 @@ import { useState } from "react";
 import { thunkDeleteDrink } from "../../redux/drinks";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import "./LoginForm.css";
 
 function DeleteDrinkForm({ drink, setShowMenu, setDelDrink }) {
     const dispatch = useDispatch();
