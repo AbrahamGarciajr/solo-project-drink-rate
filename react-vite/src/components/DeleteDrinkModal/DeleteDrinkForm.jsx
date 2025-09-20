@@ -9,7 +9,6 @@ function DeleteDrinkForm({ drink, setShowMenu, setDelDrink }) {
     const [errors, setErrors] = useState({});
 
     let handleDelete = async (e) => {
-        // console.log(drink)
         e.preventDefault()
         setShowMenu(false)
         setDelDrink(false)
