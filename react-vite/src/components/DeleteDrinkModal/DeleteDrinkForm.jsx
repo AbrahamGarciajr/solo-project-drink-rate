@@ -14,7 +14,6 @@ function DeleteDrinkForm({ drink, setShowMenu, setDelDrink }) {
         setDelDrink(false)
         let res = await dispatch(thunkDeleteDrink(drink.id))
         if (res.message) {
-            // alert(res.message)
             setDelDrink(true)
             navigate('/', { state: { 'message': res.message } })
         } else if (res.error) {
