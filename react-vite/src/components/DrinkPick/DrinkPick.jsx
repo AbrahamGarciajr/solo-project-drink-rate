@@ -89,14 +89,6 @@ function DrinkPick() {
         }
     }, [location.state, message])
 
-    // if(location.state){
-    //     console.log(location.state)
-    //     console.log(openMessage)
-    // }
-
-
-
-
     return (
         <div className={`drink-holder`}>
             {drink && isLoaded && (
