@@ -80,7 +80,6 @@ function DrinkPick() {
 
     useEffect(() => {
         if (location.state || message) {
-            // console.log(location.state)
             setOpenMessage(true)
             let close = () => {
                 setOpenMessage(false)
@@ -95,12 +94,6 @@ function DrinkPick() {
     //     console.log(openMessage)
     // }
 
-    // if (openMessage) {
-    //     let close = () => {
-    //         setOpenMessage(false)
-    //     }
-    //     setTimeout(close, 3500)
-    // }
 
     // useEffect(() => {
     //     if (location.state){
