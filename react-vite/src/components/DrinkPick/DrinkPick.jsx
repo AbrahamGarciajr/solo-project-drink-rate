@@ -95,11 +95,7 @@ function DrinkPick() {
     // }
 
 
-    // useEffect(() => {
-    //     if (location.state){
-    //         console.log(location.state, 'the update')
-    //     }
-    // },[location.state])
+
 
     return (
         <div className={`drink-holder`}>
