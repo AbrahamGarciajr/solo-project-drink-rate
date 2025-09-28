@@ -89,6 +89,8 @@ function DrinkPick() {
         }
     }, [location.state, message])
 
+
+    
     return (
         <div className={`drink-holder`}>
             {drink && isLoaded && (
