@@ -14,8 +14,6 @@ function ReviewUpdateForm({ review, setMessage, setOpenMessage }) {
     const [errors, setErrors] = useState({});
     let { closeModal } = useModal()
 
-    // console.log(drinkId)
-
     let handleSub = async (e) => {
         e.preventDefault()
 
