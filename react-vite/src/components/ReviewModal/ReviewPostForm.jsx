@@ -41,7 +41,6 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                 if (res.message) {
                     // alert(res.message)
                     setCreateRev(false)
-                    // setPostMessage(true)
                     setMessage(res.message)
                     await dispatch(thunkOneDrink(drinkId))
 
