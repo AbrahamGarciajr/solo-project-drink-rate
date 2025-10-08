@@ -99,11 +99,6 @@ function UserRevs() {
 
                 </div>
             )}
-            {/* {location.state && message && (
-                <div className="delete-message-holder">
-                    {location.state.message}
-                </div>
-            )} */}
         </div>
     )
 }
