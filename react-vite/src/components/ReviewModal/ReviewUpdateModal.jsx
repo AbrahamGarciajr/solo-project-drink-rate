@@ -18,8 +18,6 @@ function ReviewUpdateForm({ review, setMessage, setOpenMessage }) {
 
     let handleSub = async (e) => {
         e.preventDefault()
-        // console.log(rating)
-        // console.log(rev)
 
         if (rating >= 0 && rating <= 5 && rating.toString().length < 2) {
             if (rev.length > 3) {
