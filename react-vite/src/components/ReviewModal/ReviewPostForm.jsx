@@ -12,9 +12,6 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
     const [rating, setRating] = useState(0);
     const [rev, setRev] = useState('');
     const [errors, setErrors] = useState({});
-    // let { closeModal } = useModal()
-
-    // console.log(drinkId)
 
     let cancelPost = () => {
         setCreateRev(false)
