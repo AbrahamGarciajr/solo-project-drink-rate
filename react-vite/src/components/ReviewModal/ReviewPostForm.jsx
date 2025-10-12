@@ -35,11 +35,9 @@ function ReviewPostForm({ setCreateRev, setMessage }) {
                     review: rev
                 }
 
-                // console.log(newRev)
                 let res = await dispatch(thunkCreateRev(newRev))
 
                 if (res.message) {
-                    // alert(res.message)
                     setCreateRev(false)
                     setMessage(res.message)
                     await dispatch(thunkOneDrink(drinkId))
