@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkCreateRev, thunkOneDrink } from "../../redux/drinks";
-// import "./LoginForm.css";
-
 
 function ReviewPostForm({ setCreateRev, setMessage }) {
     const dispatch = useDispatch();
