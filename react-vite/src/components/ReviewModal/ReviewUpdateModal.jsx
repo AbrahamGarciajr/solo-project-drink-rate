@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkOneDrink, thunkUpdateRev } from "../../redux/drinks";
 import { useModal } from "../../context/Modal";
-// import "./LoginForm.css";
-
 
 function ReviewUpdateForm({ review, setMessage, setOpenMessage }) {
     const dispatch = useDispatch();
@@ -28,8 +26,6 @@ function ReviewUpdateForm({ review, setMessage, setOpenMessage }) {
                 let res = await dispatch(thunkUpdateRev(newRev))
 
                 if (res.message) {
-                    // alert(res.message)
-
                     await dispatch(thunkOneDrink(drinkId))
                     closeModal()
                     setOpenMessage(true)
