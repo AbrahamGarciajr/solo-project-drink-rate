@@ -25,7 +25,6 @@ function PostDrink() {
     let dispatch = useDispatch()
     let navigate = useNavigate()
 
-    // console.log(img)
     let okImg = ['jpg', 'png', 'jpeg']
 
     // console.log(category)
