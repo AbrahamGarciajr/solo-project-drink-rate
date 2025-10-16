@@ -90,7 +90,7 @@ function DrinkPick() {
     }, [location.state, message])
 
 
-    
+
     return (
         <div className={`drink-holder`}>
             {drink && isLoaded && (
@@ -200,7 +200,6 @@ function DrinkPick() {
                                 <div className="reviews" key={rev.id}>
                                     <div className="review-details">
                                         <div>
-                                            {/* {console.log(rev)} */}
                                             <div>{rev.review}</div>
                                             <div>{rev.rating}/5 stars</div>
                                         </div>
