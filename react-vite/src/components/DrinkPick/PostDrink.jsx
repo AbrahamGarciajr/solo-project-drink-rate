@@ -27,7 +27,6 @@ function PostDrink() {
 
     let okImg = ['jpg', 'png', 'jpeg']
 
-    // console.log(category)
     useEffect(() => {
         if (category > 0) {
             dispatch(thunkCategoryBrands(category))
