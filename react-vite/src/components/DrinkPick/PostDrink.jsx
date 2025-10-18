@@ -42,7 +42,6 @@ function PostDrink() {
             setErrors(descError)
         }
         let checkImg = img.name.split('.')
-        // console.log(checkImg)
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
                 if (rating > 5 || rating < 0 || String(rating).length > 1) {
@@ -53,7 +52,6 @@ function PostDrink() {
                     if (errors.error || errors.server) {
                         return
                     } else {
-                        // console.log(img, 'the imageee')
                         const formData = new FormData();
                         formData.append("user_id", user.id);
                         formData.append("brand", brand);
