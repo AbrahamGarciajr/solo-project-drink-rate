@@ -33,8 +33,6 @@ function PostDrink() {
         }
     }, [dispatch, category])
 
-
-
     let handleSub = async (e) => {
         e.preventDefault()
         setErrors({})
