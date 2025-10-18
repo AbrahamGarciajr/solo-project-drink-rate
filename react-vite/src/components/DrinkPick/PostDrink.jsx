@@ -33,9 +33,6 @@ function PostDrink() {
         }
     }, [dispatch, category])
 
-    // useEffect(() => {
-    //     console.log(errors)
-    // })
 
 
     let handleSub = async (e) => {
