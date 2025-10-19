@@ -65,7 +65,6 @@ function PostDrink() {
                         formData.append("carbs", carbs);
                         formData.append("sodium", sodium);
                         formData.append("desc", desc);
-                        // console.log(formData['alc'], 'the form dataaaa')
 
                         let serverResponse = await dispatch(thunkCreateDrink(formData))
                         if (serverResponse.error) {
