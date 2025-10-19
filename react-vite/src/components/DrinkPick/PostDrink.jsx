@@ -73,7 +73,6 @@ function PostDrink() {
                             await dispatch(thunkAllDrinks())
                                 .then(() => {
                                     let arrDrinks = Object.values(drinks)
-                                    // console.log(arrDrinks)
                                     return arrDrinks
                                 })
                                 .then((arrDrinks) => {
