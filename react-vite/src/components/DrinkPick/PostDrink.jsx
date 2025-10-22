@@ -76,7 +76,6 @@ function PostDrink() {
                                     return arrDrinks
                                 })
                                 .then((arrDrinks) => {
-                                    // console.log(serverResponse, 'from post')
                                     navigate(`/drink/${arrDrinks[arrDrinks.length - 1].id}`, { state: { 'message': serverResponse.message } })
                                 })
                         }
