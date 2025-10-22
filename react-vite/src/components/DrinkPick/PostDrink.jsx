@@ -95,7 +95,6 @@ function PostDrink() {
 
     let arrCats = Object.values(categories)
     let arrBrands = Object.values(brands)
-    // console.log('this is the cats', arrCats)
 
     return (
         <div className="post-a-drink-form-holder">
