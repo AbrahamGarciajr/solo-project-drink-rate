@@ -120,7 +120,6 @@ function PostDrink() {
                         Picture:
                         <input
                             type='file'
-                            // placeholder="A jpg, png, jpeg of drink"
                             accept=".jpg, .png, .jpeg"
                             onChange={(e) => setImg(e.target.files[0])}
                             required
