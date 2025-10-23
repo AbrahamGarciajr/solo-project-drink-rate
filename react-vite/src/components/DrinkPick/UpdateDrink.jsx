@@ -85,7 +85,6 @@ function UpdateDrink() {
                             sodium: Number(sodium),
                             desc: desc
                         }
-                        // console.log(newPost)
                         let serverResponse = await dispatch(thunkUpdateDrink(newPost))
 
                         if (!serverResponse.message) {
