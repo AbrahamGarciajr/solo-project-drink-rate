@@ -60,7 +60,6 @@ function UpdateDrink() {
     let handleSub = async (e) => {
         e.preventDefault()
         setErrors({})
-        // console.log(img)
         let checkImg = img.split('.')
         if (okImg.includes(checkImg[checkImg.length - 1].toLowerCase())) {
             if (brand > 0 && category > 0) {
