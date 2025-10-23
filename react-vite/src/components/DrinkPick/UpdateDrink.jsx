@@ -97,7 +97,6 @@ function UpdateDrink() {
                                     return arrDrinks
                                 })
                                 .then(() => {
-                                    // alert(serverResponse.message)
                                     navigate(`/drink/${drinkId}`, { state: { data: serverResponse.message } })
                                 })
                         }
