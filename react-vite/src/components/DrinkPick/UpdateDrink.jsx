@@ -121,9 +121,7 @@ function UpdateDrink() {
             <h1 className="header-post-drink">Update Your Post</h1>
             {errors.server && <p>{errors.server}</p>}
             <form className="text-in-post-drink"
-                onSubmit={handleSub}
-                // encType="multipart/form-data"
-                >
+                onSubmit={handleSub}>
                 <div className="post-drink-form-detail">
                     <label>
                         Name
