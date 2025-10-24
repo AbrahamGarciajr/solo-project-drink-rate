@@ -112,7 +112,6 @@ function UpdateDrink() {
         }
     }
 
-
     let arrCats = Object.values(categories)
     let arrBrands = Object.values(brands)
 
@@ -137,13 +136,6 @@ function UpdateDrink() {
                 {/* <div className="post-drink-form-detail">
                     <label>
                         Picture
-                        <input
-                            type='file'
-                            accept=".jpg, .png, .jpeg"
-                            value={img}
-                            onChange={(e) => setImg(e.target.files[0])}
-                            required
-                        />
                     </label>
                 </div> */}
                 <div className="post-drink-form-detail">
