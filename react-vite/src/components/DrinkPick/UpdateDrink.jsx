@@ -133,11 +133,6 @@ function UpdateDrink() {
                         />
                     </label>
                 </div>
-                {/* <div className="post-drink-form-detail">
-                    <label>
-                        Picture
-                    </label>
-                </div> */}
                 <div className="post-drink-form-detail">
                     <label>
                         OZ
