@@ -11,8 +11,7 @@ function Home() {
     let dispatch = useDispatch()
     let navigate = useNavigate()
     let [isLoaded, setIsLoaded] = useState(false)
-    // console.log(categories)
-    let arrDrinks = Object.values(drinks)
+\    let arrDrinks = Object.values(drinks)
     // let mostRecent = []
     let location = useLocation()
     let [message, setMessage] = useState(false)
