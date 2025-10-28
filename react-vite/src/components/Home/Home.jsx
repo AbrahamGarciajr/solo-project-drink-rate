@@ -36,7 +36,6 @@ function Home() {
     let drinkClick = (drink) => {
         navigate(`/drink/${drink.id}`)
     }
-    // console.log(arrDrinks.sort((a,b) => a['avgRating'] - b['avgRating']))
 
     return (
         // <div >
