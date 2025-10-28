@@ -38,7 +38,6 @@ function Home() {
     }
 
     return (
-        // <div >
         <>
             {drinks && isLoaded && (
                 <div className="home_page_drinks_holder">
