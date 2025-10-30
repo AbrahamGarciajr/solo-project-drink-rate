@@ -3,7 +3,6 @@ import { thunkDeleteRev, thunkOneDrink } from "../../redux/drinks";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-// import "./LoginForm.css";
 
 function DeleteRevForm({ review, setMessage, setOpenMessage }) {
     const dispatch = useDispatch();
