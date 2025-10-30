@@ -6,7 +6,6 @@ import { useModal } from "../../context/Modal";
 
 function DeleteRevForm({ review, setMessage, setOpenMessage }) {
     const dispatch = useDispatch();
-    // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
     let { drinkId } = useParams()
     const [errors, setErrors] = useState({});
