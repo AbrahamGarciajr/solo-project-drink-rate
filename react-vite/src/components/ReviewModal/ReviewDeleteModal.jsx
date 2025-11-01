@@ -15,7 +15,6 @@ function DeleteRevForm({ review, setMessage, setOpenMessage }) {
         // setDelDrink(false)
         let res = await dispatch(thunkDeleteRev(review))
         if (res.message) {
-            // alert(res.message)
             await dispatch(thunkOneDrink(drinkId))
             closeModal()
             setOpenMessage(true)
