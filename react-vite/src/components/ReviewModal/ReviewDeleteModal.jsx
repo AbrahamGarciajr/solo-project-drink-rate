@@ -12,7 +12,6 @@ function DeleteRevForm({ review, setMessage, setOpenMessage }) {
 
     let handleDelete = async (e) => {
         e.preventDefault()
-        // setShowMenu(false)
         // setDelDrink(false)
         let res = await dispatch(thunkDeleteRev(review))
         if (res.message) {
