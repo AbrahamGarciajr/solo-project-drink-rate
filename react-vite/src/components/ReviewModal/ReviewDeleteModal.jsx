@@ -11,7 +11,6 @@ function DeleteRevForm({ review, setMessage, setOpenMessage }) {
     let { closeModal } = useModal()
 
     let handleDelete = async (e) => {
-        // console.log(review)
         e.preventDefault()
         // setShowMenu(false)
         // setDelDrink(false)
