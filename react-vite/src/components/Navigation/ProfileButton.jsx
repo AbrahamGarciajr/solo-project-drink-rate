@@ -76,7 +76,6 @@ function ProfileButton() {
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem
-                // className="signup-button-space"
                 itemText="Sign Up"
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
