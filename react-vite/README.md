@@ -12,6 +12,8 @@ To run it:
 3. Launch it with `npm run dev`.
 4. In your browser, navigate to [`localhost:5173`].
 
+<!-- split the terminal and do 1-4 on one side and run 'flask run' on the other side -->
+
 Don't forget to run `npm run build` before merging your work to your production
 branch!
 
